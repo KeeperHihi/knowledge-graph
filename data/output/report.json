@@ -1,0 +1,27 @@
+{
+  "raw_text_count": 5,
+  "sentence_count": 11,
+  "mention_count": 36,
+  "linked_count": 33,
+  "nil_count": 3,
+  "unique_linked_entity_count": 17,
+  "mention_type_counts": {
+    "Person": 7,
+    "Organization": 10,
+    "Time": 3,
+    "Work": 1,
+    "Concept": 3,
+    "Event": 1,
+    "Place": 7,
+    "Device": 4
+  },
+  "entity_type_counts": {
+    "Person": 7,
+    "Organization": 10,
+    "Work": 1,
+    "Concept": 3,
+    "Event": 1,
+    "Place": 7,
+    "Device": 4
+  }
+}

@@ -1,0 +1,226 @@
+[
+  {
+    "entity_id": "E001",
+    "canonical_name": "Alan Turing",
+    "entity_type": "Person",
+    "aliases": ["阿兰·图灵", "艾伦·图灵", "图灵", "Turing"],
+    "keywords": ["mathematician", "computer", "logic", "图灵", "数学家", "计算机"],
+    "description": "英国数学家、逻辑学家和计算机科学先驱，是本项目的核心人物。"
+  },
+  {
+    "entity_id": "E002",
+    "canonical_name": "Alonzo Church",
+    "entity_type": "Person",
+    "aliases": ["阿隆佐·丘奇", "丘奇", "Church"],
+    "keywords": ["lambda calculus", "logic", "Princeton", "丘奇", "逻辑"],
+    "description": "逻辑学家，图灵在普林斯顿时期的重要学术导师。"
+  },
+  {
+    "entity_id": "E003",
+    "canonical_name": "Max Newman",
+    "entity_type": "Person",
+    "aliases": ["马克斯·纽曼", "Newman"],
+    "keywords": ["Cambridge", "Manchester", "mathematics", "纽曼", "数学"],
+    "description": "英国数学家，对图灵的学术成长和计算机发展均有影响。"
+  },
+  {
+    "entity_id": "E004",
+    "canonical_name": "John von Neumann",
+    "entity_type": "Person",
+    "aliases": ["约翰·冯·诺依曼", "Von Neumann", "冯·诺依曼"],
+    "keywords": ["Princeton", "computer", "architecture", "诺依曼"],
+    "description": "计算机体系结构的重要奠基者，与普林斯顿学术环境相关。"
+  },
+  {
+    "entity_id": "E005",
+    "canonical_name": "Joan Clarke",
+    "entity_type": "Person",
+    "aliases": ["琼·克拉克", "Clarke"],
+    "keywords": ["Bletchley Park", "cryptanalysis", "密码", "克拉克"],
+    "description": "二战期间在布莱切利园参与密码分析的密码学家。"
+  },
+  {
+    "entity_id": "E006",
+    "canonical_name": "Christopher Morcom",
+    "entity_type": "Person",
+    "aliases": ["克里斯托弗·莫克姆", "Morcom"],
+    "keywords": ["friend", "school", "Sherborne", "莫克姆"],
+    "description": "图灵青年时期的重要朋友，对其思想发展有影响。"
+  },
+  {
+    "entity_id": "E007",
+    "canonical_name": "Princeton University",
+    "entity_type": "Organization",
+    "aliases": ["普林斯顿大学", "Princeton"],
+    "keywords": ["university", "doctoral", "student", "普林斯顿", "博士"],
+    "description": "图灵攻读博士学位的重要学术机构。"
+  },
+  {
+    "entity_id": "E008",
+    "canonical_name": "University of Cambridge",
+    "entity_type": "Organization",
+    "aliases": ["Cambridge University", "剑桥大学"],
+    "keywords": ["university", "college", "student", "mathematics", "剑桥大学", "学习", "学院"],
+    "description": "图灵早年学习和研究的重要大学机构。"
+  },
+  {
+    "entity_id": "E009",
+    "canonical_name": "University of Manchester",
+    "entity_type": "Organization",
+    "aliases": ["曼彻斯特大学"],
+    "keywords": ["university", "laboratory", "computer", "曼彻斯特大学", "工作", "研究"],
+    "description": "图灵晚年工作过的重要大学机构。"
+  },
+  {
+    "entity_id": "E010",
+    "canonical_name": "Bletchley Park",
+    "entity_type": "Place",
+    "aliases": ["布莱切利园"],
+    "keywords": ["codebreaking", "war", "cryptanalysis", "布莱切利", "破译", "密码"],
+    "description": "二战期间英国密码破译工作的核心地点。"
+  },
+  {
+    "entity_id": "E011",
+    "canonical_name": "Cambridge",
+    "entity_type": "Place",
+    "aliases": ["剑桥"],
+    "keywords": ["city", "England", "River Cam", "英格兰", "城市", "大学城"],
+    "description": "英国城市，与剑桥大学同名，便于构造歧义。"
+  },
+  {
+    "entity_id": "E012",
+    "canonical_name": "Manchester",
+    "entity_type": "Place",
+    "aliases": ["曼彻斯特"],
+    "keywords": ["city", "industrial", "England", "英格兰", "城市", "工业"],
+    "description": "英国城市，与曼彻斯特大学同名，便于构造歧义。"
+  },
+  {
+    "entity_id": "E013",
+    "canonical_name": "London",
+    "entity_type": "Place",
+    "aliases": ["伦敦"],
+    "keywords": ["capital", "Britain", "英国", "首都"],
+    "description": "英国首都，可作为地名类实体补充。"
+  },
+  {
+    "entity_id": "E014",
+    "canonical_name": "Wilmslow",
+    "entity_type": "Place",
+    "aliases": ["威姆斯洛"],
+    "keywords": ["Cheshire", "England", "英国"],
+    "description": "图灵去世前生活的地点之一。"
+  },
+  {
+    "entity_id": "E015",
+    "canonical_name": "Enigma",
+    "entity_type": "Device",
+    "aliases": ["Enigma machine", "英格玛", "恩尼格玛"],
+    "keywords": ["cipher", "machine", "war", "密码机", "破译"],
+    "description": "二战时期著名密码机，是图灵相关文本中的高频实体。"
+  },
+  {
+    "entity_id": "E016",
+    "canonical_name": "Bombe",
+    "entity_type": "Device",
+    "aliases": ["图灵炸弹机"],
+    "keywords": ["codebreaking", "machine", "Bletchley", "破译", "机器"],
+    "description": "用于辅助破解 Enigma 的机电设备。"
+  },
+  {
+    "entity_id": "E017",
+    "canonical_name": "Turing Machine",
+    "entity_type": "Concept",
+    "aliases": ["图灵机"],
+    "keywords": ["computation", "theory", "algorithm", "可计算", "模型"],
+    "description": "计算理论中的经典抽象模型。"
+  },
+  {
+    "entity_id": "E018",
+    "canonical_name": "Turing Test",
+    "entity_type": "Concept",
+    "aliases": ["图灵测试", "模仿游戏测试"],
+    "keywords": ["intelligence", "machine", "imitation game", "智能", "机器"],
+    "description": "用于讨论机器智能判定的经典思想实验。"
+  },
+  {
+    "entity_id": "E019",
+    "canonical_name": "Computable Numbers",
+    "entity_type": "Work",
+    "aliases": ["On Computable Numbers", "可计算数", "论可计算数"],
+    "keywords": ["paper", "1936", "computable", "paper", "论文", "1936"],
+    "description": "图灵 1936 年的代表性论文，常与图灵机一起出现。"
+  },
+  {
+    "entity_id": "E020",
+    "canonical_name": "Entscheidungsproblem",
+    "entity_type": "Concept",
+    "aliases": ["判定问题"],
+    "keywords": ["logic", "decision", "problem", "逻辑", "判定"],
+    "description": "可判定性研究中的重要问题。"
+  },
+  {
+    "entity_id": "E021",
+    "canonical_name": "Second World War",
+    "entity_type": "Event",
+    "aliases": ["World War II", "第二次世界大战", "二战"],
+    "keywords": ["war", "Allies", "1940", "战争", "盟军"],
+    "description": "图灵参与密码破译工作的历史背景事件。"
+  },
+  {
+    "entity_id": "E022",
+    "canonical_name": "King's College, Cambridge",
+    "entity_type": "Organization",
+    "aliases": ["King's College", "剑桥大学国王学院", "国王学院"],
+    "keywords": ["college", "Cambridge", "student", "学院", "剑桥"],
+    "description": "图灵曾学习和任职相关的学院实体。"
+  },
+  {
+    "entity_id": "E023",
+    "canonical_name": "Government Code and Cypher School",
+    "entity_type": "Organization",
+    "aliases": ["GC&CS", "英国政府密码学校"],
+    "keywords": ["cryptanalysis", "government", "war", "密码", "政府"],
+    "description": "英国二战时期负责密码工作的机构。"
+  },
+  {
+    "entity_id": "E024",
+    "canonical_name": "Automatic Computing Engine",
+    "entity_type": "Device",
+    "aliases": ["ACE", "自动计算引擎"],
+    "keywords": ["computer", "engine", "NPL", "计算机", "设计"],
+    "description": "图灵提出的重要计算设备设计方案。"
+  },
+  {
+    "entity_id": "E025",
+    "canonical_name": "Manchester Mark I",
+    "entity_type": "Device",
+    "aliases": ["曼彻斯特一号"],
+    "keywords": ["computer", "Manchester", "machine", "计算机", "曼彻斯特"],
+    "description": "早期存储程序计算机之一，与图灵在曼彻斯特时期相关。"
+  },
+  {
+    "entity_id": "E026",
+    "canonical_name": "The Imitation Game",
+    "entity_type": "Work",
+    "aliases": ["模仿游戏"],
+    "keywords": ["film", "biography", "Turing", "电影", "图灵"],
+    "description": "与图灵相关的流行文化作品。"
+  },
+  {
+    "entity_id": "E027",
+    "canonical_name": "National Physical Laboratory",
+    "entity_type": "Organization",
+    "aliases": ["NPL", "英国国家物理实验室"],
+    "keywords": ["laboratory", "ACE", "research", "实验室", "研究"],
+    "description": "图灵参与 Automatic Computing Engine 设计时相关的机构。"
+  },
+  {
+    "entity_id": "E028",
+    "canonical_name": "Sherborne School",
+    "entity_type": "Organization",
+    "aliases": ["舍伯恩学校"],
+    "keywords": ["school", "student", "education", "学校", "教育"],
+    "description": "图灵青年时期就读的学校。"
+  }
+]

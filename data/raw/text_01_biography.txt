@@ -1,0 +1,2 @@
+Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。
+他在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。
