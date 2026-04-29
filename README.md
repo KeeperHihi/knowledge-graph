@@ -7,7 +7,7 @@
 - [x] 关系抽取
 - [x] 图谱可视化
 - [x] 人物视角切换
-- [x] 规则解释案例
+- [x] 五个页签展示抽取流程
 - [x] 小样本人工评测
 
 这个项目只用了词典匹配、正则规则、简单打分和静态网页展示，没有调用大模型，也没有使用预训练模型。
@@ -42,7 +42,7 @@
 │  ├─ utils/               # IO 与文本工具
 │  ├─ schema/              # Mention / Entity / Triple 等数据结构
 │  ├─ preprocess/          # 清洗与分句
-│  ├─ extraction/          # 实体抽取
+│  ├─ extraction/          # 实体、事件、关系抽取
 │  ├─ disambiguation/      # 实体消歧
 │  ├─ kg/                  # 流水线与导出
 │  └─ evaluation/          # 统计、报告与人工评测
@@ -126,14 +126,15 @@ python3 scripts/run_evaluation.py
 - 单元测试：`python3 -m unittest discover -s tests -v`，`11` 个测试全部通过
 - 完整流程：`python3 main.py --mode pipeline`
 - 人工评测：`python3 scripts/run_evaluation.py`
-- 当前统计结果：`12` 份原始文本、`32` 个句子、`91` 个 mention、`83` 个成功链接、`28` 条关系、`22` 个事件
+- 当前统计结果：`12` 份原始文本、`32` 个句子、`91` 个 mention、`83` 个成功链接、`29` 条关系、`23` 个事件
 - 关键检查已经通过：
   - `PublicationEvent` 已经能抽到
   - `published` 关系已经能生成
   - 不再出现 `Alan Turing studied_at Cambridge` 这种把城市当学校的关系
-  - 网页已经支持 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman` 等人物视角切换
-  - 网页已经支持实体消歧打分案例和“事件 -> 关系”解释案例
-  - 小样本人工核对结果：实体消歧 `8/8`，关系抽取 `7/8`，事件抽取 `7/8`
+  - 网页已经拆成实体抽取、实体消歧、事件抽取、关系抽取、知识图谱五个页签
+  - 知识图谱页支持点击节点查看连边，也支持拖动节点调整位置
+  - 网页已经支持实体抽取高亮、实体消歧打分、事件流程和关系三元组案例
+  - 小样本人工核对结果：实体消歧 `8/8`，关系抽取 `8/8`，事件抽取 `8/8`
   - 本地网页可以通过 `python3 scripts/run_visualization.py --port 8000` 正常启动
 
 ## 4. 答辩推荐顺序
@@ -147,7 +148,7 @@ python3 scripts/run_evaluation.py
 3. 再看 `data/output/report.json`、`data/output/traceability.json`
    - 说明统计摘要、关系数量、事件数量和来源回溯
 4. 最后打开网页 `http://127.0.0.1:8000/web/index.html`
-   - 建议先看 `Cambridge` 消歧案例、论文发表案例，再看“人工检查结果”卡片，最后切人物视角
+   - 建议按五个页签从左到右讲，最后在知识图谱页点击和拖动节点
 
 如果现场时间只剩 2 分钟，优先展示这 4 个入口：
 
@@ -180,7 +181,7 @@ python3 scripts/run_evaluation.py
 - `data/output/graph.json`
   - 网页可视化直接读取的节点边数据，节点、边、事件都尽量保留原文编号和来源信息
 - `data/output/explainability.json`
-  - 给网页“规则解释”区域使用，里面放了消歧打分案例和事件生成关系案例
+  - 给网页五个页签使用，里面放了实体抽取、消歧、事件抽取和关系抽取案例
 - `data/output/evaluation_summary.json`
   - 小样本人工核对结果，里面放了实体消歧、关系抽取、事件抽取的命中情况和误差说明
 - `data/output/traceability.json`
@@ -195,8 +196,8 @@ python3 scripts/run_evaluation.py
 - 实体抽取主要依赖种子词典与少量正则，覆盖面有限
 - 未使用统计学习或深度学习模型，泛化能力较弱
 - 实体消歧只使用简单打分函数，复杂上下文理解能力有限
-- 规则法覆盖面仍然有限，遇到代词、省略和复杂长句时容易漏抽
-- 我手工核对的小样本里，`Sherborne School` 那句就漏了，说明当前教育事件触发词还不够全
+- 规则法覆盖面仍然有限，遇到代词、省略和复杂长句时仍可能漏抽
+- 小样本人工核对目前能命中，但这不代表规则已经覆盖了所有图灵相关资料
 - 目前更适合“图灵主题”的小规模课程作业，不追求跨领域泛化
 
 ## 7. 后续可扩展方向

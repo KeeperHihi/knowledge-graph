@@ -170,20 +170,27 @@ class ReportingTestCase(unittest.TestCase):
         self.assertEqual(event_payload[0]["source_note"], "demo note")
 
         explainability = build_explainability_payload(
+            mentions=mentions,
             linked_mentions=linked_mentions,
             events=events,
             relations=relations,
             source_map=source_map,
         )
         self.assertEqual(explainability["scoring_formula"]["alias_weight"], 0.5)
+        self.assertEqual(explainability["entity_extraction_cases"][0]["mentions"][0]["mention"], "图灵")
         self.assertGreaterEqual(len(explainability["disambiguation_cases"]), 1)
         self.assertEqual(
             explainability["disambiguation_cases"][0]["candidates"][0]["canonical_name"],
             "University of Cambridge",
         )
         self.assertEqual(explainability["event_relation_cases"][0]["event_id"], "EVT001")
+        self.assertEqual(explainability["event_extraction_cases"][0]["event_id"], "EVT001")
         self.assertEqual(
             explainability["event_relation_cases"][0]["relations"][0]["triple"],
+            "Alan Turing - studied_at - University of Cambridge",
+        )
+        self.assertEqual(
+            explainability["relation_extraction_cases"][0]["triple"],
             "Alan Turing - studied_at - University of Cambridge",
         )
 

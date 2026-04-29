@@ -42,6 +42,7 @@ def export_outputs(
     )
     write_json(output_dir / "traceability.json", traceability)
     explainability = build_explainability_payload(
+        mentions=mentions,
         linked_mentions=linked_mentions,
         events=events,
         relations=relations,
@@ -171,18 +172,81 @@ def build_explainability_payload(
     events: List[EventRecord],
     relations: List[RelationRecord],
     source_map: Dict[str, dict],
+    mentions: List[Mention] | None = None,
 ) -> dict:
+    entity_extraction_cases = build_entity_extraction_cases(mentions or [], source_map)
     disambiguation_cases = build_disambiguation_cases(linked_mentions, source_map)
     event_relation_cases = build_event_relation_cases(events, relations, source_map)
+    relation_extraction_cases = build_relation_extraction_cases(relations, source_map)
     return {
         "scoring_formula": {
             "alias_weight": 0.5,
             "context_keyword_weight": 0.3,
             "type_prior_weight": 0.2,
         },
+        "entity_extraction_cases": entity_extraction_cases,
         "disambiguation_cases": disambiguation_cases,
+        "event_extraction_cases": event_relation_cases,
+        "relation_extraction_cases": relation_extraction_cases,
         "event_relation_cases": event_relation_cases,
     }
+
+
+def build_entity_extraction_cases(mentions: List[Mention], source_map: Dict[str, dict]) -> List[dict]:
+    grouped_mentions = {}
+    for mention in mentions:
+        key = (mention.text_id, mention.sentence_id, mention.context)
+        grouped_mentions.setdefault(key, []).append(mention)
+
+    preferred_keys = [
+        ("text_01_biography", 2),
+        ("text_04_test_and_machine", 2),
+        ("text_08_bletchley_team", 1),
+    ]
+    picked_key = None
+    for text_id, sentence_id in preferred_keys:
+        picked_key = next(
+            (
+                key
+                for key, items in grouped_mentions.items()
+                if key[0] == text_id and key[1] == sentence_id and len(items) >= 3
+            ),
+            None,
+        )
+        if picked_key is not None:
+            break
+
+    if picked_key is None and grouped_mentions:
+        picked_key = max(grouped_mentions, key=lambda key: len(grouped_mentions[key]))
+
+    if picked_key is None:
+        return []
+
+    text_id, sentence_id, context = picked_key
+    source_info = source_map.get(text_id, {})
+    picked_mentions = sorted(grouped_mentions[picked_key], key=lambda item: item.start)
+    return [
+        {
+            "case_id": "ENTITY01",
+            "title": "从原始句子里找实体",
+            "text_id": text_id,
+            "sentence_id": sentence_id,
+            "context": context,
+            "mentions": [
+                {
+                    "mention": mention.mention,
+                    "entity_type": mention.entity_type,
+                    "method": mention.method,
+                    "start": mention.start,
+                    "end": mention.end,
+                    "rule_note": "词典匹配" if mention.method == "gazetteer" else "正则匹配",
+                }
+                for mention in picked_mentions
+            ],
+            "source_title": source_info.get("source_title", ""),
+            "source_url": source_info.get("source_url", ""),
+        }
+    ]
 
 
 def build_disambiguation_cases(
@@ -339,3 +403,59 @@ def build_event_relation_cases(
             }
         )
     return payload
+
+
+def build_relation_extraction_cases(
+    relations: List[RelationRecord],
+    source_map: Dict[str, dict],
+) -> List[dict]:
+    preferred_rules = [
+        ("text_01_biography", "published"),
+        ("text_01_biography", "proposed"),
+        ("text_08_bletchley_team", "worked_at"),
+        ("text_10_manchester_test", "worked_at"),
+    ]
+    picked_relation = None
+    for text_id, relation_name in preferred_rules:
+        picked_relation = next(
+            (
+                relation
+                for relation in relations
+                if relation.text_id == text_id and relation.relation == relation_name
+            ),
+            None,
+        )
+        if picked_relation is not None:
+            break
+
+    if picked_relation is None and relations:
+        picked_relation = relations[0]
+
+    if picked_relation is None:
+        return []
+
+    source_info = source_map.get(picked_relation.text_id, {})
+    return [
+        {
+            "case_id": "RELATION01",
+            "title": "从事件和规则生成三元组",
+            "relation_id": picked_relation.relation_id,
+            "text_id": picked_relation.text_id,
+            "sentence_id": picked_relation.sentence_id,
+            "head_name": picked_relation.head_name,
+            "head_type": picked_relation.head_type,
+            "relation": picked_relation.relation,
+            "tail_name": picked_relation.tail_name,
+            "tail_type": picked_relation.tail_type,
+            "triple": (
+                f"{picked_relation.head_name} - {picked_relation.relation} - "
+                f"{picked_relation.tail_name}"
+            ),
+            "trigger": picked_relation.trigger,
+            "method": picked_relation.method,
+            "source_event_id": picked_relation.source_event_id,
+            "evidence": picked_relation.evidence,
+            "source_title": source_info.get("source_title", ""),
+            "source_url": source_info.get("source_url", ""),
+        }
+    ]

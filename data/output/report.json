@@ -5,8 +5,8 @@
   "linked_count": 83,
   "nil_count": 8,
   "unique_linked_entity_count": 26,
-  "relation_count": 28,
-  "event_count": 22,
+  "relation_count": 29,
+  "event_count": 23,
   "source_count": 12,
   "mention_type_counts": {
     "Person": 28,
@@ -28,7 +28,7 @@
     "Device": 11
   },
   "relation_type_counts": {
-    "studied_at": 5,
+    "studied_at": 6,
     "published": 1,
     "proposed": 4,
     "worked_at": 9,
@@ -38,7 +38,7 @@
     "located_in": 2
   },
   "event_type_counts": {
-    "EducationEvent": 4,
+    "EducationEvent": 5,
     "PublicationEvent": 1,
     "ResearchEvent": 4,
     "WarWorkEvent": 3,
@@ -103,8 +103,8 @@
       "sentence_count": 2,
       "mention_count": 6,
       "linked_count": 5,
-      "relation_count": 2,
-      "event_count": 2
+      "relation_count": 3,
+      "event_count": 3
     },
     {
       "text_id": "text_07_princeton_research",

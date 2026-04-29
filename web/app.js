@@ -1,26 +1,15 @@
 const canvas = document.getElementById("graph-canvas");
 const ctx = canvas.getContext("2d");
-const detailBox = document.getElementById("detail-box");
-const eventList = document.getElementById("event-list");
+
+const topStats = document.getElementById("top-stats");
 const statsBox = document.getElementById("stats");
+const detailBox = document.getElementById("detail-box");
+const selectionHint = document.getElementById("selection-hint");
+const eventList = document.getElementById("event-list");
 const eventCount = document.getElementById("event-count");
-const summaryBox = document.getElementById("summary-box");
-const evaluationBox = document.getElementById("evaluation-box");
 const sourceList = document.getElementById("source-list");
 const sourceCount = document.getElementById("source-count");
-const processSteps = document.getElementById("process-steps");
 const personFocusButtons = document.getElementById("person-focus-buttons");
-const personFocusSummary = document.getElementById("person-focus-summary");
-const disambiguationCasesBox = document.getElementById("disambiguation-cases");
-const eventChainCasesBox = document.getElementById("event-chain-cases");
-
-const PERSON_FOCUS_ORDER = [
-  "Alan Turing",
-  "Joan Clarke",
-  "Alonzo Church",
-  "Max Newman",
-  "John von Neumann",
-];
 
 const typeColors = {
   Person: "#d96c3a",
@@ -29,9 +18,17 @@ const typeColors = {
   Device: "#7959c4",
   Concept: "#d4a027",
   Work: "#b25f90",
-  Event: "#bb4d4d",
   EventNode: "#243746",
 };
+
+const PERSON_FOCUS_ORDER = [
+  "全部",
+  "Alan Turing",
+  "Joan Clarke",
+  "Alonzo Church",
+  "Max Newman",
+  "John von Neumann",
+];
 
 const graphState = {
   graph: null,
@@ -39,40 +36,27 @@ const graphState = {
   edges: [],
   selectedNodeId: "",
   selectedEdgeId: "",
-  animating: false,
-  report: null,
-  evaluation: null,
-  traceability: null,
-  explainability: null,
   focusNodeId: "",
   focusNeighborIds: [],
   activePersonLabel: "",
+  animating: false,
+  draggingNode: null,
+  dragOffsetX: 0,
+  dragOffsetY: 0,
+  dragMoved: false,
 };
-
-function resizeCanvas() {
-  const ratio = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * ratio;
-  canvas.height = rect.height * ratio;
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-}
-
-function distance(a, b) {
-  const dx = a.x - b.x;
-  const dy = a.y - b.y;
-  return Math.sqrt(dx * dx + dy * dy);
-}
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+function formatScore(value) {
+  return Number(value || 0).toFixed(2);
+}
+
 function parseJsonl(rawText) {
-  const trimmed = rawText.trim();
-  if (!trimmed) {
-    return [];
-  }
-  return trimmed
+  return rawText
+    .trim()
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean)
@@ -87,31 +71,34 @@ async function fetchJsonOrNull(url) {
   return response.json();
 }
 
-function uniqueBy(items, keyBuilder) {
-  const seen = new Set();
-  const picked = [];
-  for (const item of items) {
-    const key = keyBuilder(item);
-    if (seen.has(key)) {
-      continue;
-    }
-    seen.add(key);
-    picked.push(item);
-  }
-  return picked;
+function getCanvasSize() {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    width: rect.width || 860,
+    height: rect.height || 520,
+  };
+}
+
+function resizeCanvas() {
+  const ratio = window.devicePixelRatio || 1;
+  const size = getCanvasSize();
+  canvas.width = size.width * ratio;
+  canvas.height = size.height * ratio;
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+function distance(a, b) {
+  const dx = a.x - b.x;
+  const dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
 function getNodeById(nodeId) {
-  return graphState.nodes.find((item) => item.id === nodeId) || null;
+  return graphState.nodes.find((node) => node.id === nodeId) || null;
 }
 
 function getPersonNodeByLabel(label) {
-  return graphState.nodes.find((item) => item.type === "Person" && item.label === label) || null;
-}
-
-function getFocusNodeSet() {
-  const ids = [graphState.focusNodeId, ...graphState.focusNeighborIds].filter(Boolean);
-  return new Set(ids);
+  return graphState.nodes.find((node) => node.type === "Person" && node.label === label) || null;
 }
 
 function collectNeighborIds(nodeId) {
@@ -126,156 +113,136 @@ function collectNeighborIds(nodeId) {
   return [...new Set(ids)];
 }
 
-function relationEdgesForNode(nodeId) {
-  return graphState.edges.filter(
-    (edge) =>
-      edge.kind !== "event_participant" &&
-      (edge.source === nodeId || edge.target === nodeId)
-  );
-}
-
-function buildProcessData(report, traceability, mentions, linkedMentions, events) {
-  const rawSamples = (traceability.texts || []).slice(0, 2).map((item) => ({
-    label: item.text_id,
-    value: item.source_title || "公开资料整理",
-  }));
-
-  const mentionSamples = uniqueBy(mentions, (item) => `${item.mention}-${item.entity_type}`)
-    .slice(0, 3)
-    .map((item) => ({
-      label: item.mention,
-      value: item.entity_type,
-    }));
-
-  const disambiguationSamples = linkedMentions
-    .filter((item) => item.status === "linked" && (item.candidate_ids || []).length > 1)
-    .sort((a, b) => (b.candidate_ids || []).length - (a.candidate_ids || []).length)
-    .slice(0, 2)
-    .map((item) => ({
-      label: `${item.mention} -> ${item.canonical_name}`,
-      value: `${item.candidate_ids.length} 个候选`,
-    }));
-
-  const eventPriority = {
-    PublicationEvent: 1,
-    EducationEvent: 2,
-    InfluenceEvent: 3,
-    WarWorkEvent: 4,
-    ResearchEvent: 5,
-    EmploymentEvent: 6,
-  };
-  const eventSamples = events
-    .slice()
-    .sort((a, b) => (eventPriority[a.event_type] || 99) - (eventPriority[b.event_type] || 99))
-    .slice(0, 3)
-    .map((item) => ({
-      label: item.event_type,
-      value: item.evidence,
-    }));
-
-  const relationSamples = [];
-  for (const text of traceability.texts || []) {
-    for (const relation of text.relations || []) {
-      relationSamples.push({
-        label: relation.triple,
-        value: text.text_id,
-      });
-    }
+function selectView(viewName, updateHash = true) {
+  for (const button of document.querySelectorAll(".tab-button")) {
+    button.classList.toggle("active", button.dataset.view === viewName);
   }
+  for (const panel of document.querySelectorAll(".view-panel")) {
+    panel.classList.toggle("active", panel.dataset.panel === viewName);
+  }
+  if (updateHash) {
+    window.history.replaceState(null, "", `#${viewName}`);
+  }
+  if (viewName === "graph") {
+    resizeCanvas();
+  }
+}
 
-  return [
-    {
-      index: "01",
-      title: "原始文本",
-      total: `${report.raw_text_count} 份`,
-      description: "先把公开资料整理成短文本，不直接手写结构化图谱。",
-      samples: rawSamples,
-    },
-    {
-      index: "02",
-      title: "实体抽取",
-      total: `${report.mention_count} 个 mention`,
-      description: "用词典和正则抽人物、机构、地点、作品和时间。",
-      samples: mentionSamples,
-    },
-    {
-      index: "03",
-      title: "实体消歧",
-      total: `${report.linked_count} 个成功链接`,
-      description: "对别名、上下文和类型打分，选标准实体。",
-      samples: disambiguationSamples,
-    },
-    {
-      index: "04",
-      title: "事件抽取",
-      total: `${report.event_count} 个事件`,
-      description: "先抽求学、发表、研究、战争工作这些事件。",
-      samples: eventSamples,
-    },
-    {
-      index: "05",
-      title: "关系抽取",
-      total: `${report.relation_count} 条关系`,
-      description: "再从事件和少量句式规则生成三元组。",
-      samples: relationSamples.slice(0, 3),
-    },
+function initTabs() {
+  for (const button of document.querySelectorAll(".tab-button")) {
+    button.addEventListener("click", () => selectView(button.dataset.view));
+  }
+}
+
+function renderTopStats(report, graph) {
+  const items = [
+    `raw 文本 ${report.raw_text_count}`,
+    `mention ${report.mention_count}`,
+    `事件 ${graph.summary.event_count}`,
+    `关系 ${graph.summary.relation_count}`,
   ];
+  topStats.innerHTML = items.map((item) => `<span>${item}</span>`).join("");
 }
 
-function formatScore(value) {
-  return Number(value || 0).toFixed(2);
-}
-
-function renderProcessSteps(report, traceability, mentions, linkedMentions, events) {
-  const steps = buildProcessData(report, traceability, mentions, linkedMentions, events);
-  processSteps.innerHTML = steps
-    .map(
-      (step) => `
-        <article class="process-step">
-          <div class="process-index">${step.index}</div>
-          <div class="process-main">
-            <div class="process-topline">
-              <span>${step.title}</span>
-              <strong>${step.total}</strong>
-            </div>
-            <p>${step.description}</p>
-            <ul class="process-list">
-              ${(step.samples || [])
-                .map(
-                  (item) => `
-                    <li>
-                      <span>${item.label}</span>
-                      <strong>${item.value}</strong>
-                    </li>
-                  `
-                )
-                .join("")}
-            </ul>
-          </div>
-        </article>
-      `
-    )
+function renderStats(summary) {
+  statsBox.innerHTML = [
+    `节点 ${summary.node_count}`,
+    `边 ${summary.edge_count}`,
+    `事件 ${summary.event_count}`,
+    `关系 ${summary.relation_count}`,
+  ]
+    .map((item) => `<span>${item}</span>`)
     .join("");
 }
 
-function renderExplainability(explainability) {
-  graphState.explainability = explainability;
-  renderDisambiguationCases(explainability.disambiguation_cases || []);
-  renderEventChainCases(explainability.event_relation_cases || []);
+function renderMethodBoxes() {
+  document.getElementById("entity-method-list").innerHTML = `
+    <div class="method-item"><strong>词典匹配</strong><p>把种子知识库里的标准名和别名拿来扫描句子。</p></div>
+    <div class="method-item"><strong>正则匹配</strong><p>用简单格式规则抽时间、书名和机构名。</p></div>
+    <div class="method-item"><strong>重叠处理</strong><p>同一位置优先保留更长、更明确的 mention。</p></div>
+  `;
+  document.getElementById("event-method-list").innerHTML = `
+    <div class="method-item"><strong>触发词</strong><p>发表、学习、工作、参与等词会触发不同事件。</p></div>
+    <div class="method-item"><strong>参与实体</strong><p>按人物、机构、作品、设备等类型分配事件角色。</p></div>
+    <div class="method-item"><strong>保留证据</strong><p>事件记录会保留原句，方便回溯。</p></div>
+  `;
+  document.getElementById("relation-method-list").innerHTML = `
+    <div class="method-item"><strong>事件驱动</strong><p>PublicationEvent 生成 published，EducationEvent 生成 studied_at。</p></div>
+    <div class="method-item"><strong>句式补充</strong><p>“位于”等稳定句式直接生成 located_in。</p></div>
+    <div class="method-item"><strong>证据跟随</strong><p>每条边都带着 text_id、句子编号和证据句。</p></div>
+  `;
+}
+
+function highlightSentence(text, mentions) {
+  const ordered = (mentions || []).slice().sort((a, b) => a.start - b.start);
+  let cursor = 0;
+  let html = "";
+  for (const mention of ordered) {
+    html += text.slice(cursor, mention.start);
+    html += `<span class="mention-mark" title="${mention.entity_type} / ${mention.rule_note}">${text.slice(
+      mention.start,
+      mention.end
+    )}</span>`;
+    cursor = mention.end;
+  }
+  html += text.slice(cursor);
+  return html;
+}
+
+function renderEntityExtractionCase(cases) {
+  const box = document.getElementById("entity-extraction-case");
+  const item = (cases || [])[0];
+  if (!item) {
+    box.innerHTML = "<p>没有可展示的实体抽取案例。</p>";
+    return;
+  }
+
+  box.innerHTML = `
+    <div class="card-head">
+      <h3>${item.title}</h3>
+      <span>${item.text_id} / 句子 ${item.sentence_id}</span>
+    </div>
+    <div class="raw-sentence">${highlightSentence(item.context, item.mentions)}</div>
+    <div class="case-list">
+      ${(item.mentions || [])
+        .map(
+          (mention) => `
+            <div class="case-item">
+              <h4>${mention.mention}</h4>
+              <div class="case-meta">
+                <span>${mention.entity_type}</span>
+                <span>${mention.rule_note}</span>
+                <span>位置 ${mention.start}-${mention.end}</span>
+              </div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderFormula(formula) {
+  const box = document.getElementById("formula-box");
+  box.innerHTML = `
+    score = ${formula.alias_weight} * alias + ${formula.context_keyword_weight} * context + ${formula.type_prior_weight} * type
+    <br>分数最高的候选实体会作为标准实体。
+  `;
 }
 
 function renderDisambiguationCases(cases) {
-  disambiguationCasesBox.innerHTML = "";
+  const box = document.getElementById("disambiguation-cases");
+  box.innerHTML = "";
 
-  for (const item of cases) {
+  for (const item of (cases || []).slice(0, 2)) {
     const card = document.createElement("article");
     card.className = "case-item";
     card.innerHTML = `
       <h4>${item.title}</h4>
       <p>${item.context}</p>
       <div class="case-meta">
-        <span>${item.text_id} / 句子 ${item.sentence_id}</span>
         <span>最终选择：${item.selected_name}</span>
+        <span>${item.text_id} / 句子 ${item.sentence_id}</span>
       </div>
       <div class="score-table">
         ${(item.candidates || [])
@@ -294,180 +261,82 @@ function renderDisambiguationCases(cases) {
           )
           .join("")}
       </div>
-      <p>${item.selected_reason}</p>
-      <button type="button" class="case-button">在图里看结果</button>
+      <button type="button" class="case-button" data-node-id="${item.selected_entity_id}">在图里看结果</button>
     `;
-
-    const button = card.querySelector(".case-button");
-    button.addEventListener("click", () => {
-      const node = getNodeById(item.selected_entity_id);
-      if (!node) {
-        return;
-      }
-      if (node.type === "Person") {
-        focusOnPerson(node.label);
-        return;
-      }
-      graphState.selectedNodeId = node.id;
-      graphState.selectedEdgeId = "";
-      updateDetailForNode(node.id);
-      updateActiveEventCard("");
+    card.querySelector("button").addEventListener("click", () => {
+      selectView("graph");
+      selectNode(item.selected_entity_id);
     });
-
-    disambiguationCasesBox.appendChild(card);
+    box.appendChild(card);
   }
 }
 
-function renderEventChainCases(cases) {
-  eventChainCasesBox.innerHTML = "";
-
-  for (const item of cases) {
-    const participantText = (item.participants || [])
-      .map((participant) => `${participant.role}: ${participant.name}`)
-      .join(" / ");
-
-    const card = document.createElement("article");
-    card.className = "case-item";
-    card.innerHTML = `
-      <h4>${item.title}</h4>
-      <p>${item.evidence}</p>
-      <div class="case-meta">
-        <span>${item.event_type}</span>
-        <span>触发词：${item.trigger || "规则匹配"}</span>
-      </div>
-      <div class="chain-list">
-        <div class="chain-row">
-          <strong>事件层</strong>
-          <span>${participantText || "无参与实体"}</span>
-        </div>
-        ${(item.relations || [])
-          .map(
-            (relation) => `
-              <div class="chain-row selected">
-                <strong>关系层</strong>
-                <span>${relation.triple}</span>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-      <button type="button" class="case-button">在图里看这条事件</button>
-    `;
-
-    const button = card.querySelector(".case-button");
-    button.addEventListener("click", () => {
-      graphState.selectedNodeId = item.event_id;
-      graphState.selectedEdgeId = "";
-      updateDetailForNode(item.event_id);
-      updateActiveEventCard(item.event_id);
-    });
-
-    eventChainCasesBox.appendChild(card);
-  }
-}
-
-function updatePersonFocusSummary() {
-  if (!graphState.focusNodeId) {
-    personFocusSummary.innerHTML = `
-      <strong>先挑一个人物看局部关系</strong>
-      <p>这里会突出显示这个人物和一跳邻居，适合答辩时快速比较 Alan Turing、Joan Clarke、Alonzo Church、Max Newman 这些主体。</p>
-    `;
+function renderEventExtractionCase(cases) {
+  const box = document.getElementById("event-extraction-case");
+  const item = (cases || [])[0];
+  if (!item) {
+    box.innerHTML = "<p>没有可展示的事件抽取案例。</p>";
     return;
   }
 
-  const node = getNodeById(graphState.focusNodeId);
-  if (!node) {
-    return;
-  }
+  const participantText = (item.participants || [])
+    .map((participant) => `${participant.role}: ${participant.name}`)
+    .join(" / ");
 
-  const relationCount = relationEdgesForNode(node.id).length;
-  const relatedNodes = uniqueBy(
-    graphState.edges
-      .filter((edge) => edge.source === node.id || edge.target === node.id)
-      .map((edge) => (edge.source === node.id ? edge.targetNode : edge.sourceNode))
-      .filter((item) => item && item.type !== "EventNode"),
-    (item) => item.id
-  ).slice(0, 4);
-  const relatedLabels = relatedNodes.map((item) => item.label).join("、") || "暂无";
-  const textIds = (node.text_ids || []).slice(0, 4).join("、") || "暂无";
-
-  personFocusSummary.innerHTML = `
-    <strong>${node.label}</strong>
-    <p>当前直接关联 ${relationCount} 条关系，出现在 ${(node.text_ids || []).length} 份原文里。切到这个视角后，可以更快看到这个人物在整张图里的局部位置。</p>
-    <div class="focus-meta">
-      <span>一跳邻居：${relatedLabels}</span>
-      <span>原文片段：${textIds}</span>
+  box.innerHTML = `
+    <div class="card-head">
+      <h3>${item.title}</h3>
+      <span>${item.event_type}</span>
     </div>
+    <div class="raw-sentence">${item.evidence}</div>
+    <div class="flow-list">
+      <div class="flow-row"><strong>1. 找触发词</strong><p>${item.trigger || "规则匹配"}</p></div>
+      <div class="flow-row"><strong>2. 找参与实体</strong><p>${participantText || "无参与实体"}</p></div>
+      <div class="flow-row selected"><strong>3. 形成事件记录</strong><p>${item.event_id} / ${item.event_type}</p></div>
+    </div>
+    <button type="button" class="case-button" id="event-case-button">在图里看这条事件</button>
   `;
-}
-
-function clearPersonFocus() {
-  graphState.focusNodeId = "";
-  graphState.focusNeighborIds = [];
-  graphState.activePersonLabel = "";
-  renderPersonFocusButtons();
-}
-
-function focusOnPerson(label) {
-  const node = getPersonNodeByLabel(label);
-  if (!node) {
-    return;
-  }
-  if (graphState.activePersonLabel === label) {
-    clearPersonFocus();
-    return;
-  }
-
-  graphState.focusNodeId = node.id;
-  graphState.focusNeighborIds = collectNeighborIds(node.id);
-  graphState.activePersonLabel = label;
-  graphState.selectedNodeId = node.id;
-  graphState.selectedEdgeId = "";
-  updateDetailForNode(node.id);
-  updateActiveEventCard("");
-  renderPersonFocusButtons();
-}
-
-function renderPersonFocusButtons() {
-  personFocusButtons.innerHTML = "";
-
-  const allButton = document.createElement("button");
-  allButton.type = "button";
-  allButton.className = `focus-button${graphState.activePersonLabel ? "" : " active"}`;
-  allButton.textContent = "全部视角";
-  allButton.addEventListener("click", () => {
-    clearPersonFocus();
+  document.getElementById("event-case-button").addEventListener("click", () => {
+    selectView("graph");
+    selectNode(item.event_id);
   });
-  personFocusButtons.appendChild(allButton);
+}
 
-  for (const label of PERSON_FOCUS_ORDER) {
-    const node = getPersonNodeByLabel(label);
-    if (!node) {
-      continue;
-    }
-
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `focus-button${graphState.activePersonLabel === label ? " active" : ""}`;
-    button.textContent = label;
-    button.addEventListener("click", () => {
-      focusOnPerson(label);
-    });
-    personFocusButtons.appendChild(button);
+function renderRelationExtractionCase(cases) {
+  const box = document.getElementById("relation-extraction-case");
+  const item = (cases || [])[0];
+  if (!item) {
+    box.innerHTML = "<p>没有可展示的关系抽取案例。</p>";
+    return;
   }
 
-  updatePersonFocusSummary();
+  box.innerHTML = `
+    <div class="card-head">
+      <h3>${item.title}</h3>
+      <span>${item.method}</span>
+    </div>
+    <div class="raw-sentence">${item.evidence}</div>
+    <div class="flow-list">
+      <div class="flow-row"><strong>1. 头实体</strong><p>${item.head_name} (${item.head_type})</p></div>
+      <div class="flow-row"><strong>2. 关系规则</strong><p>${item.relation}，触发词：${item.trigger || "事件类型"}</p></div>
+      <div class="flow-row"><strong>3. 尾实体</strong><p>${item.tail_name} (${item.tail_type})</p></div>
+      <div class="flow-row selected"><strong>4. 三元组</strong><p>${item.triple}</p></div>
+    </div>
+    <button type="button" class="case-button" id="relation-case-button">在图里看这条边</button>
+  `;
+  document.getElementById("relation-case-button").addEventListener("click", () => {
+    selectView("graph");
+    selectEdge(item.relation_id);
+  });
 }
 
 function prepareGraph(graph) {
-  const width = canvas.getBoundingClientRect().width;
-  const height = canvas.getBoundingClientRect().height;
-
+  const size = getCanvasSize();
   graphState.graph = graph;
   graphState.nodes = graph.nodes.map((node, index) => ({
     ...node,
-    x: width * (0.2 + (index % 7) * 0.1),
-    y: height * (0.2 + ((index * 3) % 9) * 0.08),
+    x: size.width * (0.18 + (index % 7) * 0.105),
+    y: size.height * (0.18 + ((index * 3) % 8) * 0.09),
     vx: 0,
     vy: 0,
     radius: node.type === "EventNode" ? 10 : 8,
@@ -480,147 +349,92 @@ function prepareGraph(graph) {
   }));
 
   renderStats(graph.summary);
-  renderEventCards(graph.events);
   renderPersonFocusButtons();
+  renderEventCards(graph.events || []);
+
   if (!graphState.animating) {
     graphState.animating = true;
     requestAnimationFrame(tick);
   }
 }
 
-function renderStats(summary) {
-  statsBox.innerHTML = "";
-  const stats = [
-    `节点 ${summary.node_count}`,
-    `边 ${summary.edge_count}`,
-    `事件 ${summary.event_count}`,
-    `关系 ${summary.relation_count}`,
-  ];
-  for (const item of stats) {
-    const tag = document.createElement("span");
-    tag.textContent = item;
-    statsBox.appendChild(tag);
+function renderPersonFocusButtons() {
+  personFocusButtons.innerHTML = "";
+  for (const label of PERSON_FOCUS_ORDER) {
+    if (label !== "全部" && !getPersonNodeByLabel(label)) {
+      continue;
+    }
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `focus-button${graphState.activePersonLabel === label || (!graphState.activePersonLabel && label === "全部") ? " active" : ""}`;
+    button.textContent = label;
+    button.addEventListener("click", () => {
+      if (label === "全部") {
+        clearFocus();
+      } else {
+        focusOnPerson(label);
+      }
+    });
+    personFocusButtons.appendChild(button);
   }
 }
 
-function renderSummary(report) {
-  graphState.report = report;
-  const relationItems = Object.entries(report.relation_type_counts || {})
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4);
-  const eventItems = Object.entries(report.event_type_counts || {})
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4);
-
-  summaryBox.innerHTML = `
-    <div class="summary-grid">
-      <div class="summary-item"><span>原始文本</span><strong>${report.raw_text_count}</strong></div>
-      <div class="summary-item"><span>抽到实体</span><strong>${report.linked_count}</strong></div>
-      <div class="summary-item"><span>关系条数</span><strong>${report.relation_count}</strong></div>
-      <div class="summary-item"><span>事件条数</span><strong>${report.event_count}</strong></div>
-    </div>
-    <p>现在网页同时支持“构建过程”“人物视角”“规则解释”三种讲法：既能看流程，也能看局部主体，还能直接拆解释案例。</p>
-    <div>
-      <p>常见关系：</p>
-      <ul class="summary-list">
-        ${relationItems.map(([name, count]) => `<li><span>${name}</span><strong>${count}</strong></li>`).join("")}
-      </ul>
-    </div>
-    <div>
-      <p>当前抽到的事件类型：</p>
-      <ul class="summary-list">
-        ${eventItems.map(([name, count]) => `<li><span>${name}</span><strong>${count}</strong></li>`).join("")}
-      </ul>
-    </div>
-  `;
+function clearFocus() {
+  graphState.focusNodeId = "";
+  graphState.focusNeighborIds = [];
+  graphState.activePersonLabel = "";
+  renderPersonFocusButtons();
 }
 
-function renderEvaluationSummary(summary) {
-  graphState.evaluation = summary;
-  evaluationBox.innerHTML = `
-    <div class="summary-grid">
-      <div class="summary-item"><span>实体消歧</span><strong>${Math.round((summary.entity_linking_accuracy || 0) * 100)}%</strong></div>
-      <div class="summary-item"><span>关系抽取</span><strong>${Math.round((summary.relation_hit_rate || 0) * 100)}%</strong></div>
-      <div class="summary-item"><span>事件抽取</span><strong>${Math.round((summary.event_hit_rate || 0) * 100)}%</strong></div>
-      <div class="summary-item"><span>人工样本</span><strong>${summary.entity_linking.checked + summary.relation_extraction.checked + summary.event_extraction.checked}</strong></div>
-    </div>
-    <ul class="note-list">
-      ${(summary.key_findings || []).map((item) => `<li>${item}</li>`).join("")}
-    </ul>
-  `;
-}
-
-function renderSourceList(traceability) {
-  graphState.traceability = traceability;
-  const texts = traceability.texts || [];
-  sourceCount.textContent = `${texts.length} 份`;
-  sourceList.innerHTML = "";
-
-  for (const item of texts) {
-    const relationText = (item.relations || [])
-      .slice(0, 2)
-      .map((relation) => `<li>${relation.triple}</li>`)
-      .join("");
-    const eventText = (item.events || [])
-      .slice(0, 1)
-      .map((event) => `<li>${event.event_type} · ${event.trigger}</li>`)
-      .join("");
-
-    const card = document.createElement("article");
-    card.className = "source-card";
-    card.innerHTML = `
-      <h4>${item.text_id}</h4>
-      <p>${item.source_title || "未记录来源标题"}</p>
-      <p class="source-note">${item.note || "未记录说明"}</p>
-      <p><a href="${item.source_url}" target="_blank" rel="noreferrer">查看来源链接</a></p>
-      <div class="source-meta">
-        <span>${item.mention_count} 个 mention</span>
-        <span>${item.relation_count} 条关系</span>
-        <span>${item.event_count} 个事件</span>
-      </div>
-      ${relationText ? `<ul class="mini-list">${relationText}</ul>` : ""}
-      ${eventText ? `<ul class="mini-list">${eventText}</ul>` : ""}
-    `;
-    sourceList.appendChild(card);
+function focusOnPerson(label) {
+  const node = getPersonNodeByLabel(label);
+  if (!node) {
+    return;
   }
+  graphState.focusNodeId = node.id;
+  graphState.focusNeighborIds = collectNeighborIds(node.id);
+  graphState.activePersonLabel = label;
+  selectNode(node.id);
+  renderPersonFocusButtons();
 }
 
 function renderEventCards(events) {
   eventCount.textContent = `${events.length} 条`;
   eventList.innerHTML = "";
-
   for (const event of events) {
     const card = document.createElement("article");
     card.className = "event-card";
     card.dataset.eventId = event.event_id;
-
-    const participants = event.participants.map((item) => item.name).join(" / ");
-    const timeText = event.time || "未标出时间";
-
+    const participants = (event.participants || []).map((item) => item.name).join(" / ");
     card.innerHTML = `
       <h4>${event.event_type}</h4>
-      <p class="event-meta">${event.text_id} · ${timeText}</p>
+      <p>${event.text_id} · ${event.trigger || "规则匹配"}</p>
       <div class="evidence">${event.evidence}</div>
-      <div class="event-tags">
-        <span>${event.trigger || "规则匹配"}</span>
-        <span>${participants || "无参与实体"}</span>
-      </div>
+      <div class="tag-row"><span>${participants || "无参与实体"}</span></div>
     `;
-
-    card.addEventListener("click", () => {
-      graphState.selectedNodeId = event.event_id;
-      graphState.selectedEdgeId = "";
-      updateDetailForNode(event.event_id);
-      updateActiveEventCard(event.event_id);
-    });
-
+    card.addEventListener("click", () => selectNode(event.event_id));
     eventList.appendChild(card);
   }
 }
 
-function updateActiveEventCard(eventId) {
-  for (const card of eventList.querySelectorAll(".event-card")) {
-    card.classList.toggle("active", card.dataset.eventId === eventId);
+function renderSourceList(traceability) {
+  const texts = traceability.texts || [];
+  sourceCount.textContent = `${texts.length} 份`;
+  sourceList.innerHTML = "";
+  for (const item of texts.slice(0, 8)) {
+    const card = document.createElement("article");
+    card.className = "source-card";
+    card.innerHTML = `
+      <h4>${item.text_id}</h4>
+      <p>${item.source_title || "公开资料整理"}</p>
+      <div class="tag-row">
+        <span>${item.mention_count} mention</span>
+        <span>${item.event_count} 事件</span>
+        <span>${item.relation_count} 关系</span>
+      </div>
+      ${item.source_url ? `<p><a href="${item.source_url}" target="_blank" rel="noreferrer">来源链接</a></p>` : ""}
+    `;
+    sourceList.appendChild(card);
   }
 }
 
@@ -629,14 +443,16 @@ function tick() {
     return;
   }
 
-  const width = canvas.getBoundingClientRect().width;
-  const height = canvas.getBoundingClientRect().height;
-  const centerX = width / 2;
-  const centerY = height / 2;
+  const size = getCanvasSize();
+  const centerX = size.width / 2;
+  const centerY = size.height / 2;
 
   for (const node of graphState.nodes) {
-    node.vx += (centerX - node.x) * 0.0008;
-    node.vy += (centerY - node.y) * 0.0008;
+    if (node === graphState.draggingNode) {
+      continue;
+    }
+    node.vx += (centerX - node.x) * 0.0007;
+    node.vy += (centerY - node.y) * 0.0007;
   }
 
   for (let i = 0; i < graphState.nodes.length; i += 1) {
@@ -645,14 +461,18 @@ function tick() {
       const b = graphState.nodes[j];
       const dx = b.x - a.x;
       const dy = b.y - a.y;
-      const dist = Math.max(20, Math.sqrt(dx * dx + dy * dy));
-      const force = 1200 / (dist * dist);
+      const dist = Math.max(22, Math.sqrt(dx * dx + dy * dy));
+      const force = 1050 / (dist * dist);
       const fx = (dx / dist) * force;
       const fy = (dy / dist) * force;
-      a.vx -= fx;
-      a.vy -= fy;
-      b.vx += fx;
-      b.vy += fy;
+      if (a !== graphState.draggingNode) {
+        a.vx -= fx;
+        a.vy -= fy;
+      }
+      if (b !== graphState.draggingNode) {
+        b.vx += fx;
+        b.vy += fy;
+      }
     }
   }
 
@@ -660,21 +480,28 @@ function tick() {
     const dx = edge.targetNode.x - edge.sourceNode.x;
     const dy = edge.targetNode.y - edge.sourceNode.y;
     const dist = Math.max(30, Math.sqrt(dx * dx + dy * dy));
-    const ideal = edge.kind === "event_participant" ? 95 : 130;
-    const spring = (dist - ideal) * 0.0024;
+    const ideal = edge.kind === "event_participant" ? 88 : 122;
+    const spring = (dist - ideal) * 0.0023;
     const fx = (dx / dist) * spring;
     const fy = (dy / dist) * spring;
-    edge.sourceNode.vx += fx;
-    edge.sourceNode.vy += fy;
-    edge.targetNode.vx -= fx;
-    edge.targetNode.vy -= fy;
+    if (edge.sourceNode !== graphState.draggingNode) {
+      edge.sourceNode.vx += fx;
+      edge.sourceNode.vy += fy;
+    }
+    if (edge.targetNode !== graphState.draggingNode) {
+      edge.targetNode.vx -= fx;
+      edge.targetNode.vy -= fy;
+    }
   }
 
   for (const node of graphState.nodes) {
-    node.vx *= 0.88;
-    node.vy *= 0.88;
-    node.x = clamp(node.x + node.vx, 36, width - 36);
-    node.y = clamp(node.y + node.vy, 36, height - 36);
+    if (node === graphState.draggingNode) {
+      continue;
+    }
+    node.vx *= 0.87;
+    node.vy *= 0.87;
+    node.x = clamp(node.x + node.vx, 30, size.width - 30);
+    node.y = clamp(node.y + node.vy, 30, size.height - 30);
   }
 
   draw();
@@ -682,31 +509,31 @@ function tick() {
 }
 
 function draw() {
-  const width = canvas.getBoundingClientRect().width;
-  const height = canvas.getBoundingClientRect().height;
+  const size = getCanvasSize();
+  const focusSet = new Set([graphState.focusNodeId, ...graphState.focusNeighborIds].filter(Boolean));
   const focusActive = Boolean(graphState.focusNodeId);
-  const focusSet = getFocusNodeSet();
+  const selectedNode = graphState.selectedNodeId;
 
-  ctx.clearRect(0, 0, width, height);
-  drawBackground(width, height);
+  ctx.clearRect(0, 0, size.width, size.height);
+  drawBackground(size.width, size.height);
 
   for (const edge of graphState.edges) {
-    const active =
-      edge.id === graphState.selectedEdgeId || edge.event_id === graphState.selectedNodeId;
-    const edgeInFocus =
-      !focusActive || (focusSet.has(edge.source) && focusSet.has(edge.target));
+    const selected = edge.id === graphState.selectedEdgeId;
+    const relatedToSelectedNode =
+      selectedNode && (edge.source === selectedNode || edge.target === selectedNode || edge.event_id === selectedNode);
+    const inFocus = !focusActive || (focusSet.has(edge.source) && focusSet.has(edge.target));
 
-    if (active) {
+    if (selected || relatedToSelectedNode) {
       ctx.strokeStyle = "rgba(217, 108, 58, 0.92)";
-      ctx.lineWidth = 2.4;
-    } else if (!edgeInFocus) {
-      ctx.strokeStyle = "rgba(30, 42, 51, 0.08)";
+      ctx.lineWidth = selected ? 2.8 : 2;
+    } else if (!inFocus || selectedNode) {
+      ctx.strokeStyle = "rgba(34, 46, 55, 0.08)";
       ctx.lineWidth = 1;
     } else if (edge.kind === "event_participant") {
-      ctx.strokeStyle = "rgba(36, 55, 70, 0.32)";
-      ctx.lineWidth = 1.3;
+      ctx.strokeStyle = "rgba(36, 55, 70, 0.28)";
+      ctx.lineWidth = 1.2;
     } else {
-      ctx.strokeStyle = "rgba(86, 132, 214, 0.5)";
+      ctx.strokeStyle = "rgba(75, 127, 208, 0.5)";
       ctx.lineWidth = 1.5;
     }
 
@@ -718,17 +545,20 @@ function draw() {
 
   for (const node of graphState.nodes) {
     const active = node.id === graphState.selectedNodeId;
-    const nodeInFocus = !focusActive || focusSet.has(node.id);
+    const related = graphState.focusNeighborIds.includes(node.id) || node.id === graphState.focusNodeId;
+    const dimmedByFocus = focusActive && !related;
+    const dimmedBySelection =
+      selectedNode &&
+      !active &&
+      !graphState.edges.some((edge) => edge.source === selectedNode && edge.target === node.id || edge.target === selectedNode && edge.source === node.id);
     const color = typeColors[node.type] || "#60717d";
-    const alpha = active ? 1 : nodeInFocus ? 0.94 : 0.22;
 
     ctx.save();
-    ctx.globalAlpha = alpha;
+    ctx.globalAlpha = dimmedByFocus || dimmedBySelection ? 0.22 : 0.96;
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.arc(node.x, node.y, active ? node.radius + 2 : node.radius, 0, Math.PI * 2);
+    ctx.arc(node.x, node.y, active ? node.radius + 3 : node.radius, 0, Math.PI * 2);
     ctx.fill();
-
     ctx.fillStyle = "#1e2a33";
     ctx.font = active ? "600 13px sans-serif" : "12px sans-serif";
     ctx.fillText(node.label, node.x + 12, node.y + 4);
@@ -738,7 +568,7 @@ function draw() {
 
 function drawBackground(width, height) {
   ctx.save();
-  ctx.strokeStyle = "rgba(30, 42, 51, 0.05)";
+  ctx.strokeStyle = "rgba(34, 46, 55, 0.05)";
   ctx.lineWidth = 1;
   for (let x = 40; x < width; x += 40) {
     ctx.beginPath();
@@ -756,8 +586,9 @@ function drawBackground(width, height) {
 }
 
 function findNodeAt(x, y) {
-  for (const node of graphState.nodes) {
-    if (distance({ x, y }, node) <= node.radius + 6) {
+  for (let index = graphState.nodes.length - 1; index >= 0; index -= 1) {
+    const node = graphState.nodes[index];
+    if (distance({ x, y }, node) <= node.radius + 8) {
       return node;
     }
   }
@@ -793,23 +624,50 @@ function findEdgeAt(x, y) {
   return null;
 }
 
+function selectNode(nodeId) {
+  const node = getNodeById(nodeId);
+  if (!node) {
+    return;
+  }
+  graphState.selectedNodeId = nodeId;
+  graphState.selectedEdgeId = "";
+  selectionHint.textContent = "已选节点";
+  updateDetailForNode(nodeId);
+  updateActiveEventCard(node.type === "EventNode" ? node.id : "");
+}
+
+function selectEdge(edgeId) {
+  const edge = graphState.edges.find((item) => item.id === edgeId);
+  if (!edge) {
+    return;
+  }
+  graphState.selectedNodeId = "";
+  graphState.selectedEdgeId = edgeId;
+  selectionHint.textContent = "已选关系";
+  updateDetailForEdge(edgeId);
+  updateActiveEventCard(edge.event_id || "");
+}
+
 function updateDetailForNode(nodeId) {
   const node = getNodeById(nodeId);
   if (!node) {
     return;
   }
-
   const relatedEdges = graphState.edges.filter(
     (edge) => edge.source === nodeId || edge.target === nodeId || edge.event_id === nodeId
   );
-
-  const evidenceList = (node.evidence_samples || [])
+  const neighborItems = relatedEdges.slice(0, 8).map((edge) => {
+    const other = edge.source === nodeId ? edge.targetNode : edge.sourceNode;
+    return `<div class="mini-card"><strong>${edge.label}</strong><p>${other ? other.label : edge.targetNode.label}</p></div>`;
+  });
+  const evidenceItems = (node.evidence_samples || [])
+    .slice(0, 3)
     .map(
       (item) => `
         <div class="detail-evidence-card">
           <strong>${item.text_id} / 句子 ${item.sentence_id}</strong>
           <p>${item.evidence}</p>
-          ${item.source_url ? `<a class="source-link" href="${item.source_url}" target="_blank" rel="noreferrer">${item.source_title || "查看来源"}</a>` : ""}
+          ${item.source_url ? `<a class="source-link" href="${item.source_url}" target="_blank" rel="noreferrer">来源链接</a>` : ""}
         </div>
       `
     )
@@ -818,12 +676,10 @@ function updateDetailForNode(nodeId) {
   detailBox.innerHTML = `
     <div class="title">${node.label}</div>
     <span class="meta">${node.type}</span>
-    <p>${node.description || "暂无额外描述。"}</p>
-    ${node.evidence ? `<div class="evidence">${node.evidence}</div>` : ""}
-    ${node.source_url ? `<a class="source-link" href="${node.source_url}" target="_blank" rel="noreferrer">${node.source_title || "查看来源"}</a>` : ""}
-    <p>相关边数：${relatedEdges.length}</p>
-    ${node.text_ids ? `<p>出现原文：${node.text_ids.join("、")}</p>` : ""}
-    ${evidenceList ? `<div class="detail-evidence-list">${evidenceList}</div>` : ""}
+    <p>${node.description || node.evidence || "暂无额外描述。"}</p>
+    <p>直接连边：${relatedEdges.length} 条</p>
+    <div class="case-list">${neighborItems.join("") || "<p>暂无相邻节点。</p>"}</div>
+    ${evidenceItems ? `<div class="case-list">${evidenceItems}</div>` : ""}
   `;
 }
 
@@ -832,51 +688,99 @@ function updateDetailForEdge(edgeId) {
   if (!edge) {
     return;
   }
-
   detailBox.innerHTML = `
-    <div class="title">${edge.sourceNode.label} → ${edge.targetNode.label}</div>
+    <div class="title">${edge.sourceNode.label} -> ${edge.targetNode.label}</div>
     <span class="meta">${edge.label}</span>
     <p>边类型：${edge.kind}</p>
     <p>原文位置：${edge.text_id || "未记录"} / 句子 ${edge.sentence_id || "-"}</p>
     <div class="evidence">${edge.evidence || "暂无证据句。"}</div>
-    ${edge.source_url ? `<a class="source-link" href="${edge.source_url}" target="_blank" rel="noreferrer">${edge.source_title || "查看来源"}</a>` : ""}
+    ${edge.source_url ? `<a class="source-link" href="${edge.source_url}" target="_blank" rel="noreferrer">来源链接</a>` : ""}
   `;
 }
 
-canvas.addEventListener("click", (event) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+function updateActiveEventCard(eventId) {
+  for (const card of eventList.querySelectorAll(".event-card")) {
+    card.classList.toggle("active", card.dataset.eventId === eventId);
+  }
+}
 
-  const node = findNodeAt(x, y);
+function canvasPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
+}
+
+canvas.addEventListener("mousedown", (event) => {
+  const point = canvasPoint(event);
+  const node = findNodeAt(point.x, point.y);
+  if (!node) {
+    return;
+  }
+  graphState.draggingNode = node;
+  graphState.dragOffsetX = point.x - node.x;
+  graphState.dragOffsetY = point.y - node.y;
+  graphState.dragMoved = false;
+  node.vx = 0;
+  node.vy = 0;
+  canvas.classList.add("dragging");
+});
+
+canvas.addEventListener("mousemove", (event) => {
+  if (!graphState.draggingNode) {
+    return;
+  }
+  const point = canvasPoint(event);
+  const size = getCanvasSize();
+  const node = graphState.draggingNode;
+  node.x = clamp(point.x - graphState.dragOffsetX, 30, size.width - 30);
+  node.y = clamp(point.y - graphState.dragOffsetY, 30, size.height - 30);
+  node.vx = 0;
+  node.vy = 0;
+  graphState.dragMoved = true;
+});
+
+function releaseDrag() {
+  graphState.draggingNode = null;
+  canvas.classList.remove("dragging");
+}
+
+canvas.addEventListener("mouseup", releaseDrag);
+canvas.addEventListener("mouseleave", releaseDrag);
+
+canvas.addEventListener("click", (event) => {
+  if (graphState.dragMoved) {
+    graphState.dragMoved = false;
+    return;
+  }
+  const point = canvasPoint(event);
+  const node = findNodeAt(point.x, point.y);
   if (node) {
     if (node.type === "Person") {
       focusOnPerson(node.label);
-      return;
+    } else {
+      selectNode(node.id);
     }
-
-    graphState.selectedNodeId = node.id;
-    graphState.selectedEdgeId = "";
-    updateDetailForNode(node.id);
-    updateActiveEventCard(node.type === "EventNode" ? node.id : "");
     return;
   }
-
-  const edge = findEdgeAt(x, y);
+  const edge = findEdgeAt(point.x, point.y);
   if (edge) {
-    graphState.selectedEdgeId = edge.id;
-    graphState.selectedNodeId = "";
-    updateDetailForEdge(edge.id);
-    updateActiveEventCard(edge.event_id || "");
+    selectEdge(edge.id);
   }
 });
 
-window.addEventListener("resize", () => {
-  resizeCanvas();
-});
+window.addEventListener("resize", resizeCanvas);
 
 async function boot() {
+  initTabs();
+  const initialView = window.location.hash.replace("#", "");
+  if (["entity", "disambiguation", "event", "relation", "graph"].includes(initialView)) {
+    selectView(initialView, false);
+  }
+  renderMethodBoxes();
   resizeCanvas();
+
   const [
     graphResponse,
     reportResponse,
@@ -899,26 +803,27 @@ async function boot() {
   const report = await reportResponse.json();
   const traceability = await traceResponse.json();
   const explainability = await explainResponse.json();
-  const mentions = parseJsonl(await mentionsResponse.text());
-  const linkedMentions = parseJsonl(await linkedResponse.text());
+  parseJsonl(await mentionsResponse.text());
+  parseJsonl(await linkedResponse.text());
 
-  prepareGraph(graph);
-  renderSummary(report);
-  if (evaluation) {
-    renderEvaluationSummary(evaluation);
-  } else {
-    evaluationBox.innerHTML = "<p>还没有生成人工检查结果。运行 `python3 scripts/run_evaluation.py` 后，这里会显示小样本核对结果。</p>";
-  }
+  renderTopStats(report, graph);
+  renderFormula(explainability.scoring_formula || {});
+  renderEntityExtractionCase(explainability.entity_extraction_cases || []);
+  renderDisambiguationCases(explainability.disambiguation_cases || []);
+  renderEventExtractionCase(explainability.event_extraction_cases || explainability.event_relation_cases || []);
+  renderRelationExtractionCase(explainability.relation_extraction_cases || []);
   renderSourceList(traceability);
-  renderProcessSteps(report, traceability, mentions, linkedMentions, graph.events || []);
-  renderExplainability(explainability);
+  prepareGraph(graph);
+
+  if (evaluation) {
+    topStats.insertAdjacentHTML(
+      "beforeend",
+      `<span>人工检查 ${Math.round((evaluation.entity_linking_accuracy || 0) * 100)}%</span>`
+    );
+  }
 }
 
 boot().catch((error) => {
+  topStats.innerHTML = `<span>加载失败：${error.message}</span>`;
   detailBox.innerHTML = `<p>加载失败：${error.message}</p>`;
-  processSteps.innerHTML = `<p>流程数据加载失败：${error.message}</p>`;
-  personFocusSummary.innerHTML = `<p>人物视角加载失败：${error.message}</p>`;
-  disambiguationCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
-  eventChainCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
-  evaluationBox.innerHTML = `<p>人工检查结果加载失败：${error.message}</p>`;
 });

@@ -7,133 +7,127 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="page-shell">
-    <header class="hero">
+  <div class="app-shell">
+    <header class="topbar">
       <div>
         <p class="eyebrow">Turing Knowledge Graph</p>
         <h1>图灵主题多主体知识图谱</h1>
-        <p class="hero-copy">从原始文本出发，经过实体抽取、实体消歧、事件抽取、关系抽取，最后生成一个可以交互查看证据句的知识图谱。</p>
       </div>
-      <div class="hero-note">
-        <div class="stat-chip">
-          <span>规则方法</span>
-          <strong>可解释</strong>
-        </div>
-        <div class="stat-chip">
-          <span>展示方式</span>
-          <strong>本地网页</strong>
-        </div>
+      <div id="top-stats" class="top-stats">
+        <span>正在加载数据...</span>
       </div>
     </header>
 
-    <section class="process-panel">
-      <div class="panel-head">
-        <h2>构建过程</h2>
-        <div class="stats">
-          <span>从 raw_data 到图谱</span>
-        </div>
-      </div>
-      <div id="process-steps" class="process-steps">
-        <p>正在加载流程数据...</p>
-      </div>
-    </section>
+    <nav class="tabs" aria-label="展示步骤">
+      <button type="button" class="tab-button active" data-view="entity">实体抽取</button>
+      <button type="button" class="tab-button" data-view="disambiguation">实体消歧</button>
+      <button type="button" class="tab-button" data-view="event">事件抽取</button>
+      <button type="button" class="tab-button" data-view="relation">关系抽取</button>
+      <button type="button" class="tab-button" data-view="graph">知识图谱</button>
+    </nav>
 
-    <section class="focus-panel">
-      <div class="panel-head">
-        <h2>人物视角</h2>
-        <div class="stats">
-          <span>多主体切换</span>
+    <main class="view-stage">
+      <section class="view-panel active" data-panel="entity">
+        <div class="case-layout">
+          <section class="method-card">
+            <p class="step-label">Step 01</p>
+            <h2>实体抽取</h2>
+            <p>这一页展示从 raw 文本里找 mention 的过程。规则只有两类：种子词典匹配已知人物、机构、作品等；正则匹配时间和书名这类格式明显的片段。</p>
+            <div id="entity-method-list" class="method-list"></div>
+          </section>
+          <section id="entity-extraction-case" class="case-card wide-card">
+            <p>正在加载实体抽取案例...</p>
+          </section>
         </div>
-      </div>
-      <p class="focus-copy">点击不同人物后，关系图会高亮该人物和一跳邻居，右侧详情也会同步到对应主体。</p>
-      <div id="person-focus-buttons" class="focus-buttons">
-        <p>正在加载人物按钮...</p>
-      </div>
-      <div id="person-focus-summary" class="focus-summary">
-        <p>正在加载人物视角摘要...</p>
-      </div>
-    </section>
-
-    <section class="explain-panel">
-      <div class="panel-head">
-        <h2>规则解释</h2>
-        <div class="stats">
-          <span>为什么这样抽</span>
-        </div>
-      </div>
-      <p class="focus-copy">这里专门挑了几个最适合答辩的真实案例，直接展示实体消歧打分和“句子 -> 事件 -> 关系”的推导过程。</p>
-      <div class="explain-grid">
-        <section class="explain-card">
-          <div class="event-head">
-            <h3>实体消歧案例</h3>
-          </div>
-          <div id="disambiguation-cases" class="case-list">
-            <p>正在加载消歧案例...</p>
-          </div>
-        </section>
-        <section class="explain-card">
-          <div class="event-head">
-            <h3>事件生成关系案例</h3>
-          </div>
-          <div id="event-chain-cases" class="case-list">
-            <p>正在加载事件链路案例...</p>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <main class="layout">
-      <section class="graph-panel">
-        <div class="panel-head">
-          <h2>关系图</h2>
-          <div id="stats" class="stats"></div>
-        </div>
-        <canvas id="graph-canvas"></canvas>
       </section>
 
-      <aside class="sidebar">
-        <section class="sidebar-card">
-          <h3>查看说明</h3>
-          <p>可以先点上方人物视角按钮，再点击节点、边或右侧事件卡片查看证据句和关联信息。</p>
-        </section>
+      <section class="view-panel" data-panel="disambiguation">
+        <div class="case-layout">
+          <section class="method-card">
+            <p class="step-label">Step 02</p>
+            <h2>实体消歧</h2>
+            <p>同一个词可能对应多个标准实体，所以这里把候选实体放在一起比较。总分由别名、上下文关键词、类型一致性三项组成。</p>
+            <div id="formula-box" class="formula-box"></div>
+          </section>
+          <section class="case-card wide-card">
+            <div class="card-head">
+              <h3>典型案例</h3>
+              <span>候选打分</span>
+            </div>
+            <div id="disambiguation-cases" class="case-list"></div>
+          </section>
+        </div>
+      </section>
 
-        <section class="sidebar-card">
-          <h3>答辩速览</h3>
-          <div id="summary-box" class="summary-box">
-            <p>正在加载统计摘要...</p>
-          </div>
-        </section>
+      <section class="view-panel" data-panel="event">
+        <div class="case-layout">
+          <section class="method-card">
+            <p class="step-label">Step 03</p>
+            <h2>事件抽取</h2>
+            <p>我没有直接把句子变成边，而是先识别求学、发表、研究、战争工作等事件。这样答辩时可以先解释事件，再解释关系。</p>
+            <div id="event-method-list" class="method-list"></div>
+          </section>
+          <section id="event-extraction-case" class="case-card wide-card">
+            <p>正在加载事件抽取案例...</p>
+          </section>
+        </div>
+      </section>
 
-        <section class="sidebar-card">
-          <h3>人工检查结果</h3>
-          <div id="evaluation-box" class="summary-box">
-            <p>正在加载人工检查结果...</p>
-          </div>
-        </section>
+      <section class="view-panel" data-panel="relation">
+        <div class="case-layout">
+          <section class="method-card">
+            <p class="step-label">Step 04</p>
+            <h2>关系抽取</h2>
+            <p>关系抽取主要跟着事件走：先确定事件类型和参与实体，再按简单规则生成三元组，并保留证据句。</p>
+            <div id="relation-method-list" class="method-list"></div>
+          </section>
+          <section id="relation-extraction-case" class="case-card wide-card">
+            <p>正在加载关系抽取案例...</p>
+          </section>
+        </div>
+      </section>
 
-        <section class="sidebar-card">
-          <h3>详情</h3>
-          <div id="detail-box" class="detail-box">
-            <p>先点击一个节点或一条关系。</p>
-          </div>
-        </section>
+      <section class="view-panel" data-panel="graph">
+        <div class="graph-layout">
+          <section class="graph-panel">
+            <div class="panel-head">
+              <div>
+                <h2>知识图谱</h2>
+                <p>点击节点查看连边，拖动节点可以调整位置。</p>
+              </div>
+              <div id="stats" class="stats"></div>
+            </div>
+            <div id="person-focus-buttons" class="focus-buttons"></div>
+            <canvas id="graph-canvas"></canvas>
+          </section>
 
-        <section class="sidebar-card">
-          <div class="event-head">
-            <h3>来源回溯</h3>
-            <span id="source-count" class="event-count"></span>
-          </div>
-          <div id="source-list" class="source-list"></div>
-        </section>
-
-        <section class="sidebar-card">
-          <div class="event-head">
-            <h3>事件卡片</h3>
-            <span id="event-count" class="event-count"></span>
-          </div>
-          <div id="event-list" class="event-list"></div>
-        </section>
-      </aside>
+          <aside class="graph-sidebar">
+            <section class="sidebar-card">
+              <div class="card-head">
+                <h3>当前选择</h3>
+                <span id="selection-hint">节点 / 边</span>
+              </div>
+              <div id="detail-box" class="detail-box">
+                <p>先点击一个节点或一条关系。</p>
+              </div>
+            </section>
+            <section class="sidebar-card compact-card">
+              <div class="card-head">
+                <h3>事件卡片</h3>
+                <span id="event-count"></span>
+              </div>
+              <div id="event-list" class="event-list"></div>
+            </section>
+            <section class="sidebar-card compact-card">
+              <div class="card-head">
+                <h3>来源回溯</h3>
+                <span id="source-count"></span>
+              </div>
+              <div id="source-list" class="source-list"></div>
+            </section>
+          </aside>
+        </div>
+      </section>
     </main>
   </div>
 

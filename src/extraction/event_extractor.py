@@ -5,7 +5,17 @@ from src.schema.types import EventRecord, LinkedMention
 
 
 class EventExtractor:
-    EDUCATION_TRIGGERS = ["就读", "学习", "攻读", "深造", "studied", "study", "matriculated"]
+    EDUCATION_TRIGGERS = [
+        "就读",
+        "学习",
+        "攻读",
+        "深造",
+        "接受中学教育",
+        "中学教育",
+        "studied",
+        "study",
+        "matriculated",
+    ]
     PUBLICATION_TRIGGERS = ["发表", "published", "论文", "paper"]
     PROPOSAL_TRIGGERS = ["提出", "proposed", "设计", "designed"]
     WAR_TRIGGERS = ["破译", "密码", "战争", "战时", "Enigma", "Bletchley", "GC&CS", "盟军"]

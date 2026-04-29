@@ -53,6 +53,6 @@
     "text_id": "text_06_early_education",
     "sentence_id": 1,
     "event_type": "EducationEvent",
-    "note": "这句包含 Sherborne School 和中学教育，人工觉得应该算求学事件。"
+    "note": "这句包含 Sherborne School 和中学教育，应该算求学事件。"
   }
 ]

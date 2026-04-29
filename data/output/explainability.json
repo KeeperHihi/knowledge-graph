@@ -4,6 +4,51 @@
     "context_keyword_weight": 0.3,
     "type_prior_weight": 0.2
   },
+  "entity_extraction_cases": [
+    {
+      "case_id": "ENTITY01",
+      "title": "从原始句子里找实体",
+      "text_id": "text_01_biography",
+      "sentence_id": 2,
+      "context": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+      "mentions": [
+        {
+          "mention": "Alan Turing",
+          "entity_type": "Person",
+          "method": "gazetteer",
+          "start": 0,
+          "end": 11,
+          "rule_note": "词典匹配"
+        },
+        {
+          "mention": "1936",
+          "entity_type": "Time",
+          "method": "regex",
+          "start": 14,
+          "end": 18,
+          "rule_note": "正则匹配"
+        },
+        {
+          "mention": "《Computable Numbers》",
+          "entity_type": "Work",
+          "method": "regex",
+          "start": 23,
+          "end": 43,
+          "rule_note": "正则匹配"
+        },
+        {
+          "mention": "Turing Machine",
+          "entity_type": "Concept",
+          "method": "gazetteer",
+          "start": 49,
+          "end": 63,
+          "rule_note": "词典匹配"
+        }
+      ],
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+    }
+  ],
   "disambiguation_cases": [
     {
       "case_id": "DISAMBIG01",
@@ -141,6 +186,143 @@
       "source_url": "https://www.princeton.edu/"
     }
   ],
+  "event_extraction_cases": [
+    {
+      "case_id": "EVENTCHAIN01",
+      "title": "PublicationEvent 如何生成关系",
+      "text_id": "text_01_biography",
+      "sentence_id": 2,
+      "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+      "event_id": "EVT002",
+      "event_type": "PublicationEvent",
+      "trigger": "发表",
+      "participants": [
+        {
+          "role": "author",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "work",
+          "entity_id": "E019",
+          "name": "Computable Numbers",
+          "entity_type": "Work"
+        }
+      ],
+      "relations": [
+        {
+          "relation_id": "REL003",
+          "triple": "Alan Turing - published - Computable Numbers",
+          "method": "event_rule",
+          "trigger": "发表"
+        }
+      ],
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+    },
+    {
+      "case_id": "EVENTCHAIN02",
+      "title": "EducationEvent 如何生成关系",
+      "text_id": "text_03_cambridge_manchester",
+      "sentence_id": 1,
+      "evidence": "图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。",
+      "event_id": "EVT005",
+      "event_type": "EducationEvent",
+      "trigger": "学习",
+      "participants": [
+        {
+          "role": "student",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "institution",
+          "entity_id": "E008",
+          "name": "University of Cambridge",
+          "entity_type": "Organization"
+        },
+        {
+          "role": "city",
+          "entity_id": "E011",
+          "name": "Cambridge",
+          "entity_type": "Place"
+        }
+      ],
+      "relations": [
+        {
+          "relation_id": "REL008",
+          "triple": "Alan Turing - studied_at - University of Cambridge",
+          "method": "event_rule",
+          "trigger": "学习"
+        }
+      ],
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+    },
+    {
+      "case_id": "EVENTCHAIN03",
+      "title": "EmploymentEvent 如何生成关系",
+      "text_id": "text_11_late_life",
+      "sentence_id": 1,
+      "evidence": "图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。",
+      "event_id": "EVT023",
+      "event_type": "EmploymentEvent",
+      "trigger": "工作",
+      "participants": [
+        {
+          "role": "staff",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "organization",
+          "entity_id": "E009",
+          "name": "University of Manchester",
+          "entity_type": "Organization"
+        },
+        {
+          "role": "location",
+          "entity_id": "E014",
+          "name": "Wilmslow",
+          "entity_type": "Place"
+        }
+      ],
+      "relations": [
+        {
+          "relation_id": "REL027",
+          "triple": "Alan Turing - worked_at - University of Manchester",
+          "method": "event_rule",
+          "trigger": "工作"
+        }
+      ],
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+    }
+  ],
+  "relation_extraction_cases": [
+    {
+      "case_id": "RELATION01",
+      "title": "从事件和规则生成三元组",
+      "relation_id": "REL003",
+      "text_id": "text_01_biography",
+      "sentence_id": 2,
+      "head_name": "Alan Turing",
+      "head_type": "Person",
+      "relation": "published",
+      "tail_name": "Computable Numbers",
+      "tail_type": "Work",
+      "triple": "Alan Turing - published - Computable Numbers",
+      "trigger": "发表",
+      "method": "event_rule",
+      "source_event_id": "EVT002",
+      "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+    }
+  ],
   "event_relation_cases": [
     {
       "case_id": "EVENTCHAIN01",
@@ -222,7 +404,7 @@
       "text_id": "text_11_late_life",
       "sentence_id": 1,
       "evidence": "图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。",
-      "event_id": "EVT022",
+      "event_id": "EVT023",
       "event_type": "EmploymentEvent",
       "trigger": "工作",
       "participants": [
@@ -247,7 +429,7 @@
       ],
       "relations": [
         {
-          "relation_id": "REL026",
+          "relation_id": "REL027",
           "triple": "Alan Turing - worked_at - University of Manchester",
           "method": "event_rule",
           "trigger": "工作"

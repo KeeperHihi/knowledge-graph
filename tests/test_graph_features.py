@@ -153,6 +153,15 @@ class GraphFeatureTestCase(unittest.TestCase):
         events = self.event_extractor.extract(mentions)
         relations = self.relation_extractor.extract(mentions, events)
 
+        self.assertTrue(any(event.event_type == "EducationEvent" for event in events))
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "studied_at"
+                and relation.tail_name == "Sherborne School"
+                for relation in relations
+            )
+        )
         self.assertTrue(
             any(
                 relation.head_name == "Alan Turing"

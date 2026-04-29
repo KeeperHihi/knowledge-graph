@@ -69,6 +69,6 @@
     "head_name": "Alan Turing",
     "relation": "studied_at",
     "tail_name": "Sherborne School",
-    "note": "这条是我人工觉得应该抽到、但当前规则还漏掉的关系。"
+    "note": "中学教育句，修复后应该能抽到 Sherborne School。"
   }
 ]
