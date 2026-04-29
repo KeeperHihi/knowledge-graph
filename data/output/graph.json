@@ -1,0 +1,1230 @@
+{
+  "nodes": [
+    {
+      "id": "E001",
+      "label": "Alan Turing",
+      "type": "Person",
+      "description": "英国数学家、逻辑学家和计算机科学先驱，是本项目的核心人物。",
+      "source": "entity"
+    },
+    {
+      "id": "E008",
+      "label": "University of Cambridge",
+      "type": "Organization",
+      "description": "图灵早年学习和研究的重要大学机构。",
+      "source": "entity"
+    },
+    {
+      "id": "E007",
+      "label": "Princeton University",
+      "type": "Organization",
+      "description": "图灵攻读博士学位的重要学术机构。",
+      "source": "entity"
+    },
+    {
+      "id": "E019",
+      "label": "Computable Numbers",
+      "type": "Work",
+      "description": "图灵 1936 年的代表性论文，常与图灵机一起出现。",
+      "source": "entity"
+    },
+    {
+      "id": "E017",
+      "label": "Turing Machine",
+      "type": "Concept",
+      "description": "计算理论中的经典抽象模型。",
+      "source": "entity"
+    },
+    {
+      "id": "E021",
+      "label": "Second World War",
+      "type": "Event",
+      "description": "图灵参与密码破译工作的历史背景事件。",
+      "source": "entity"
+    },
+    {
+      "id": "E010",
+      "label": "Bletchley Park",
+      "type": "Place",
+      "description": "二战期间英国密码破译工作的核心地点。",
+      "source": "entity"
+    },
+    {
+      "id": "E015",
+      "label": "Enigma",
+      "type": "Device",
+      "description": "二战时期著名密码机，是图灵相关文本中的高频实体。",
+      "source": "entity"
+    },
+    {
+      "id": "E023",
+      "label": "Government Code and Cypher School",
+      "type": "Organization",
+      "description": "英国二战时期负责密码工作的机构。",
+      "source": "entity"
+    },
+    {
+      "id": "E016",
+      "label": "Bombe",
+      "type": "Device",
+      "description": "用于辅助破解 Enigma 的机电设备。",
+      "source": "entity"
+    },
+    {
+      "id": "E011",
+      "label": "Cambridge",
+      "type": "Place",
+      "description": "英国城市，与剑桥大学同名，便于构造歧义。",
+      "source": "entity"
+    },
+    {
+      "id": "E009",
+      "label": "University of Manchester",
+      "type": "Organization",
+      "description": "图灵晚年工作过的重要大学机构。",
+      "source": "entity"
+    },
+    {
+      "id": "E012",
+      "label": "Manchester",
+      "type": "Place",
+      "description": "英国城市，与曼彻斯特大学同名，便于构造歧义。",
+      "source": "entity"
+    },
+    {
+      "id": "E002",
+      "label": "Alonzo Church",
+      "type": "Person",
+      "description": "逻辑学家，图灵在普林斯顿时期的重要学术导师。",
+      "source": "entity"
+    },
+    {
+      "id": "E018",
+      "label": "Turing Test",
+      "type": "Concept",
+      "description": "用于讨论机器智能判定的经典思想实验。",
+      "source": "entity"
+    },
+    {
+      "id": "E024",
+      "label": "Automatic Computing Engine",
+      "type": "Device",
+      "description": "图灵提出的重要计算设备设计方案。",
+      "source": "entity"
+    },
+    {
+      "id": "E025",
+      "label": "Manchester Mark I",
+      "type": "Device",
+      "description": "早期存储程序计算机之一，与图灵在曼彻斯特时期相关。",
+      "source": "entity"
+    },
+    {
+      "id": "E028",
+      "label": "Sherborne School",
+      "type": "Organization",
+      "description": "图灵青年时期就读的学校。",
+      "source": "entity"
+    },
+    {
+      "id": "E006",
+      "label": "Christopher Morcom",
+      "type": "Person",
+      "description": "图灵青年时期的重要朋友，对其思想发展有影响。",
+      "source": "entity"
+    },
+    {
+      "id": "E022",
+      "label": "King's College, Cambridge",
+      "type": "Organization",
+      "description": "图灵曾学习和任职相关的学院实体。",
+      "source": "entity"
+    },
+    {
+      "id": "E004",
+      "label": "John von Neumann",
+      "type": "Person",
+      "description": "计算机体系结构的重要奠基者，与普林斯顿学术环境相关。",
+      "source": "entity"
+    },
+    {
+      "id": "E005",
+      "label": "Joan Clarke",
+      "type": "Person",
+      "description": "二战期间在布莱切利园参与密码分析的密码学家。",
+      "source": "entity"
+    },
+    {
+      "id": "E027",
+      "label": "National Physical Laboratory",
+      "type": "Organization",
+      "description": "图灵参与 Automatic Computing Engine 设计时相关的机构。",
+      "source": "entity"
+    },
+    {
+      "id": "E003",
+      "label": "Max Newman",
+      "type": "Person",
+      "description": "英国数学家，对图灵的学术成长和计算机发展均有影响。",
+      "source": "entity"
+    },
+    {
+      "id": "E014",
+      "label": "Wilmslow",
+      "type": "Place",
+      "description": "图灵去世前生活的地点之一。",
+      "source": "entity"
+    },
+    {
+      "id": "E013",
+      "label": "London",
+      "type": "Place",
+      "description": "英国首都，可作为地名类实体补充。",
+      "source": "entity"
+    },
+    {
+      "id": "EVT001",
+      "label": "EducationEvent",
+      "type": "EventNode",
+      "description": "记录人物的求学经历。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。"
+    },
+    {
+      "id": "EVT002",
+      "label": "WarWorkEvent",
+      "type": "EventNode",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source": "event",
+      "time": "",
+      "place": "Bletchley Park",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。"
+    },
+    {
+      "id": "EVT003",
+      "label": "EducationEvent",
+      "type": "EventNode",
+      "description": "记录人物的求学经历。",
+      "source": "event",
+      "time": "",
+      "place": "Cambridge",
+      "evidence": "图灵早年在剑桥学习数学。"
+    },
+    {
+      "id": "EVT004",
+      "label": "InfluenceEvent",
+      "type": "EventNode",
+      "description": "记录人物之间的思想影响。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "Alonzo Church 对图灵的研究有重要影响。"
+    },
+    {
+      "id": "EVT005",
+      "label": "InfluenceEvent",
+      "type": "EventNode",
+      "description": "记录人物之间的思想影响。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。"
+    },
+    {
+      "id": "EVT006",
+      "label": "EducationEvent",
+      "type": "EventNode",
+      "description": "记录人物的求学经历。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。"
+    },
+    {
+      "id": "EVT007",
+      "label": "WarWorkEvent",
+      "type": "EventNode",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source": "event",
+      "time": "",
+      "place": "Bletchley Park",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。"
+    },
+    {
+      "id": "EVT008",
+      "label": "EmploymentEvent",
+      "type": "EventNode",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source": "event",
+      "time": "",
+      "place": "Bletchley Park",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。"
+    },
+    {
+      "id": "EVT009",
+      "label": "WarWorkEvent",
+      "type": "EventNode",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。"
+    },
+    {
+      "id": "EVT010",
+      "label": "ResearchEvent",
+      "type": "EventNode",
+      "description": "记录图灵提出概念、设备或研究方向的句子。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
+    },
+    {
+      "id": "EVT011",
+      "label": "EmploymentEvent",
+      "type": "EventNode",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
+    },
+    {
+      "id": "EVT012",
+      "label": "EmploymentEvent",
+      "type": "EventNode",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。"
+    },
+    {
+      "id": "EVT013",
+      "label": "ResearchEvent",
+      "type": "EventNode",
+      "description": "记录图灵提出概念、设备或研究方向的句子。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。"
+    }
+  ],
+  "edges": [
+    {
+      "id": "EVT001_E001",
+      "source": "EVT001",
+      "target": "E001",
+      "label": "student",
+      "kind": "event_participant",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "event_id": "EVT001"
+    },
+    {
+      "id": "EVT001_E008",
+      "source": "EVT001",
+      "target": "E008",
+      "label": "institution",
+      "kind": "event_participant",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "event_id": "EVT001"
+    },
+    {
+      "id": "EVT001_E007",
+      "source": "EVT001",
+      "target": "E007",
+      "label": "institution",
+      "kind": "event_participant",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "event_id": "EVT001"
+    },
+    {
+      "id": "EVT002_E001",
+      "source": "EVT002",
+      "target": "E001",
+      "label": "researcher",
+      "kind": "event_participant",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "event_id": "EVT002"
+    },
+    {
+      "id": "EVT002_E010",
+      "source": "EVT002",
+      "target": "E010",
+      "label": "location",
+      "kind": "event_participant",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "event_id": "EVT002"
+    },
+    {
+      "id": "EVT002_E015",
+      "source": "EVT002",
+      "target": "E015",
+      "label": "device",
+      "kind": "event_participant",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "event_id": "EVT002"
+    },
+    {
+      "id": "EVT002_E021",
+      "source": "EVT002",
+      "target": "E021",
+      "label": "background_event",
+      "kind": "event_participant",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "event_id": "EVT002"
+    },
+    {
+      "id": "EVT003_E001",
+      "source": "EVT003",
+      "target": "E001",
+      "label": "student",
+      "kind": "event_participant",
+      "evidence": "图灵早年在剑桥学习数学。",
+      "event_id": "EVT003"
+    },
+    {
+      "id": "EVT003_E011",
+      "source": "EVT003",
+      "target": "E011",
+      "label": "city",
+      "kind": "event_participant",
+      "evidence": "图灵早年在剑桥学习数学。",
+      "event_id": "EVT003"
+    },
+    {
+      "id": "EVT004_E002",
+      "source": "EVT004",
+      "target": "E002",
+      "label": "influencer",
+      "kind": "event_participant",
+      "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+      "event_id": "EVT004"
+    },
+    {
+      "id": "EVT004_E001",
+      "source": "EVT004",
+      "target": "E001",
+      "label": "influenced",
+      "kind": "event_participant",
+      "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+      "event_id": "EVT004"
+    },
+    {
+      "id": "EVT005_E006",
+      "source": "EVT005",
+      "target": "E006",
+      "label": "influencer",
+      "kind": "event_participant",
+      "evidence": "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。",
+      "event_id": "EVT005"
+    },
+    {
+      "id": "EVT005_E001",
+      "source": "EVT005",
+      "target": "E001",
+      "label": "influenced",
+      "kind": "event_participant",
+      "evidence": "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。",
+      "event_id": "EVT005"
+    },
+    {
+      "id": "EVT006_E001",
+      "source": "EVT006",
+      "target": "E001",
+      "label": "student",
+      "kind": "event_participant",
+      "evidence": "1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。",
+      "event_id": "EVT006"
+    },
+    {
+      "id": "EVT006_E007",
+      "source": "EVT006",
+      "target": "E007",
+      "label": "institution",
+      "kind": "event_participant",
+      "evidence": "1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。",
+      "event_id": "EVT006"
+    },
+    {
+      "id": "EVT007_E001",
+      "source": "EVT007",
+      "target": "E001",
+      "label": "researcher",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT007"
+    },
+    {
+      "id": "EVT007_E023",
+      "source": "EVT007",
+      "target": "E023",
+      "label": "organization",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT007"
+    },
+    {
+      "id": "EVT007_E010",
+      "source": "EVT007",
+      "target": "E010",
+      "label": "location",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT007"
+    },
+    {
+      "id": "EVT008_E001",
+      "source": "EVT008",
+      "target": "E001",
+      "label": "staff",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT008"
+    },
+    {
+      "id": "EVT008_E023",
+      "source": "EVT008",
+      "target": "E023",
+      "label": "organization",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT008"
+    },
+    {
+      "id": "EVT008_E010",
+      "source": "EVT008",
+      "target": "E010",
+      "label": "location",
+      "kind": "event_participant",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "event_id": "EVT008"
+    },
+    {
+      "id": "EVT009_E005",
+      "source": "EVT009",
+      "target": "E005",
+      "label": "researcher",
+      "kind": "event_participant",
+      "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+      "event_id": "EVT009"
+    },
+    {
+      "id": "EVT009_E016",
+      "source": "EVT009",
+      "target": "E016",
+      "label": "device",
+      "kind": "event_participant",
+      "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+      "event_id": "EVT009"
+    },
+    {
+      "id": "EVT010_E001",
+      "source": "EVT010",
+      "target": "E001",
+      "label": "researcher",
+      "kind": "event_participant",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "event_id": "EVT010"
+    },
+    {
+      "id": "EVT010_E024",
+      "source": "EVT010",
+      "target": "E024",
+      "label": "topic",
+      "kind": "event_participant",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "event_id": "EVT010"
+    },
+    {
+      "id": "EVT011_E001",
+      "source": "EVT011",
+      "target": "E001",
+      "label": "staff",
+      "kind": "event_participant",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "event_id": "EVT011"
+    },
+    {
+      "id": "EVT011_E027",
+      "source": "EVT011",
+      "target": "E027",
+      "label": "organization",
+      "kind": "event_participant",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "event_id": "EVT011"
+    },
+    {
+      "id": "EVT012_E001",
+      "source": "EVT012",
+      "target": "E001",
+      "label": "staff",
+      "kind": "event_participant",
+      "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。",
+      "event_id": "EVT012"
+    },
+    {
+      "id": "EVT012_E009",
+      "source": "EVT012",
+      "target": "E009",
+      "label": "organization",
+      "kind": "event_participant",
+      "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。",
+      "event_id": "EVT012"
+    },
+    {
+      "id": "EVT013_E001",
+      "source": "EVT013",
+      "target": "E001",
+      "label": "researcher",
+      "kind": "event_participant",
+      "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。",
+      "event_id": "EVT013"
+    },
+    {
+      "id": "EVT013_E018",
+      "source": "EVT013",
+      "target": "E018",
+      "label": "topic",
+      "kind": "event_participant",
+      "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。",
+      "event_id": "EVT013"
+    },
+    {
+      "id": "REL001",
+      "source": "E001",
+      "target": "E008",
+      "label": "studied_at",
+      "kind": "relation",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "trigger": "就读",
+      "event_id": "EVT001",
+      "text_id": "text_01_biography",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL002",
+      "source": "E001",
+      "target": "E007",
+      "label": "studied_at",
+      "kind": "relation",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "trigger": "就读",
+      "event_id": "EVT001",
+      "text_id": "text_01_biography",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL003",
+      "source": "E001",
+      "target": "E010",
+      "label": "worked_at",
+      "kind": "relation",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "trigger": "破译",
+      "event_id": "EVT002",
+      "text_id": "text_02_war",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL004",
+      "source": "E001",
+      "target": "E015",
+      "label": "used",
+      "kind": "relation",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "trigger": "破译",
+      "event_id": "EVT002",
+      "text_id": "text_02_war",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL005",
+      "source": "E001",
+      "target": "E021",
+      "label": "participated_in",
+      "kind": "relation",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "trigger": "破译",
+      "event_id": "EVT002",
+      "text_id": "text_02_war",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL006",
+      "source": "E001",
+      "target": "E011",
+      "label": "studied_at",
+      "kind": "relation",
+      "evidence": "图灵早年在剑桥学习数学。",
+      "trigger": "学习",
+      "event_id": "EVT003",
+      "text_id": "text_03_cambridge_manchester",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL007",
+      "source": "E001",
+      "target": "E002",
+      "label": "influenced_by",
+      "kind": "relation",
+      "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+      "trigger": "影响",
+      "event_id": "EVT004",
+      "text_id": "text_04_test_and_machine",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL008",
+      "source": "E001",
+      "target": "E006",
+      "label": "influenced_by",
+      "kind": "relation",
+      "evidence": "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。",
+      "trigger": "影响",
+      "event_id": "EVT005",
+      "text_id": "text_06_early_education",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL009",
+      "source": "E001",
+      "target": "E007",
+      "label": "studied_at",
+      "kind": "relation",
+      "evidence": "1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。",
+      "trigger": "深造",
+      "event_id": "EVT006",
+      "text_id": "text_07_princeton_research",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL010",
+      "source": "E001",
+      "target": "E023",
+      "label": "worked_at",
+      "kind": "relation",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "trigger": "战争",
+      "event_id": "EVT007",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL011",
+      "source": "E001",
+      "target": "E010",
+      "label": "worked_at",
+      "kind": "relation",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "trigger": "战争",
+      "event_id": "EVT007",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL012",
+      "source": "E005",
+      "target": "E016",
+      "label": "used",
+      "kind": "relation",
+      "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+      "trigger": "密码",
+      "event_id": "EVT009",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 2
+    },
+    {
+      "id": "REL013",
+      "source": "E001",
+      "target": "E024",
+      "label": "proposed",
+      "kind": "relation",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "trigger": "提出",
+      "event_id": "EVT010",
+      "text_id": "text_09_npl_ace",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL014",
+      "source": "E001",
+      "target": "E027",
+      "label": "worked_at",
+      "kind": "relation",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "trigger": "加入",
+      "event_id": "EVT011",
+      "text_id": "text_09_npl_ace",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL015",
+      "source": "E001",
+      "target": "E009",
+      "label": "worked_at",
+      "kind": "relation",
+      "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。",
+      "trigger": "工作",
+      "event_id": "EVT012",
+      "text_id": "text_10_manchester_test",
+      "sentence_id": 1
+    },
+    {
+      "id": "REL016",
+      "source": "E001",
+      "target": "E018",
+      "label": "proposed",
+      "kind": "relation",
+      "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。",
+      "trigger": "提出",
+      "event_id": "EVT013",
+      "text_id": "text_10_manchester_test",
+      "sentence_id": 2
+    },
+    {
+      "id": "REL017",
+      "source": "E009",
+      "target": "E012",
+      "label": "located_in",
+      "kind": "relation",
+      "evidence": "University of Manchester 位于 Manchester。",
+      "trigger": "位于",
+      "event_id": "",
+      "text_id": "text_12_locations",
+      "sentence_id": 2
+    },
+    {
+      "id": "REL018",
+      "source": "E027",
+      "target": "E013",
+      "label": "located_in",
+      "kind": "relation",
+      "evidence": "National Physical Laboratory 位于 London。",
+      "trigger": "位于",
+      "event_id": "",
+      "text_id": "text_12_locations",
+      "sentence_id": 3
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT001",
+      "text_id": "text_01_biography",
+      "sentence_id": 1,
+      "event_type": "EducationEvent",
+      "trigger": "就读",
+      "evidence": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "participants": [
+        {
+          "role": "student",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "institution",
+          "entity_id": "E008",
+          "name": "University of Cambridge",
+          "entity_type": "Organization"
+        },
+        {
+          "role": "institution",
+          "entity_id": "E007",
+          "name": "Princeton University",
+          "entity_type": "Organization"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录人物的求学经历。",
+      "source_relation_ids": [
+        "REL001",
+        "REL002"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT002",
+      "text_id": "text_02_war",
+      "sentence_id": 1,
+      "event_type": "WarWorkEvent",
+      "trigger": "破译",
+      "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
+      "participants": [
+        {
+          "role": "researcher",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "location",
+          "entity_id": "E010",
+          "name": "Bletchley Park",
+          "entity_type": "Place"
+        },
+        {
+          "role": "device",
+          "entity_id": "E015",
+          "name": "Enigma",
+          "entity_type": "Device"
+        },
+        {
+          "role": "background_event",
+          "entity_id": "E021",
+          "name": "Second World War",
+          "entity_type": "Event"
+        }
+      ],
+      "time": "",
+      "place": "Bletchley Park",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source_relation_ids": [
+        "REL003",
+        "REL004",
+        "REL005"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT003",
+      "text_id": "text_03_cambridge_manchester",
+      "sentence_id": 1,
+      "event_type": "EducationEvent",
+      "trigger": "学习",
+      "evidence": "图灵早年在剑桥学习数学。",
+      "participants": [
+        {
+          "role": "student",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "city",
+          "entity_id": "E011",
+          "name": "Cambridge",
+          "entity_type": "Place"
+        }
+      ],
+      "time": "",
+      "place": "Cambridge",
+      "description": "记录人物的求学经历。",
+      "source_relation_ids": [
+        "REL006"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT004",
+      "text_id": "text_04_test_and_machine",
+      "sentence_id": 1,
+      "event_type": "InfluenceEvent",
+      "trigger": "影响",
+      "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+      "participants": [
+        {
+          "role": "influencer",
+          "entity_id": "E002",
+          "name": "Alonzo Church",
+          "entity_type": "Person"
+        },
+        {
+          "role": "influenced",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录人物之间的思想影响。",
+      "source_relation_ids": [
+        "REL007"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT005",
+      "text_id": "text_06_early_education",
+      "sentence_id": 1,
+      "event_type": "InfluenceEvent",
+      "trigger": "影响",
+      "evidence": "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。",
+      "participants": [
+        {
+          "role": "influencer",
+          "entity_id": "E006",
+          "name": "Christopher Morcom",
+          "entity_type": "Person"
+        },
+        {
+          "role": "influenced",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录人物之间的思想影响。",
+      "source_relation_ids": [
+        "REL008"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT006",
+      "text_id": "text_07_princeton_research",
+      "sentence_id": 1,
+      "event_type": "EducationEvent",
+      "trigger": "深造",
+      "evidence": "1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。",
+      "participants": [
+        {
+          "role": "student",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "institution",
+          "entity_id": "E007",
+          "name": "Princeton University",
+          "entity_type": "Organization"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录人物的求学经历。",
+      "source_relation_ids": [
+        "REL009"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT007",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 1,
+      "event_type": "WarWorkEvent",
+      "trigger": "战争",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "participants": [
+        {
+          "role": "researcher",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "organization",
+          "entity_id": "E023",
+          "name": "Government Code and Cypher School",
+          "entity_type": "Organization"
+        },
+        {
+          "role": "location",
+          "entity_id": "E010",
+          "name": "Bletchley Park",
+          "entity_type": "Place"
+        }
+      ],
+      "time": "",
+      "place": "Bletchley Park",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source_relation_ids": [
+        "REL010",
+        "REL011"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT008",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 1,
+      "event_type": "EmploymentEvent",
+      "trigger": "工作",
+      "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+      "participants": [
+        {
+          "role": "staff",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "organization",
+          "entity_id": "E023",
+          "name": "Government Code and Cypher School",
+          "entity_type": "Organization"
+        },
+        {
+          "role": "location",
+          "entity_id": "E010",
+          "name": "Bletchley Park",
+          "entity_type": "Place"
+        }
+      ],
+      "time": "",
+      "place": "Bletchley Park",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source_relation_ids": [],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT009",
+      "text_id": "text_08_bletchley_team",
+      "sentence_id": 2,
+      "event_type": "WarWorkEvent",
+      "trigger": "密码",
+      "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+      "participants": [
+        {
+          "role": "researcher",
+          "entity_id": "E005",
+          "name": "Joan Clarke",
+          "entity_type": "Person"
+        },
+        {
+          "role": "device",
+          "entity_id": "E016",
+          "name": "Bombe",
+          "entity_type": "Device"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录图灵在战争背景下的密码工作。",
+      "source_relation_ids": [
+        "REL012"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT010",
+      "text_id": "text_09_npl_ace",
+      "sentence_id": 1,
+      "event_type": "ResearchEvent",
+      "trigger": "提出",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "participants": [
+        {
+          "role": "researcher",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "topic",
+          "entity_id": "E024",
+          "name": "Automatic Computing Engine",
+          "entity_type": "Device"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录图灵提出概念、设备或研究方向的句子。",
+      "source_relation_ids": [
+        "REL013"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT011",
+      "text_id": "text_09_npl_ace",
+      "sentence_id": 1,
+      "event_type": "EmploymentEvent",
+      "trigger": "加入",
+      "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。",
+      "participants": [
+        {
+          "role": "staff",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "organization",
+          "entity_id": "E027",
+          "name": "National Physical Laboratory",
+          "entity_type": "Organization"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source_relation_ids": [
+        "REL014"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT012",
+      "text_id": "text_10_manchester_test",
+      "sentence_id": 1,
+      "event_type": "EmploymentEvent",
+      "trigger": "工作",
+      "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。",
+      "participants": [
+        {
+          "role": "staff",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "organization",
+          "entity_id": "E009",
+          "name": "University of Manchester",
+          "entity_type": "Organization"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录图灵在机构或地点工作的经历。",
+      "source_relation_ids": [
+        "REL015"
+      ],
+      "metadata": null
+    },
+    {
+      "event_id": "EVT013",
+      "text_id": "text_10_manchester_test",
+      "sentence_id": 2,
+      "event_type": "ResearchEvent",
+      "trigger": "提出",
+      "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。",
+      "participants": [
+        {
+          "role": "researcher",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "topic",
+          "entity_id": "E018",
+          "name": "Turing Test",
+          "entity_type": "Concept"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录图灵提出概念、设备或研究方向的句子。",
+      "source_relation_ids": [
+        "REL016"
+      ],
+      "metadata": null
+    }
+  ],
+  "summary": {
+    "node_count": 39,
+    "edge_count": 49,
+    "event_count": 13,
+    "relation_count": 18
+  }
+}

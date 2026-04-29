@@ -1,0 +1,2 @@
+战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
+ACE 体现了他把理论计算思想推进到实际机器的尝试。

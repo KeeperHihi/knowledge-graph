@@ -8,6 +8,7 @@ RAW_DIR = DATA_DIR / "raw"
 KB_DIR = DATA_DIR / "kb"
 INTERMEDIATE_DIR = DATA_DIR / "intermediate"
 OUTPUT_DIR = DATA_DIR / "output"
+WEB_DIR = BASE_DIR / "web"
 
 DEFAULT_ENCODING = "utf-8"
 
@@ -42,3 +43,19 @@ WORK_PATTERNS = [
 ]
 
 TRIPLES_HEADER = ["head", "relation", "tail", "evidence"]
+RELATIONS_HEADER = [
+    "relation_id",
+    "text_id",
+    "sentence_id",
+    "head_id",
+    "head_name",
+    "head_type",
+    "relation",
+    "tail_id",
+    "tail_name",
+    "tail_type",
+    "trigger",
+    "method",
+    "source_event_id",
+    "evidence",
+]

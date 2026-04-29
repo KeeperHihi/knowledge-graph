@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图灵知识图谱</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Turing Knowledge Graph</p>
+        <h1>图灵主题多主体知识图谱</h1>
+        <p class="hero-copy">从原始文本出发，经过实体抽取、实体消歧、事件抽取、关系抽取，最后生成一个可以交互查看证据句的知识图谱。</p>
+      </div>
+      <div class="hero-note">
+        <div class="stat-chip">
+          <span>规则方法</span>
+          <strong>可解释</strong>
+        </div>
+        <div class="stat-chip">
+          <span>展示方式</span>
+          <strong>本地网页</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="graph-panel">
+        <div class="panel-head">
+          <h2>关系图</h2>
+          <div id="stats" class="stats"></div>
+        </div>
+        <canvas id="graph-canvas"></canvas>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-card">
+          <h3>查看说明</h3>
+          <p>点击节点、边或右侧事件卡片，可以查看证据句和关联信息。</p>
+        </section>
+
+        <section class="sidebar-card">
+          <h3>详情</h3>
+          <div id="detail-box" class="detail-box">
+            <p>先点击一个节点或一条关系。</p>
+          </div>
+        </section>
+
+        <section class="sidebar-card">
+          <div class="event-head">
+            <h3>事件卡片</h3>
+            <span id="event-count" class="event-count"></span>
+          </div>
+          <div id="event-list" class="event-list"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

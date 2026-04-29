@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass, field
-from typing import List
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -75,6 +75,46 @@ class LinkedMention:
     context_keyword_score: float = 0.0
     type_prior_score: float = 0.0
     candidate_ids: List[str] = field(default_factory=list) # 可能是这个 Memtion 对应的实体构成的列表
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class RelationRecord:
+    relation_id: str
+    text_id: str
+    sentence_id: int
+    head_id: str
+    head_name: str
+    head_type: str
+    relation: str
+    tail_id: str
+    tail_name: str
+    tail_type: str
+    evidence: str
+    method: str
+    trigger: str = ""
+    source_event_id: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class EventRecord:
+    event_id: str
+    text_id: str
+    sentence_id: int
+    event_type: str
+    trigger: str
+    evidence: str
+    participants: List[Dict[str, str]]
+    time: str = ""
+    place: str = ""
+    description: str = ""
+    source_relation_ids: List[str] = field(default_factory=list)
+    metadata: Optional[Dict[str, str]] = None
 
     def to_dict(self) -> dict:
         return asdict(self)

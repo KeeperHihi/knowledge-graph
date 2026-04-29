@@ -38,6 +38,72 @@
     "description": "逻辑学家，图灵在普林斯顿时期的重要学术导师。"
   },
   {
+    "entity_id": "E003",
+    "canonical_name": "Max Newman",
+    "entity_type": "Person",
+    "aliases": [
+      "马克斯·纽曼",
+      "Newman"
+    ],
+    "keywords": [
+      "Cambridge",
+      "Manchester",
+      "mathematics",
+      "纽曼",
+      "数学"
+    ],
+    "description": "英国数学家，对图灵的学术成长和计算机发展均有影响。"
+  },
+  {
+    "entity_id": "E004",
+    "canonical_name": "John von Neumann",
+    "entity_type": "Person",
+    "aliases": [
+      "约翰·冯·诺依曼",
+      "Von Neumann",
+      "冯·诺依曼"
+    ],
+    "keywords": [
+      "Princeton",
+      "computer",
+      "architecture",
+      "诺依曼"
+    ],
+    "description": "计算机体系结构的重要奠基者，与普林斯顿学术环境相关。"
+  },
+  {
+    "entity_id": "E005",
+    "canonical_name": "Joan Clarke",
+    "entity_type": "Person",
+    "aliases": [
+      "琼·克拉克",
+      "Clarke"
+    ],
+    "keywords": [
+      "Bletchley Park",
+      "cryptanalysis",
+      "密码",
+      "克拉克"
+    ],
+    "description": "二战期间在布莱切利园参与密码分析的密码学家。"
+  },
+  {
+    "entity_id": "E006",
+    "canonical_name": "Christopher Morcom",
+    "entity_type": "Person",
+    "aliases": [
+      "克里斯托弗·莫克姆",
+      "Morcom"
+    ],
+    "keywords": [
+      "friend",
+      "school",
+      "Sherborne",
+      "莫克姆"
+    ],
+    "description": "图灵青年时期的重要朋友，对其思想发展有影响。"
+  },
+  {
     "entity_id": "E007",
     "canonical_name": "Princeton University",
     "entity_type": "Organization",
@@ -78,7 +144,8 @@
     "canonical_name": "University of Manchester",
     "entity_type": "Organization",
     "aliases": [
-      "曼彻斯特大学"
+      "曼彻斯特大学",
+      "Manchester University"
     ],
     "keywords": [
       "university",
@@ -95,7 +162,8 @@
     "canonical_name": "Bletchley Park",
     "entity_type": "Place",
     "aliases": [
-      "布莱切利园"
+      "布莱切利园",
+      "Bletchley"
     ],
     "keywords": [
       "codebreaking",
@@ -140,6 +208,35 @@
       "工业"
     ],
     "description": "英国城市，与曼彻斯特大学同名，便于构造歧义。"
+  },
+  {
+    "entity_id": "E013",
+    "canonical_name": "London",
+    "entity_type": "Place",
+    "aliases": [
+      "伦敦"
+    ],
+    "keywords": [
+      "capital",
+      "Britain",
+      "英国",
+      "首都"
+    ],
+    "description": "英国首都，可作为地名类实体补充。"
+  },
+  {
+    "entity_id": "E014",
+    "canonical_name": "Wilmslow",
+    "entity_type": "Place",
+    "aliases": [
+      "威姆斯洛"
+    ],
+    "keywords": [
+      "Cheshire",
+      "England",
+      "英国"
+    ],
+    "description": "图灵去世前生活的地点之一。"
   },
   {
     "entity_id": "E015",
@@ -246,12 +343,32 @@
     "description": "图灵参与密码破译工作的历史背景事件。"
   },
   {
+    "entity_id": "E022",
+    "canonical_name": "King's College, Cambridge",
+    "entity_type": "Organization",
+    "aliases": [
+      "King's College",
+      "King's College Cambridge",
+      "剑桥大学国王学院",
+      "国王学院"
+    ],
+    "keywords": [
+      "college",
+      "Cambridge",
+      "student",
+      "学院",
+      "剑桥"
+    ],
+    "description": "图灵曾学习和任职相关的学院实体。"
+  },
+  {
     "entity_id": "E023",
     "canonical_name": "Government Code and Cypher School",
     "entity_type": "Organization",
     "aliases": [
       "GC&CS",
-      "英国政府密码学校"
+      "英国政府密码学校",
+      "Government Code and Cypher School"
     ],
     "keywords": [
       "cryptanalysis",
@@ -294,5 +411,38 @@
       "曼彻斯特"
     ],
     "description": "早期存储程序计算机之一，与图灵在曼彻斯特时期相关。"
+  },
+  {
+    "entity_id": "E027",
+    "canonical_name": "National Physical Laboratory",
+    "entity_type": "Organization",
+    "aliases": [
+      "NPL",
+      "英国国家物理实验室"
+    ],
+    "keywords": [
+      "laboratory",
+      "ACE",
+      "research",
+      "实验室",
+      "研究"
+    ],
+    "description": "图灵参与 Automatic Computing Engine 设计时相关的机构。"
+  },
+  {
+    "entity_id": "E028",
+    "canonical_name": "Sherborne School",
+    "entity_type": "Organization",
+    "aliases": [
+      "舍伯恩学校"
+    ],
+    "keywords": [
+      "school",
+      "student",
+      "education",
+      "学校",
+      "教育"
+    ],
+    "description": "图灵青年时期就读的学校。"
   }
 ]

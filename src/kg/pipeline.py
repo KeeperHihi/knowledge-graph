@@ -3,7 +3,10 @@ from pathlib import Path
 from config import INTERMEDIATE_DIR, KB_DIR, OUTPUT_DIR, RAW_DIR
 from src.disambiguation.entity_linker import EntityLinker
 from src.extraction.entity_extractor import EntityExtractor
+from src.extraction.event_extractor import EventExtractor
+from src.extraction.relation_extractor import RelationExtractor
 from src.kg.exporter import export_outputs
+from src.kg.graph_builder import GraphBuilder
 from src.preprocess.cleaner import preprocess_raw_texts
 from src.schema.types import Mention
 from src.utils.io import load_entities, read_jsonl, read_text_files, write_jsonl
@@ -68,11 +71,36 @@ def run_full_pipeline(
 
     entities = load_entities(kb_path)
     entity_map = {entity.entity_id: entity for entity in entities}
+    event_extractor = EventExtractor()
+    events = event_extractor.extract(linked_mentions)
+
+    relation_extractor = RelationExtractor()
+    relations = relation_extractor.extract(linked_mentions, events)
+
+    relation_ids_by_event = {}
+    for relation in relations:
+        if not relation.source_event_id:
+            continue
+        relation_ids_by_event.setdefault(relation.source_event_id, []).append(relation.relation_id)
+    for event in events:
+        event.source_relation_ids = relation_ids_by_event.get(event.event_id, [])
+
+    graph_builder = GraphBuilder()
+    graph = graph_builder.build(
+        entity_map=entity_map,
+        linked_mentions=linked_mentions,
+        relations=relations,
+        events=events,
+    )
+
     export_result = export_outputs(
         raw_text_count=raw_text_count,
         sentence_count=len(sentences),
         mentions=mentions,
         linked_mentions=linked_mentions,
+        relations=relations,
+        events=events,
+        graph=graph,
         entity_map=entity_map,
         output_dir=output_dir,
     )

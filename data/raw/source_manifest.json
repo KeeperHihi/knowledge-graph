@@ -1,0 +1,86 @@
+[
+  {
+    "text_id": "text_01_biography",
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录。"
+  },
+  {
+    "text_id": "text_02_war",
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "note": "整理了图灵在 Bletchley Park、Enigma 和 Bombe 相关的信息，用来构造战争场景。"
+  },
+  {
+    "text_id": "text_03_cambridge_manchester",
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本。"
+  },
+  {
+    "text_id": "text_04_test_and_machine",
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展。"
+  },
+  {
+    "text_id": "text_05_places",
+    "source_title": "Princeton University Official Site / King's College Cambridge Official Site",
+    "source_url": "https://www.princeton.edu/",
+    "collected_on": "2026-04-29",
+    "note": "这一段是为实体消歧专门整理的地点文本，辅助区分 Cambridge/University of Cambridge、Princeton/Princeton University。"
+  },
+  {
+    "text_id": "text_06_early_education",
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom。"
+  },
+  {
+    "text_id": "text_07_princeton_research",
+    "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
+    "source_url": "https://cst.princeton.edu/people/alan-turing",
+    "collected_on": "2026-04-29",
+    "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系。"
+  },
+  {
+    "text_id": "text_08_bletchley_team",
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
+  },
+  {
+    "text_id": "text_09_npl_ace",
+    "source_title": "History - timeline - NPL",
+    "source_url": "https://www.npl.co.uk/about-us/History/timeline",
+    "collected_on": "2026-04-29",
+    "note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
+  },
+  {
+    "text_id": "text_10_manchester_test",
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
+  },
+  {
+    "text_id": "text_11_late_life",
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "note": "补充 Wilmslow 和图灵晚年经历。"
+  },
+  {
+    "text_id": "text_12_locations",
+    "source_title": "The University of Manchester / King's College Cambridge / NPL",
+    "source_url": "https://www.manchester.ac.uk/",
+    "collected_on": "2026-04-29",
+    "note": "这一段是为了让 located_in 规则更容易展示，句子是根据公开机构信息整理的。"
+  }
+]

@@ -1,27 +1,27 @@
 {
-  "raw_text_count": 5,
-  "sentence_count": 11,
-  "mention_count": 36,
-  "linked_count": 33,
-  "nil_count": 3,
-  "unique_linked_entity_count": 17,
+  "raw_text_count": 12,
+  "sentence_count": 29,
+  "mention_count": 75,
+  "linked_count": 67,
+  "nil_count": 8,
+  "unique_linked_entity_count": 26,
   "mention_type_counts": {
-    "Person": 7,
-    "Organization": 10,
-    "Time": 3,
+    "Person": 19,
+    "Organization": 20,
+    "Time": 8,
     "Work": 1,
-    "Concept": 3,
+    "Concept": 4,
     "Event": 1,
-    "Place": 7,
-    "Device": 4
+    "Place": 13,
+    "Device": 9
   },
   "entity_type_counts": {
-    "Person": 7,
-    "Organization": 10,
+    "Person": 19,
+    "Organization": 21,
     "Work": 1,
-    "Concept": 3,
+    "Concept": 4,
     "Event": 1,
-    "Place": 7,
-    "Device": 4
+    "Place": 12,
+    "Device": 9
   }
 }

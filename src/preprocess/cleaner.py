@@ -19,7 +19,7 @@ class TextCleaner:
             return []
 
         # 切割方式：中文的。！？!?；;之后，或者英文的.之后跟着空格并且下一个字符是大写字母、数字或汉字
-        sentences = re.split(r"(?<=[。！？!?；;])\s+|(?<=[.])\s+(?=[A-Z0-9\u4e00-\u9fff])", merged)
+        sentences = re.split(r"(?<=[。！？!?；;])\s*|(?<=[.])\s+(?=[A-Z0-9\u4e00-\u9fff])", merged)
         return [sentence.strip() for sentence in sentences if sentence.strip()]
 
 

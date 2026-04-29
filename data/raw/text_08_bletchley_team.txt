@@ -1,0 +1,2 @@
+战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。
+Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。

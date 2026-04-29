@@ -67,7 +67,7 @@
     "entity_id": "E009",
     "canonical_name": "University of Manchester",
     "entity_type": "Organization",
-    "aliases": ["曼彻斯特大学"],
+    "aliases": ["曼彻斯特大学", "Manchester University"],
     "keywords": ["university", "laboratory", "computer", "曼彻斯特大学", "工作", "研究"],
     "description": "图灵晚年工作过的重要大学机构。"
   },
@@ -75,7 +75,7 @@
     "entity_id": "E010",
     "canonical_name": "Bletchley Park",
     "entity_type": "Place",
-    "aliases": ["布莱切利园"],
+    "aliases": ["布莱切利园", "Bletchley"],
     "keywords": ["codebreaking", "war", "cryptanalysis", "布莱切利", "破译", "密码"],
     "description": "二战期间英国密码破译工作的核心地点。"
   },
@@ -171,7 +171,7 @@
     "entity_id": "E022",
     "canonical_name": "King's College, Cambridge",
     "entity_type": "Organization",
-    "aliases": ["King's College", "剑桥大学国王学院", "国王学院"],
+    "aliases": ["King's College", "King's College Cambridge", "剑桥大学国王学院", "国王学院"],
     "keywords": ["college", "Cambridge", "student", "学院", "剑桥"],
     "description": "图灵曾学习和任职相关的学院实体。"
   },
@@ -179,7 +179,7 @@
     "entity_id": "E023",
     "canonical_name": "Government Code and Cypher School",
     "entity_type": "Organization",
-    "aliases": ["GC&CS", "英国政府密码学校"],
+    "aliases": ["GC&CS", "英国政府密码学校", "Government Code and Cypher School"],
     "keywords": ["cryptanalysis", "government", "war", "密码", "政府"],
     "description": "英国二战时期负责密码工作的机构。"
   },
