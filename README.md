@@ -22,7 +22,8 @@
 │  ├─ intermediate/        # mentions / linked_entities 等中间结果
 │  └─ output/              # 最终导出结果与统计报告
 ├─ docs/
-│  └─ student_method.md    # 学生口吻的方法说明
+│  ├─ student_method.md    # 学生口吻的方法说明
+│  └─ demo_walkthrough.md  # 答辩演示顺序
 ├─ web/                    # 本地可视化网页
 ├─ src/
 │  ├─ utils/               # IO 与文本工具
@@ -35,11 +36,13 @@
 ├─ scripts/
 │  ├─ run_extraction.py
 │  ├─ run_disambiguation.py
+│  ├─ run_demo.py
 │  ├─ run_pipeline.py
 │  └─ run_visualization.py
 └─ tests/
    ├─ test_basic.py
-   └─ test_graph_features.py
+   ├─ test_graph_features.py
+   └─ test_reporting.py
 ```
 
 ## 2. 运行方式
@@ -83,7 +86,44 @@ python3 main.py --mode pipeline
 python3 scripts/run_visualization.py --port 8000
 ```
 
-## 3. 示例输出说明
+如果想一边跑完整流程一边拿到演示提示，可以直接执行：
+
+```bash
+python3 scripts/run_demo.py --prepare-only
+```
+
+如果希望它同时启动网页：
+
+```bash
+python3 scripts/run_demo.py --port 8000
+```
+
+## 3. 答辩推荐顺序
+
+如果按老师现场查看项目的习惯来演示，推荐下面这个顺序：
+
+1. 先打开 `data/raw/` 和 `data/raw/source_manifest.json`
+   - 说明原始文本来自公开资料整理，不是直接下载现成知识图谱
+2. 再看 `data/intermediate/mentions.jsonl` 和 `data/intermediate/linked_entities.jsonl`
+   - 说明实体抽取和实体消歧的中间结果
+3. 再看 `data/output/report.json`、`data/output/traceability.json`
+   - 说明统计摘要、关系数量、事件数量和来源回溯
+4. 最后打开网页 `http://127.0.0.1:8000/web/index.html`
+   - 建议优先点击 `Alan Turing`、`Princeton University`、`Bletchley Park` 和事件卡片
+
+如果现场时间只剩 2 分钟，优先展示这 4 个入口：
+
+- `data/raw/source_manifest.json`
+- `data/output/report.json`
+- `data/output/traceability.json`
+- `http://127.0.0.1:8000/web/index.html`
+
+配套的讲解文档：
+
+- `docs/student_method.md`
+- `docs/demo_walkthrough.md`
+
+## 4. 示例输出说明
 
 运行完整流水线后，会生成以下结果：
 
@@ -108,7 +148,7 @@ python3 scripts/run_visualization.py --port 8000
 - `docs/student_method.md`
   - 用学生口吻说明为什么选择规则法、事件层、可视化展示，便于答辩讲解
 
-## 4. 当前阶段的局限性
+## 5. 当前阶段的局限性
 
 - 实体抽取主要依赖种子词典与少量正则，覆盖面有限
 - 未使用统计学习或深度学习模型，泛化能力较弱
@@ -116,7 +156,7 @@ python3 scripts/run_visualization.py --port 8000
 - 规则法覆盖面仍然有限，遇到代词、省略和复杂长句时容易漏抽
 - 目前更适合“图灵主题”的小规模课程作业，不追求跨领域泛化
 
-## 5. 后续可扩展方向
+## 6. 后续可扩展方向
 
 后续可以在保持结构稳定的前提下继续扩展：
 
@@ -131,7 +171,7 @@ python3 scripts/run_visualization.py --port 8000
 5. 更丰富的评估
    - 增加人工标注样本，计算 precision / recall / F1
 
-## 6. 当前实现的技术路线
+## 7. 当前实现的技术路线
 
 - 预处理：清洗空白、按中英文标点分句
 - 抽取：词典匹配 + 正则规则
@@ -152,7 +192,7 @@ score = 0.5 * alias_score + 0.3 * context_keyword_score + 0.2 * type_prior_score
 - `context_keyword_score`：上下文与实体关键词的重合程度
 - `type_prior_score`：抽取类型与候选实体类型的一致程度
 
-## 7. 数据来源说明
+## 8. 数据来源说明
 
 - 原始文本都放在 `data/raw/`，不是直接写死结构化图谱
 - 每个 raw 文本的来源记录在 `data/raw/source_manifest.json`
