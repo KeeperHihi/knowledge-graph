@@ -19,6 +19,7 @@
 
 - `data/intermediate/mentions.jsonl`
 - `data/intermediate/linked_entities.jsonl`
+- `data/output/evaluation_summary.json`
 
 这一步我想强调的是：我不是从原文直接跳到图谱，中间还有实体抽取和实体消歧。
 
@@ -27,7 +28,7 @@
 - 先抽到 mention
 - 再根据上下文判断它更像城市还是大学
 
-这个例子很好讲，也能体现这个项目不是只做表面展示。
+这个例子很好讲，也能体现这个项目不是只做表面展示。顺手我还会补一句：我不是只看程序跑通，还挑了一小批样本做人工核对，`evaluation_summary.json` 里能直接看到结果。
 
 ## 3. 再讲事件和关系是怎么出来的
 
@@ -57,14 +58,16 @@
 1. 先看页面最上方的“构建过程”卡片
 2. 再点“规则解释”里的 `Cambridge` 消歧案例
 3. 接着点论文发表那张事件案例卡
-4. 然后再切到“人物视角”里的 `Alan Turing`
-5. 再切到 `Joan Clarke`
-6. 再切到 `Alonzo Church` 或 `Max Newman`
-7. 最后点左侧关系图里的 `Princeton University` 或 `Bletchley Park`
-8. 任意一条 `studied_at` 或 `worked_at` 的边
-9. 右侧任意一个事件卡片
+4. 再看右侧的“人工检查结果”卡片
+5. 然后再切到“人物视角”里的 `Alan Turing`
+6. 再切到 `Joan Clarke`
+7. 再切到 `Alonzo Church` 或 `Max Newman`
+8. 最后点左侧关系图里的 `Princeton University` 或 `Bletchley Park`
+9. 任意一条 `studied_at` 或 `worked_at` 的边
+10. 右侧任意一个事件卡片
 
 我想让老师先看到的是：这不是直接画出来的图，而且它也不是黑箱。通过规则解释卡，我可以先说明“为什么这样判”，再通过人物视角切换说明“同一套规则怎样把不同人物放到同一张知识图里”。
+然后再用人工检查结果补一句：我还手工核对过一小批样本，所以不是只看页面效果好不好看。
 
 原来的图谱点击顺序也还可以保留：
 

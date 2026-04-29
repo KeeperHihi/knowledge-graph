@@ -536,6 +536,22 @@ body {
   background: rgba(30, 42, 51, 0.05);
 }
 
+.summary-box .note-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary-box .note-list li {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(30, 42, 51, 0.05);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .source-card {
   padding: 14px;
   border-radius: 18px;

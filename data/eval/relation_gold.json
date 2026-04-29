@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": "REL_GOLD001",
+    "text_id": "text_01_biography",
+    "sentence_id": 1,
+    "head_name": "Alan Turing",
+    "relation": "studied_at",
+    "tail_name": "University of Cambridge",
+    "note": "求学关系。"
+  },
+  {
+    "case_id": "REL_GOLD002",
+    "text_id": "text_01_biography",
+    "sentence_id": 1,
+    "head_name": "Alan Turing",
+    "relation": "studied_at",
+    "tail_name": "Princeton University",
+    "note": "同一句里还有普林斯顿。"
+  },
+  {
+    "case_id": "REL_GOLD003",
+    "text_id": "text_01_biography",
+    "sentence_id": 2,
+    "head_name": "Alan Turing",
+    "relation": "published",
+    "tail_name": "Computable Numbers",
+    "note": "论文发表关系。"
+  },
+  {
+    "case_id": "REL_GOLD004",
+    "text_id": "text_04_test_and_machine",
+    "sentence_id": 1,
+    "head_name": "Alan Turing",
+    "relation": "influenced_by",
+    "tail_name": "Alonzo Church",
+    "note": "人物影响关系。"
+  },
+  {
+    "case_id": "REL_GOLD005",
+    "text_id": "text_08_bletchley_team",
+    "sentence_id": 2,
+    "head_name": "Joan Clarke",
+    "relation": "worked_at",
+    "tail_name": "Bletchley Park",
+    "note": "多主体场景里的工作关系。"
+  },
+  {
+    "case_id": "REL_GOLD006",
+    "text_id": "text_10_manchester_test",
+    "sentence_id": 2,
+    "head_name": "Max Newman",
+    "relation": "worked_at",
+    "tail_name": "University of Manchester",
+    "note": "曼彻斯特阶段的侧人物。"
+  },
+  {
+    "case_id": "REL_GOLD007",
+    "text_id": "text_12_locations",
+    "sentence_id": 3,
+    "head_name": "National Physical Laboratory",
+    "relation": "located_in",
+    "tail_name": "London",
+    "note": "地点关系样例。"
+  },
+  {
+    "case_id": "REL_GOLD008",
+    "text_id": "text_06_early_education",
+    "sentence_id": 1,
+    "head_name": "Alan Turing",
+    "relation": "studied_at",
+    "tail_name": "Sherborne School",
+    "note": "这条是我人工觉得应该抽到、但当前规则还漏掉的关系。"
+  }
+]

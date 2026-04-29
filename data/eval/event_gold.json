@@ -1,0 +1,58 @@
+[
+  {
+    "case_id": "EV_GOLD001",
+    "text_id": "text_01_biography",
+    "sentence_id": 1,
+    "event_type": "EducationEvent",
+    "note": "求学句。"
+  },
+  {
+    "case_id": "EV_GOLD002",
+    "text_id": "text_01_biography",
+    "sentence_id": 2,
+    "event_type": "PublicationEvent",
+    "note": "发表论文句。"
+  },
+  {
+    "case_id": "EV_GOLD003",
+    "text_id": "text_01_biography",
+    "sentence_id": 2,
+    "event_type": "ResearchEvent",
+    "note": "同一句里还提出了图灵机概念。"
+  },
+  {
+    "case_id": "EV_GOLD004",
+    "text_id": "text_04_test_and_machine",
+    "sentence_id": 1,
+    "event_type": "InfluenceEvent",
+    "note": "人物影响句。"
+  },
+  {
+    "case_id": "EV_GOLD005",
+    "text_id": "text_08_bletchley_team",
+    "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "note": "Joan Clarke 的工作句。"
+  },
+  {
+    "case_id": "EV_GOLD006",
+    "text_id": "text_08_bletchley_team",
+    "sentence_id": 2,
+    "event_type": "WarWorkEvent",
+    "note": "同一句也落在战争密码场景。"
+  },
+  {
+    "case_id": "EV_GOLD007",
+    "text_id": "text_10_manchester_test",
+    "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "note": "Max Newman 的工作句。"
+  },
+  {
+    "case_id": "EV_GOLD008",
+    "text_id": "text_06_early_education",
+    "sentence_id": 1,
+    "event_type": "EducationEvent",
+    "note": "这句包含 Sherborne School 和中学教育，人工觉得应该算求学事件。"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": "EL001",
+    "text_id": "text_01_biography",
+    "sentence_id": 1,
+    "mention": "剑桥大学",
+    "expected_entity_id": "E008",
+    "expected_name": "University of Cambridge",
+    "note": "学校名比较明确，应该稳定连到大学。"
+  },
+  {
+    "case_id": "EL002",
+    "text_id": "text_03_cambridge_manchester",
+    "sentence_id": 1,
+    "mention": "Cambridge",
+    "expected_entity_id": "E011",
+    "expected_name": "Cambridge",
+    "note": "这里指城市，不是学校。"
+  },
+  {
+    "case_id": "EL003",
+    "text_id": "text_05_places",
+    "sentence_id": 2,
+    "mention": "Princeton",
+    "expected_entity_id": "E007",
+    "expected_name": "Princeton University",
+    "note": "这里是大学简称。"
+  },
+  {
+    "case_id": "EL004",
+    "text_id": "text_05_places",
+    "sentence_id": 3,
+    "mention": "Cambridge",
+    "expected_entity_id": "E011",
+    "expected_name": "Cambridge",
+    "note": "句子里明确在说 Cambridge 这座城市。"
+  },
+  {
+    "case_id": "EL005",
+    "text_id": "text_06_early_education",
+    "sentence_id": 2,
+    "mention": "King's College, Cambridge",
+    "expected_entity_id": "E022",
+    "expected_name": "King's College, Cambridge",
+    "note": "完整机构名。"
+  },
+  {
+    "case_id": "EL006",
+    "text_id": "text_07_princeton_research",
+    "sentence_id": 2,
+    "mention": "John von Neumann",
+    "expected_entity_id": "E004",
+    "expected_name": "John von Neumann",
+    "note": "重要人物名。"
+  },
+  {
+    "case_id": "EL007",
+    "text_id": "text_08_bletchley_team",
+    "sentence_id": 2,
+    "mention": "Joan Clarke",
+    "expected_entity_id": "E005",
+    "expected_name": "Joan Clarke",
+    "note": "多主体场景里的侧人物。"
+  },
+  {
+    "case_id": "EL008",
+    "text_id": "text_11_late_life",
+    "sentence_id": 1,
+    "mention": "Wilmslow",
+    "expected_entity_id": "E014",
+    "expected_name": "Wilmslow",
+    "note": "晚年阶段的地点。"
+  }
+]

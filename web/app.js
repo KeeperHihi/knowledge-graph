@@ -5,6 +5,7 @@ const eventList = document.getElementById("event-list");
 const statsBox = document.getElementById("stats");
 const eventCount = document.getElementById("event-count");
 const summaryBox = document.getElementById("summary-box");
+const evaluationBox = document.getElementById("evaluation-box");
 const sourceList = document.getElementById("source-list");
 const sourceCount = document.getElementById("source-count");
 const processSteps = document.getElementById("process-steps");
@@ -40,6 +41,7 @@ const graphState = {
   selectedEdgeId: "",
   animating: false,
   report: null,
+  evaluation: null,
   traceability: null,
   explainability: null,
   focusNodeId: "",
@@ -75,6 +77,14 @@ function parseJsonl(rawText) {
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => JSON.parse(line));
+}
+
+async function fetchJsonOrNull(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return null;
+  }
+  return response.json();
 }
 
 function uniqueBy(items, keyBuilder) {
@@ -525,6 +535,21 @@ function renderSummary(report) {
   `;
 }
 
+function renderEvaluationSummary(summary) {
+  graphState.evaluation = summary;
+  evaluationBox.innerHTML = `
+    <div class="summary-grid">
+      <div class="summary-item"><span>实体消歧</span><strong>${Math.round((summary.entity_linking_accuracy || 0) * 100)}%</strong></div>
+      <div class="summary-item"><span>关系抽取</span><strong>${Math.round((summary.relation_hit_rate || 0) * 100)}%</strong></div>
+      <div class="summary-item"><span>事件抽取</span><strong>${Math.round((summary.event_hit_rate || 0) * 100)}%</strong></div>
+      <div class="summary-item"><span>人工样本</span><strong>${summary.entity_linking.checked + summary.relation_extraction.checked + summary.event_extraction.checked}</strong></div>
+    </div>
+    <ul class="note-list">
+      ${(summary.key_findings || []).map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+  `;
+}
+
 function renderSourceList(traceability) {
   graphState.traceability = traceability;
   const texts = traceability.texts || [];
@@ -857,6 +882,7 @@ async function boot() {
     reportResponse,
     traceResponse,
     explainResponse,
+    evaluation,
     mentionsResponse,
     linkedResponse,
   ] = await Promise.all([
@@ -864,6 +890,7 @@ async function boot() {
     fetch("/data/output/report.json"),
     fetch("/data/output/traceability.json"),
     fetch("/data/output/explainability.json"),
+    fetchJsonOrNull("/data/output/evaluation_summary.json"),
     fetch("/data/intermediate/mentions.jsonl"),
     fetch("/data/intermediate/linked_entities.jsonl"),
   ]);
@@ -877,6 +904,11 @@ async function boot() {
 
   prepareGraph(graph);
   renderSummary(report);
+  if (evaluation) {
+    renderEvaluationSummary(evaluation);
+  } else {
+    evaluationBox.innerHTML = "<p>还没有生成人工检查结果。运行 `python3 scripts/run_evaluation.py` 后，这里会显示小样本核对结果。</p>";
+  }
   renderSourceList(traceability);
   renderProcessSteps(report, traceability, mentions, linkedMentions, graph.events || []);
   renderExplainability(explainability);
@@ -888,4 +920,5 @@ boot().catch((error) => {
   personFocusSummary.innerHTML = `<p>人物视角加载失败：${error.message}</p>`;
   disambiguationCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
   eventChainCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
+  evaluationBox.innerHTML = `<p>人工检查结果加载失败：${error.message}</p>`;
 });

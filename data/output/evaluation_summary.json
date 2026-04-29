@@ -1,0 +1,244 @@
+{
+  "entity_linking_accuracy": 1.0,
+  "relation_hit_rate": 0.875,
+  "event_hit_rate": 0.875,
+  "entity_linking": {
+    "checked": 8,
+    "correct": 8,
+    "accuracy": 1.0,
+    "checked_cases": [
+      {
+        "case_id": "EL001",
+        "mention": "剑桥大学",
+        "expected_name": "University of Cambridge",
+        "predicted_name": "University of Cambridge",
+        "matched": true,
+        "note": "学校名比较明确，应该稳定连到大学。"
+      },
+      {
+        "case_id": "EL002",
+        "mention": "Cambridge",
+        "expected_name": "Cambridge",
+        "predicted_name": "Cambridge",
+        "matched": true,
+        "note": "这里指城市，不是学校。"
+      },
+      {
+        "case_id": "EL003",
+        "mention": "Princeton",
+        "expected_name": "Princeton University",
+        "predicted_name": "Princeton University",
+        "matched": true,
+        "note": "这里是大学简称。"
+      },
+      {
+        "case_id": "EL004",
+        "mention": "Cambridge",
+        "expected_name": "Cambridge",
+        "predicted_name": "Cambridge",
+        "matched": true,
+        "note": "句子里明确在说 Cambridge 这座城市。"
+      },
+      {
+        "case_id": "EL005",
+        "mention": "King's College, Cambridge",
+        "expected_name": "King's College, Cambridge",
+        "predicted_name": "King's College, Cambridge",
+        "matched": true,
+        "note": "完整机构名。"
+      },
+      {
+        "case_id": "EL006",
+        "mention": "John von Neumann",
+        "expected_name": "John von Neumann",
+        "predicted_name": "John von Neumann",
+        "matched": true,
+        "note": "重要人物名。"
+      },
+      {
+        "case_id": "EL007",
+        "mention": "Joan Clarke",
+        "expected_name": "Joan Clarke",
+        "predicted_name": "Joan Clarke",
+        "matched": true,
+        "note": "多主体场景里的侧人物。"
+      },
+      {
+        "case_id": "EL008",
+        "mention": "Wilmslow",
+        "expected_name": "Wilmslow",
+        "predicted_name": "Wilmslow",
+        "matched": true,
+        "note": "晚年阶段的地点。"
+      }
+    ],
+    "key_finding": "实体消歧小样本命中 8/8。 其中最接近的一组是 Cambridge，当前胜出实体是 Cambridge，分差只有 0.06。"
+  },
+  "relation_extraction": {
+    "checked": 8,
+    "matched": 7,
+    "hit_rate": 0.875,
+    "checked_cases": [
+      {
+        "case_id": "REL_GOLD001",
+        "triple": "Alan Turing - studied_at - University of Cambridge",
+        "matched": true,
+        "note": "求学关系。"
+      },
+      {
+        "case_id": "REL_GOLD002",
+        "triple": "Alan Turing - studied_at - Princeton University",
+        "matched": true,
+        "note": "同一句里还有普林斯顿。"
+      },
+      {
+        "case_id": "REL_GOLD003",
+        "triple": "Alan Turing - published - Computable Numbers",
+        "matched": true,
+        "note": "论文发表关系。"
+      },
+      {
+        "case_id": "REL_GOLD004",
+        "triple": "Alan Turing - influenced_by - Alonzo Church",
+        "matched": true,
+        "note": "人物影响关系。"
+      },
+      {
+        "case_id": "REL_GOLD005",
+        "triple": "Joan Clarke - worked_at - Bletchley Park",
+        "matched": true,
+        "note": "多主体场景里的工作关系。"
+      },
+      {
+        "case_id": "REL_GOLD006",
+        "triple": "Max Newman - worked_at - University of Manchester",
+        "matched": true,
+        "note": "曼彻斯特阶段的侧人物。"
+      },
+      {
+        "case_id": "REL_GOLD007",
+        "triple": "National Physical Laboratory - located_in - London",
+        "matched": true,
+        "note": "地点关系样例。"
+      },
+      {
+        "case_id": "REL_GOLD008",
+        "triple": "Alan Turing - studied_at - Sherborne School",
+        "matched": false,
+        "note": "这条是我人工觉得应该抽到、但当前规则还漏掉的关系。"
+      }
+    ],
+    "key_finding": "关系抽取小样本命中 7/8。 当前最明显的漏例是 Sherborne School 相关关系。",
+    "error_analysis": [
+      {
+        "task": "relation_extraction",
+        "text_id": "text_06_early_education",
+        "sentence_id": 1,
+        "expected": "Alan Turing - studied_at - Sherborne School",
+        "reason": "这条是我人工觉得应该抽到、但当前规则还漏掉的关系。"
+      }
+    ]
+  },
+  "event_extraction": {
+    "checked": 8,
+    "matched": 7,
+    "hit_rate": 0.875,
+    "checked_cases": [
+      {
+        "case_id": "EV_GOLD001",
+        "event_type": "EducationEvent",
+        "text_id": "text_01_biography",
+        "sentence_id": 1,
+        "matched": true,
+        "note": "求学句。"
+      },
+      {
+        "case_id": "EV_GOLD002",
+        "event_type": "PublicationEvent",
+        "text_id": "text_01_biography",
+        "sentence_id": 2,
+        "matched": true,
+        "note": "发表论文句。"
+      },
+      {
+        "case_id": "EV_GOLD003",
+        "event_type": "ResearchEvent",
+        "text_id": "text_01_biography",
+        "sentence_id": 2,
+        "matched": true,
+        "note": "同一句里还提出了图灵机概念。"
+      },
+      {
+        "case_id": "EV_GOLD004",
+        "event_type": "InfluenceEvent",
+        "text_id": "text_04_test_and_machine",
+        "sentence_id": 1,
+        "matched": true,
+        "note": "人物影响句。"
+      },
+      {
+        "case_id": "EV_GOLD005",
+        "event_type": "EmploymentEvent",
+        "text_id": "text_08_bletchley_team",
+        "sentence_id": 2,
+        "matched": true,
+        "note": "Joan Clarke 的工作句。"
+      },
+      {
+        "case_id": "EV_GOLD006",
+        "event_type": "WarWorkEvent",
+        "text_id": "text_08_bletchley_team",
+        "sentence_id": 2,
+        "matched": true,
+        "note": "同一句也落在战争密码场景。"
+      },
+      {
+        "case_id": "EV_GOLD007",
+        "event_type": "EmploymentEvent",
+        "text_id": "text_10_manchester_test",
+        "sentence_id": 2,
+        "matched": true,
+        "note": "Max Newman 的工作句。"
+      },
+      {
+        "case_id": "EV_GOLD008",
+        "event_type": "EducationEvent",
+        "text_id": "text_06_early_education",
+        "sentence_id": 1,
+        "matched": false,
+        "note": "这句包含 Sherborne School 和中学教育，人工觉得应该算求学事件。"
+      }
+    ],
+    "key_finding": "事件抽取小样本命中 7/8。 当前最明显的漏例是 EducationEvent。",
+    "error_analysis": [
+      {
+        "task": "event_extraction",
+        "text_id": "text_06_early_education",
+        "sentence_id": 1,
+        "expected": "EducationEvent",
+        "reason": "这句包含 Sherborne School 和中学教育，人工觉得应该算求学事件。"
+      }
+    ]
+  },
+  "key_findings": [
+    "实体消歧小样本命中 8/8。 其中最接近的一组是 Cambridge，当前胜出实体是 Cambridge，分差只有 0.06。",
+    "关系抽取小样本命中 7/8。 当前最明显的漏例是 Sherborne School 相关关系。",
+    "事件抽取小样本命中 7/8。 当前最明显的漏例是 EducationEvent。"
+  ],
+  "error_analysis": [
+    {
+      "task": "relation_extraction",
+      "text_id": "text_06_early_education",
+      "sentence_id": 1,
+      "expected": "Alan Turing - studied_at - Sherborne School",
+      "reason": "这条是我人工觉得应该抽到、但当前规则还漏掉的关系。"
+    },
+    {
+      "task": "event_extraction",
+      "text_id": "text_06_early_education",
+      "sentence_id": 1,
+      "expected": "EducationEvent",
+      "reason": "这句包含 Sherborne School 和中学教育，人工觉得应该算求学事件。"
+    }
+  ]
+}

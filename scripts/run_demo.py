@@ -10,6 +10,8 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.kg.pipeline import run_full_pipeline
+from src.evaluation.manual_eval import run_manual_evaluation
+from config import DATA_DIR
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,7 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def print_demo_notes(result: dict, port: int) -> None:
+def print_demo_notes(result: dict, evaluation: dict, port: int) -> None:
     print("\n演示摘要")
     print(f"- 原始文本数: {result['raw_text_count']}")
     print(f"- 句子数: {result['sentence_count']}")
@@ -32,12 +34,18 @@ def print_demo_notes(result: dict, port: int) -> None:
     print(f"- 统计报告: {result['report_path']}")
     print(f"- 来源回溯: {result['traceability_path']}")
     print(f"- 图谱数据: {result['graph_path']}")
+    print("- 人工检查结果: data/output/evaluation_summary.json")
+    print(
+        f"- 人工检查摘要: 消歧 {evaluation['entity_linking']['correct']}/{evaluation['entity_linking']['checked']}，"
+        f"关系 {evaluation['relation_extraction']['matched']}/{evaluation['relation_extraction']['checked']}，"
+        f"事件 {evaluation['event_extraction']['matched']}/{evaluation['event_extraction']['checked']}"
+    )
     print("\n建议答辩顺序")
     print("1. 先展示 data/raw 和 source_manifest，说明数据不是直接手写成图谱。")
     print("2. 再展示 mentions.jsonl 和 linked_entities.jsonl，说明抽取与消歧的中间结果。")
-    print("3. 再展示 report.json 和 traceability.json，说明统计摘要与来源回溯。")
+    print("3. 再展示 report.json、traceability.json 和 evaluation_summary.json，说明统计摘要、来源回溯和人工检查结果。")
     print(f"4. 最后打开 http://127.0.0.1:{port}/web/index.html 做网页演示。")
-    print("5. 网页里优先点击 Alan Turing、Princeton University、Bletchley Park 和事件卡片。")
+    print("5. 网页里优先看 Cambridge 消歧案例、论文发表案例、人工检查结果，再切人物视角。")
     print("\n配套文档")
     print("- docs/student_method.md")
     print("- docs/demo_walkthrough.md")
@@ -46,7 +54,8 @@ def print_demo_notes(result: dict, port: int) -> None:
 def main() -> None:
     args = build_parser().parse_args()
     result = run_full_pipeline()
-    print_demo_notes(result, args.port)
+    evaluation = run_manual_evaluation(eval_dir=DATA_DIR / "eval")
+    print_demo_notes(result, evaluation, args.port)
 
     if args.prepare_only:
         return
