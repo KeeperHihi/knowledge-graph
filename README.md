@@ -57,6 +57,7 @@
 └─ tests/
    ├─ test_basic.py
    ├─ test_graph_features.py
+   ├─ test_io_atomic.py
    ├─ test_manual_evaluation.py
    └─ test_reporting.py
 ```
@@ -130,7 +131,7 @@ python3 scripts/check_web_demo.py --port 8765
 
 我在本地重新跑过一次，当前这份仓库可以直接得到下面这些结果：
 
-- 单元测试：`python3 -m unittest discover -s tests -v`，`11` 个测试全部通过
+- 单元测试：`python3 -m unittest discover -s tests -v`，`13` 个测试全部通过
 - 完整流程：`python3 main.py --mode pipeline`
 - 人工评测：`python3 scripts/run_evaluation.py`
 - 网页演示自检：`python3 scripts/check_web_demo.py --port 8765`
@@ -143,6 +144,7 @@ python3 scripts/check_web_demo.py --port 8765
   - 知识图谱页支持点击节点查看连边，也支持拖动节点调整位置
   - 网页已经支持实体抽取高亮、实体消歧打分、事件流程和关系三元组案例
   - 小样本人工核对结果：实体消歧 `8/8`，关系抽取 `8/8`，事件抽取 `8/8`
+  - JSON、JSONL、CSV 输出已经改成临时文件写入后原子替换，避免网页读到半写文件
   - 本地网页可以通过 `python3 scripts/run_visualization.py --port 8000` 正常启动
 
 ## 4. 答辩推荐顺序
