@@ -8,6 +8,16 @@ const summaryBox = document.getElementById("summary-box");
 const sourceList = document.getElementById("source-list");
 const sourceCount = document.getElementById("source-count");
 const processSteps = document.getElementById("process-steps");
+const personFocusButtons = document.getElementById("person-focus-buttons");
+const personFocusSummary = document.getElementById("person-focus-summary");
+
+const PERSON_FOCUS_ORDER = [
+  "Alan Turing",
+  "Joan Clarke",
+  "Alonzo Church",
+  "Max Newman",
+  "John von Neumann",
+];
 
 const typeColors = {
   Person: "#d96c3a",
@@ -29,6 +39,9 @@ const graphState = {
   animating: false,
   report: null,
   traceability: null,
+  focusNodeId: "",
+  focusNeighborIds: [],
+  activePersonLabel: "",
 };
 
 function resizeCanvas() {
@@ -73,6 +86,39 @@ function uniqueBy(items, keyBuilder) {
     picked.push(item);
   }
   return picked;
+}
+
+function getNodeById(nodeId) {
+  return graphState.nodes.find((item) => item.id === nodeId) || null;
+}
+
+function getPersonNodeByLabel(label) {
+  return graphState.nodes.find((item) => item.type === "Person" && item.label === label) || null;
+}
+
+function getFocusNodeSet() {
+  const ids = [graphState.focusNodeId, ...graphState.focusNeighborIds].filter(Boolean);
+  return new Set(ids);
+}
+
+function collectNeighborIds(nodeId) {
+  const ids = [];
+  for (const edge of graphState.edges) {
+    if (edge.source === nodeId) {
+      ids.push(edge.target);
+    } else if (edge.target === nodeId) {
+      ids.push(edge.source);
+    }
+  }
+  return [...new Set(ids)];
+}
+
+function relationEdgesForNode(nodeId) {
+  return graphState.edges.filter(
+    (edge) =>
+      edge.kind !== "event_participant" &&
+      (edge.source === nodeId || edge.target === nodeId)
+  );
 }
 
 function buildProcessData(report, traceability, mentions, linkedMentions, events) {
@@ -195,6 +241,99 @@ function renderProcessSteps(report, traceability, mentions, linkedMentions, even
     .join("");
 }
 
+function updatePersonFocusSummary() {
+  if (!graphState.focusNodeId) {
+    personFocusSummary.innerHTML = `
+      <strong>先挑一个人物看局部关系</strong>
+      <p>这里会突出显示这个人物和一跳邻居，适合答辩时快速比较 Alan Turing、Joan Clarke、Alonzo Church、Max Newman 这些主体。</p>
+    `;
+    return;
+  }
+
+  const node = getNodeById(graphState.focusNodeId);
+  if (!node) {
+    return;
+  }
+
+  const relationCount = relationEdgesForNode(node.id).length;
+  const relatedNodes = uniqueBy(
+    graphState.edges
+      .filter((edge) => edge.source === node.id || edge.target === node.id)
+      .map((edge) => (edge.source === node.id ? edge.targetNode : edge.sourceNode))
+      .filter((item) => item && item.type !== "EventNode"),
+    (item) => item.id
+  ).slice(0, 4);
+  const relatedLabels = relatedNodes.map((item) => item.label).join("、") || "暂无";
+  const textIds = (node.text_ids || []).slice(0, 4).join("、") || "暂无";
+
+  personFocusSummary.innerHTML = `
+    <strong>${node.label}</strong>
+    <p>当前直接关联 ${relationCount} 条关系，出现在 ${(node.text_ids || []).length} 份原文里。切到这个视角后，可以更快看到这个人物在整张图里的局部位置。</p>
+    <div class="focus-meta">
+      <span>一跳邻居：${relatedLabels}</span>
+      <span>原文片段：${textIds}</span>
+    </div>
+  `;
+}
+
+function clearPersonFocus() {
+  graphState.focusNodeId = "";
+  graphState.focusNeighborIds = [];
+  graphState.activePersonLabel = "";
+  renderPersonFocusButtons();
+}
+
+function focusOnPerson(label) {
+  const node = getPersonNodeByLabel(label);
+  if (!node) {
+    return;
+  }
+  if (graphState.activePersonLabel === label) {
+    clearPersonFocus();
+    return;
+  }
+
+  graphState.focusNodeId = node.id;
+  graphState.focusNeighborIds = collectNeighborIds(node.id);
+  graphState.activePersonLabel = label;
+  graphState.selectedNodeId = node.id;
+  graphState.selectedEdgeId = "";
+  updateDetailForNode(node.id);
+  updateActiveEventCard("");
+  renderPersonFocusButtons();
+}
+
+function renderPersonFocusButtons() {
+  personFocusButtons.innerHTML = "";
+
+  const allButton = document.createElement("button");
+  allButton.type = "button";
+  allButton.className = `focus-button${graphState.activePersonLabel ? "" : " active"}`;
+  allButton.textContent = "全部视角";
+  allButton.addEventListener("click", () => {
+    clearPersonFocus();
+  });
+  personFocusButtons.appendChild(allButton);
+
+  for (const label of PERSON_FOCUS_ORDER) {
+    const node = getPersonNodeByLabel(label);
+    if (!node) {
+      continue;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `focus-button${graphState.activePersonLabel === label ? " active" : ""}`;
+    button.textContent = label;
+    button.addEventListener("click", () => {
+      focusOnPerson(label);
+    });
+    personFocusButtons.appendChild(button);
+  }
+
+  updatePersonFocusSummary();
+}
+
 function prepareGraph(graph) {
   const width = canvas.getBoundingClientRect().width;
   const height = canvas.getBoundingClientRect().height;
@@ -217,6 +356,7 @@ function prepareGraph(graph) {
 
   renderStats(graph.summary);
   renderEventCards(graph.events);
+  renderPersonFocusButtons();
   if (!graphState.animating) {
     graphState.animating = true;
     requestAnimationFrame(tick);
@@ -254,7 +394,7 @@ function renderSummary(report) {
       <div class="summary-item"><span>关系条数</span><strong>${report.relation_count}</strong></div>
       <div class="summary-item"><span>事件条数</span><strong>${report.event_count}</strong></div>
     </div>
-    <p>现在网页最上方会直接展示：原始文本 -> 实体抽取 -> 实体消歧 -> 事件抽取 -> 关系抽取。</p>
+    <p>现在网页同时支持“构建过程”和“人物视角”两种讲法：既能看流程，也能切到具体主体的局部关系。</p>
     <div>
       <p>常见关系：</p>
       <ul class="summary-list">
@@ -404,16 +544,32 @@ function tick() {
 function draw() {
   const width = canvas.getBoundingClientRect().width;
   const height = canvas.getBoundingClientRect().height;
-  ctx.clearRect(0, 0, width, height);
+  const focusActive = Boolean(graphState.focusNodeId);
+  const focusSet = getFocusNodeSet();
 
+  ctx.clearRect(0, 0, width, height);
   drawBackground(width, height);
 
   for (const edge of graphState.edges) {
-    const active = edge.id === graphState.selectedEdgeId || edge.event_id === graphState.selectedNodeId;
-    ctx.strokeStyle = active ? "rgba(217, 108, 58, 0.9)" : edge.kind === "event_participant"
-      ? "rgba(36, 55, 70, 0.25)"
-      : "rgba(86, 132, 214, 0.32)";
-    ctx.lineWidth = active ? 2.4 : 1.2;
+    const active =
+      edge.id === graphState.selectedEdgeId || edge.event_id === graphState.selectedNodeId;
+    const edgeInFocus =
+      !focusActive || (focusSet.has(edge.source) && focusSet.has(edge.target));
+
+    if (active) {
+      ctx.strokeStyle = "rgba(217, 108, 58, 0.92)";
+      ctx.lineWidth = 2.4;
+    } else if (!edgeInFocus) {
+      ctx.strokeStyle = "rgba(30, 42, 51, 0.08)";
+      ctx.lineWidth = 1;
+    } else if (edge.kind === "event_participant") {
+      ctx.strokeStyle = "rgba(36, 55, 70, 0.32)";
+      ctx.lineWidth = 1.3;
+    } else {
+      ctx.strokeStyle = "rgba(86, 132, 214, 0.5)";
+      ctx.lineWidth = 1.5;
+    }
+
     ctx.beginPath();
     ctx.moveTo(edge.sourceNode.x, edge.sourceNode.y);
     ctx.lineTo(edge.targetNode.x, edge.targetNode.y);
@@ -422,17 +578,21 @@ function draw() {
 
   for (const node of graphState.nodes) {
     const active = node.id === graphState.selectedNodeId;
+    const nodeInFocus = !focusActive || focusSet.has(node.id);
     const color = typeColors[node.type] || "#60717d";
+    const alpha = active ? 1 : nodeInFocus ? 0.94 : 0.22;
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.globalAlpha = active ? 1 : 0.9;
     ctx.arc(node.x, node.y, active ? node.radius + 2 : node.radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.globalAlpha = 1;
 
     ctx.fillStyle = "#1e2a33";
     ctx.font = active ? "600 13px sans-serif" : "12px sans-serif";
     ctx.fillText(node.label, node.x + 12, node.y + 4);
+    ctx.restore();
   }
 }
 
@@ -494,7 +654,7 @@ function findEdgeAt(x, y) {
 }
 
 function updateDetailForNode(nodeId) {
-  const node = graphState.nodes.find((item) => item.id === nodeId);
+  const node = getNodeById(nodeId);
   if (!node) {
     return;
   }
@@ -550,6 +710,11 @@ canvas.addEventListener("click", (event) => {
 
   const node = findNodeAt(x, y);
   if (node) {
+    if (node.type === "Person") {
+      focusOnPerson(node.label);
+      return;
+    }
+
     graphState.selectedNodeId = node.id;
     graphState.selectedEdgeId = "";
     updateDetailForNode(node.id);
@@ -601,4 +766,5 @@ async function boot() {
 boot().catch((error) => {
   detailBox.innerHTML = `<p>加载失败：${error.message}</p>`;
   processSteps.innerHTML = `<p>流程数据加载失败：${error.message}</p>`;
+  personFocusSummary.innerHTML = `<p>人物视角加载失败：${error.message}</p>`;
 });

@@ -354,7 +354,7 @@
     "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
     "source_url": "https://cst.princeton.edu/people/alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入侧人物独立句来展示多主体。"
   },
   {
     "event_id": "EVT011",
@@ -387,10 +387,43 @@
     "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
     "source_url": "https://cst.princeton.edu/people/alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入侧人物独立句来展示多主体。"
   },
   {
     "event_id": "EVT012",
+    "text_id": "text_07_princeton_research",
+    "sentence_id": 3,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "Alonzo Church 当时也在 Princeton University 工作，并持续指导 Alan Turing 研究可计算性问题。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E002",
+        "name": "Alonzo Church",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E007",
+        "name": "Princeton University",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL015"
+    ],
+    "metadata": null,
+    "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
+    "source_url": "https://cst.princeton.edu/people/alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入侧人物独立句来展示多主体。"
+  },
+  {
+    "event_id": "EVT013",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 1,
     "event_type": "WarWorkEvent",
@@ -426,18 +459,18 @@
     "place": "Bletchley Park",
     "description": "记录图灵在战争背景下的密码工作。",
     "source_relation_ids": [
-      "REL015",
       "REL016",
-      "REL017"
+      "REL017",
+      "REL018"
     ],
     "metadata": null,
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。"
   },
   {
-    "event_id": "EVT013",
+    "event_id": "EVT014",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 1,
     "event_type": "EmploymentEvent",
@@ -471,15 +504,15 @@
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。"
   },
   {
-    "event_id": "EVT014",
+    "event_id": "EVT015",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 2,
     "event_type": "WarWorkEvent",
-    "trigger": "密码",
-    "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
+    "trigger": "Enigma",
+    "evidence": "Joan Clarke 在 Bletchley Park 工作，并参与分析 Enigma。",
     "participants": [
       {
         "role": "researcher",
@@ -495,8 +528,8 @@
       },
       {
         "role": "device",
-        "entity_id": "E016",
-        "name": "Bombe",
+        "entity_id": "E015",
+        "name": "Enigma",
         "entity_type": "Device"
       }
     ],
@@ -504,17 +537,48 @@
     "place": "Bletchley Park",
     "description": "记录图灵在战争背景下的密码工作。",
     "source_relation_ids": [
-      "REL018",
-      "REL019"
+      "REL019",
+      "REL020"
     ],
     "metadata": null,
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。"
   },
   {
-    "event_id": "EVT015",
+    "event_id": "EVT016",
+    "text_id": "text_08_bletchley_team",
+    "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "Joan Clarke 在 Bletchley Park 工作，并参与分析 Enigma。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E005",
+        "name": "Joan Clarke",
+        "entity_type": "Person"
+      },
+      {
+        "role": "location",
+        "entity_id": "E010",
+        "name": "Bletchley Park",
+        "entity_type": "Place"
+      }
+    ],
+    "time": "",
+    "place": "Bletchley Park",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [],
+    "metadata": null,
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。"
+  },
+  {
+    "event_id": "EVT017",
     "text_id": "text_09_npl_ace",
     "sentence_id": 1,
     "event_type": "ResearchEvent",
@@ -538,7 +602,7 @@
     "place": "",
     "description": "记录图灵提出概念、设备或研究方向的句子。",
     "source_relation_ids": [
-      "REL020"
+      "REL021"
     ],
     "metadata": null,
     "source_title": "History - timeline - NPL",
@@ -547,7 +611,7 @@
     "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
-    "event_id": "EVT016",
+    "event_id": "EVT018",
     "text_id": "text_09_npl_ace",
     "sentence_id": 1,
     "event_type": "EmploymentEvent",
@@ -571,7 +635,7 @@
     "place": "",
     "description": "记录图灵在机构或地点工作的经历。",
     "source_relation_ids": [
-      "REL021"
+      "REL022"
     ],
     "metadata": null,
     "source_title": "History - timeline - NPL",
@@ -580,7 +644,7 @@
     "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
-    "event_id": "EVT017",
+    "event_id": "EVT019",
     "text_id": "text_10_manchester_test",
     "sentence_id": 1,
     "event_type": "EmploymentEvent",
@@ -604,18 +668,51 @@
     "place": "",
     "description": "记录图灵在机构或地点工作的经历。",
     "source_relation_ids": [
-      "REL022"
+      "REL023"
     ],
     "metadata": null,
     "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
     "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
     "collected_on": "2026-04-29",
-    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
+    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试，并增加 Max Newman 的独立工作句。"
   },
   {
-    "event_id": "EVT018",
+    "event_id": "EVT020",
     "text_id": "text_10_manchester_test",
     "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "Max Newman 也在 University of Manchester 工作，并支持早期计算机研究。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E003",
+        "name": "Max Newman",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E009",
+        "name": "University of Manchester",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL024"
+    ],
+    "metadata": null,
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试，并增加 Max Newman 的独立工作句。"
+  },
+  {
+    "event_id": "EVT021",
+    "text_id": "text_10_manchester_test",
+    "sentence_id": 3,
     "event_type": "ResearchEvent",
     "trigger": "提出",
     "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。",
@@ -637,12 +734,51 @@
     "place": "",
     "description": "记录图灵提出概念、设备或研究方向的句子。",
     "source_relation_ids": [
-      "REL023"
+      "REL025"
     ],
     "metadata": null,
     "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
     "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
     "collected_on": "2026-04-29",
-    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
+    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试，并增加 Max Newman 的独立工作句。"
+  },
+  {
+    "event_id": "EVT022",
+    "text_id": "text_11_late_life",
+    "sentence_id": 1,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E009",
+        "name": "University of Manchester",
+        "entity_type": "Organization"
+      },
+      {
+        "role": "location",
+        "entity_id": "E014",
+        "name": "Wilmslow",
+        "entity_type": "Place"
+      }
+    ],
+    "time": "",
+    "place": "Wilmslow",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL026"
+    ],
+    "metadata": null,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Wilmslow 和图灵晚年经历，并让晚年阶段至少产出可展示的机构关系。"
   }
 ]

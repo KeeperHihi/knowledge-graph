@@ -1,37 +1,37 @@
 {
   "raw_text_count": 12,
-  "sentence_count": 29,
-  "mention_count": 83,
-  "linked_count": 75,
+  "sentence_count": 32,
+  "mention_count": 91,
+  "linked_count": 83,
   "nil_count": 8,
   "unique_linked_entity_count": 26,
-  "relation_count": 25,
-  "event_count": 18,
+  "relation_count": 28,
+  "event_count": 22,
   "source_count": 12,
   "mention_type_counts": {
-    "Person": 24,
-    "Organization": 21,
+    "Person": 28,
+    "Organization": 24,
     "Time": 8,
     "Work": 1,
     "Concept": 5,
     "Event": 1,
     "Place": 13,
-    "Device": 10
+    "Device": 11
   },
   "entity_type_counts": {
-    "Person": 24,
-    "Organization": 22,
+    "Person": 28,
+    "Organization": 25,
     "Work": 1,
     "Concept": 5,
     "Event": 1,
     "Place": 12,
-    "Device": 10
+    "Device": 11
   },
   "relation_type_counts": {
     "studied_at": 5,
     "published": 1,
     "proposed": 4,
-    "worked_at": 6,
+    "worked_at": 9,
     "used": 3,
     "participated_in": 1,
     "influenced_by": 3,
@@ -43,7 +43,7 @@
     "ResearchEvent": 4,
     "WarWorkEvent": 3,
     "InfluenceEvent": 3,
-    "EmploymentEvent": 3
+    "EmploymentEvent": 7
   },
   "text_statistics": [
     {
@@ -110,21 +110,21 @@
       "text_id": "text_07_princeton_research",
       "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
       "source_url": "https://cst.princeton.edu/people/alan-turing",
-      "sentence_count": 2,
-      "mention_count": 7,
-      "linked_count": 6,
-      "relation_count": 2,
-      "event_count": 2
+      "sentence_count": 3,
+      "mention_count": 10,
+      "linked_count": 9,
+      "relation_count": 3,
+      "event_count": 3
     },
     {
       "text_id": "text_08_bletchley_team",
       "source_title": "Alan Turing | Bletchley Park",
       "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
-      "sentence_count": 2,
-      "mention_count": 8,
-      "linked_count": 8,
+      "sentence_count": 3,
+      "mention_count": 9,
+      "linked_count": 9,
       "relation_count": 5,
-      "event_count": 3
+      "event_count": 4
     },
     {
       "text_id": "text_09_npl_ace",
@@ -140,21 +140,21 @@
       "text_id": "text_10_manchester_test",
       "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
       "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
-      "sentence_count": 2,
-      "mention_count": 8,
-      "linked_count": 6,
-      "relation_count": 2,
-      "event_count": 2
+      "sentence_count": 3,
+      "mention_count": 10,
+      "linked_count": 8,
+      "relation_count": 3,
+      "event_count": 3
     },
     {
       "text_id": "text_11_late_life",
       "source_title": "About Alan Turing | The Turing Digital Archive",
       "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
       "sentence_count": 2,
-      "mention_count": 4,
-      "linked_count": 3,
-      "relation_count": 0,
-      "event_count": 0
+      "mention_count": 6,
+      "linked_count": 5,
+      "relation_count": 1,
+      "event_count": 1
     },
     {
       "text_id": "text_12_locations",

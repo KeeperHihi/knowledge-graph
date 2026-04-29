@@ -207,11 +207,11 @@
       "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
       "source_url": "https://cst.princeton.edu/people/alan-turing",
       "collected_on": "2026-04-29",
-      "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。",
-      "mention_count": 7,
-      "linked_count": 6,
-      "relation_count": 2,
-      "event_count": 2,
+      "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入侧人物独立句来展示多主体。",
+      "mention_count": 10,
+      "linked_count": 9,
+      "relation_count": 3,
+      "event_count": 3,
       "relations": [
         {
           "relation_id": "REL013",
@@ -222,6 +222,11 @@
           "relation_id": "REL014",
           "triple": "Alan Turing - influenced_by - John von Neumann",
           "evidence": "在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。"
+        },
+        {
+          "relation_id": "REL015",
+          "triple": "Alonzo Church - worked_at - Princeton University",
+          "evidence": "Alonzo Church 当时也在 Princeton University 工作，并持续指导 Alan Turing 研究可计算性问题。"
         }
       ],
       "events": [
@@ -236,6 +241,12 @@
           "event_type": "InfluenceEvent",
           "trigger": "影响",
           "evidence": "在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。"
+        },
+        {
+          "event_id": "EVT012",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "Alonzo Church 当时也在 Princeton University 工作，并持续指导 Alan Turing 研究可计算性问题。"
         }
       ]
     },
@@ -244,51 +255,57 @@
       "source_title": "Alan Turing | Bletchley Park",
       "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
       "collected_on": "2026-04-29",
-      "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。",
-      "mention_count": 8,
-      "linked_count": 8,
+      "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。",
+      "mention_count": 9,
+      "linked_count": 9,
       "relation_count": 5,
-      "event_count": 3,
+      "event_count": 4,
       "relations": [
         {
-          "relation_id": "REL015",
+          "relation_id": "REL016",
           "triple": "Alan Turing - worked_at - Government Code and Cypher School",
           "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。"
         },
         {
-          "relation_id": "REL016",
+          "relation_id": "REL017",
           "triple": "Alan Turing - worked_at - Bletchley Park",
           "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。"
         },
         {
-          "relation_id": "REL017",
+          "relation_id": "REL018",
           "triple": "Alan Turing - used - Enigma",
           "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。"
         },
         {
-          "relation_id": "REL018",
+          "relation_id": "REL019",
           "triple": "Joan Clarke - worked_at - Bletchley Park",
-          "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。"
+          "evidence": "Joan Clarke 在 Bletchley Park 工作，并参与分析 Enigma。"
         }
       ],
       "events": [
         {
-          "event_id": "EVT012",
+          "event_id": "EVT013",
           "event_type": "WarWorkEvent",
           "trigger": "战争",
           "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。"
         },
         {
-          "event_id": "EVT013",
+          "event_id": "EVT014",
           "event_type": "EmploymentEvent",
           "trigger": "工作",
           "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。"
         },
         {
-          "event_id": "EVT014",
+          "event_id": "EVT015",
           "event_type": "WarWorkEvent",
-          "trigger": "密码",
-          "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。"
+          "trigger": "Enigma",
+          "evidence": "Joan Clarke 在 Bletchley Park 工作，并参与分析 Enigma。"
+        },
+        {
+          "event_id": "EVT016",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "Joan Clarke 在 Bletchley Park 工作，并参与分析 Enigma。"
         }
       ]
     },
@@ -304,25 +321,25 @@
       "event_count": 2,
       "relations": [
         {
-          "relation_id": "REL020",
+          "relation_id": "REL021",
           "triple": "Alan Turing - proposed - Automatic Computing Engine",
           "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
         },
         {
-          "relation_id": "REL021",
+          "relation_id": "REL022",
           "triple": "Alan Turing - worked_at - National Physical Laboratory",
           "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
         }
       ],
       "events": [
         {
-          "event_id": "EVT015",
+          "event_id": "EVT017",
           "event_type": "ResearchEvent",
           "trigger": "提出",
           "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
         },
         {
-          "event_id": "EVT016",
+          "event_id": "EVT018",
           "event_type": "EmploymentEvent",
           "trigger": "加入",
           "evidence": "战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。"
@@ -334,32 +351,43 @@
       "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
       "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
       "collected_on": "2026-04-29",
-      "note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。",
-      "mention_count": 8,
-      "linked_count": 6,
-      "relation_count": 2,
-      "event_count": 2,
+      "note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试，并增加 Max Newman 的独立工作句。",
+      "mention_count": 10,
+      "linked_count": 8,
+      "relation_count": 3,
+      "event_count": 3,
       "relations": [
         {
-          "relation_id": "REL022",
+          "relation_id": "REL023",
           "triple": "Alan Turing - worked_at - University of Manchester",
           "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。"
         },
         {
-          "relation_id": "REL023",
+          "relation_id": "REL024",
+          "triple": "Max Newman - worked_at - University of Manchester",
+          "evidence": "Max Newman 也在 University of Manchester 工作，并支持早期计算机研究。"
+        },
+        {
+          "relation_id": "REL025",
           "triple": "Alan Turing - proposed - Turing Test",
           "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。"
         }
       ],
       "events": [
         {
-          "event_id": "EVT017",
+          "event_id": "EVT019",
           "event_type": "EmploymentEvent",
           "trigger": "工作",
           "evidence": "1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。"
         },
         {
-          "event_id": "EVT018",
+          "event_id": "EVT020",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "Max Newman 也在 University of Manchester 工作，并支持早期计算机研究。"
+        },
+        {
+          "event_id": "EVT021",
           "event_type": "ResearchEvent",
           "trigger": "提出",
           "evidence": "1950 年，图灵提出图灵测试，继续讨论机器智能问题。"
@@ -371,13 +399,26 @@
       "source_title": "About Alan Turing | The Turing Digital Archive",
       "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
       "collected_on": "2026-04-29",
-      "note": "补充 Wilmslow 和图灵晚年经历。",
-      "mention_count": 4,
-      "linked_count": 3,
-      "relation_count": 0,
-      "event_count": 0,
-      "relations": [],
-      "events": []
+      "note": "补充 Wilmslow 和图灵晚年经历，并让晚年阶段至少产出可展示的机构关系。",
+      "mention_count": 6,
+      "linked_count": 5,
+      "relation_count": 1,
+      "event_count": 1,
+      "relations": [
+        {
+          "relation_id": "REL026",
+          "triple": "Alan Turing - worked_at - University of Manchester",
+          "evidence": "图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。"
+        }
+      ],
+      "events": [
+        {
+          "event_id": "EVT022",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。"
+        }
+      ]
     },
     {
       "text_id": "text_12_locations",
@@ -391,12 +432,12 @@
       "event_count": 0,
       "relations": [
         {
-          "relation_id": "REL024",
+          "relation_id": "REL027",
           "triple": "University of Manchester - located_in - Manchester",
           "evidence": "University of Manchester 位于 Manchester。"
         },
         {
-          "relation_id": "REL025",
+          "relation_id": "REL028",
           "triple": "National Physical Laboratory - located_in - London",
           "evidence": "National Physical Laboratory 位于 London。"
         }

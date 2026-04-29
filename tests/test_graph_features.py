@@ -162,6 +162,43 @@ class GraphFeatureTestCase(unittest.TestCase):
             )
         )
 
+    def test_employment_relation_does_not_point_to_city(self) -> None:
+        sentence = "Alan Turing 晚年仍在 University of Manchester 工作，Wilmslow 是他的居住地。"
+        mentions = [
+            make_linked("Alan Turing", "E001", "Alan Turing", "Person", sentence, 0, 12),
+            make_linked(
+                "University of Manchester",
+                "E009",
+                "University of Manchester",
+                "Organization",
+                sentence,
+                18,
+                42,
+            ),
+            make_linked("Wilmslow", "E031", "Wilmslow", "Place", sentence, 46, 54),
+        ]
+
+        events = self.event_extractor.extract(mentions)
+        relations = self.relation_extractor.extract(mentions, events)
+
+        self.assertTrue(any(event.event_type == "EmploymentEvent" for event in events))
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "worked_at"
+                and relation.tail_name == "University of Manchester"
+                for relation in relations
+            )
+        )
+        self.assertFalse(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "worked_at"
+                and relation.tail_name == "Wilmslow"
+                for relation in relations
+            )
+        )
+
     def test_location_rule_needs_place_after_the_trigger(self) -> None:
         wrong_sentence = "Cambridge 很有名，而 Princeton University 常被简称为 Princeton。"
         wrong_mentions = [

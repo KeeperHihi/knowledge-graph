@@ -89,7 +89,7 @@ class RelationExtractor:
         elif event.event_type == "EmploymentEvent":
             relation_specs.extend(
                 self._build_role_relations(
-                    event, participants, "staff", "worked_at", ["organization", "location"]
+                    event, participants, "staff", "worked_at", ["organization"]
                 )
             )
         elif event.event_type == "InfluenceEvent":

@@ -46,14 +46,14 @@
     "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
     "source_url": "https://cst.princeton.edu/people/alan-turing",
     "collected_on": "2026-04-29",
-    "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
+    "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入侧人物独立句来展示多主体。"
   },
   {
     "text_id": "text_08_bletchley_team",
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
+    "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的多句展示，让 Joan Clarke 也有更明确的主体视角。"
   },
   {
     "text_id": "text_09_npl_ace",
@@ -67,14 +67,14 @@
     "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
     "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
     "collected_on": "2026-04-29",
-    "note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
+    "note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试，并增加 Max Newman 的独立工作句。"
   },
   {
     "text_id": "text_11_late_life",
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "note": "补充 Wilmslow 和图灵晚年经历。"
+    "note": "补充 Wilmslow 和图灵晚年经历，并让晚年阶段至少产出可展示的机构关系。"
   },
   {
     "text_id": "text_12_locations",

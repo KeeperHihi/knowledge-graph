@@ -6,6 +6,7 @@
 - [x] 事件抽取
 - [x] 关系抽取
 - [x] 图谱可视化
+- [x] 人物视角切换
 
 这个项目只用了词典匹配、正则规则、简单打分和静态网页展示，没有调用大模型，也没有使用预训练模型。
 
@@ -111,13 +112,14 @@ python3 scripts/run_demo.py --port 8000
 
 我在本地重新跑过一次，当前这份仓库可以直接得到下面这些结果：
 
-- 单元测试：`python3 -m unittest discover -s tests -v`，`9` 个测试全部通过
+- 单元测试：`python3 -m unittest discover -s tests -v`，`10` 个测试全部通过
 - 完整流程：`python3 main.py --mode pipeline`
-- 当前统计结果：`12` 份原始文本、`29` 个句子、`83` 个 mention、`75` 个成功链接、`25` 条关系、`18` 个事件
+- 当前统计结果：`12` 份原始文本、`32` 个句子、`91` 个 mention、`83` 个成功链接、`28` 条关系、`22` 个事件
 - 关键检查已经通过：
   - `PublicationEvent` 已经能抽到
   - `published` 关系已经能生成
   - 不再出现 `Alan Turing studied_at Cambridge` 这种把城市当学校的关系
+  - 网页已经支持 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman` 等人物视角切换
   - 本地网页可以通过 `python3 scripts/run_visualization.py --port 8000` 正常启动
 
 ## 4. 答辩推荐顺序
@@ -131,7 +133,7 @@ python3 scripts/run_demo.py --port 8000
 3. 再看 `data/output/report.json`、`data/output/traceability.json`
    - 说明统计摘要、关系数量、事件数量和来源回溯
 4. 最后打开网页 `http://127.0.0.1:8000/web/index.html`
-   - 建议优先点击 `Alan Turing`、`Princeton University`、`Bletchley Park` 和事件卡片
+   - 建议先切人物视角里的 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman`，再点 `Princeton University`、`Bletchley Park` 和事件卡片
 
 如果现场时间只剩 2 分钟，优先展示这 4 个入口：
 
