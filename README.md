@@ -7,6 +7,7 @@
 - [x] 关系抽取
 - [x] 图谱可视化
 - [x] 人物视角切换
+- [x] 规则解释案例
 
 这个项目只用了词典匹配、正则规则、简单打分和静态网页展示，没有调用大模型，也没有使用预训练模型。
 
@@ -120,6 +121,7 @@ python3 scripts/run_demo.py --port 8000
   - `published` 关系已经能生成
   - 不再出现 `Alan Turing studied_at Cambridge` 这种把城市当学校的关系
   - 网页已经支持 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman` 等人物视角切换
+  - 网页已经支持实体消歧打分案例和“事件 -> 关系”解释案例
   - 本地网页可以通过 `python3 scripts/run_visualization.py --port 8000` 正常启动
 
 ## 4. 答辩推荐顺序
@@ -133,7 +135,7 @@ python3 scripts/run_demo.py --port 8000
 3. 再看 `data/output/report.json`、`data/output/traceability.json`
    - 说明统计摘要、关系数量、事件数量和来源回溯
 4. 最后打开网页 `http://127.0.0.1:8000/web/index.html`
-   - 建议先切人物视角里的 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman`，再点 `Princeton University`、`Bletchley Park` 和事件卡片
+   - 建议先看 `Cambridge` 消歧案例和论文发表案例，再切人物视角里的 `Alan Turing / Joan Clarke / Alonzo Church / Max Newman`
 
 如果现场时间只剩 2 分钟，优先展示这 4 个入口：
 
@@ -165,6 +167,8 @@ python3 scripts/run_demo.py --port 8000
   - 简化版三元组结果，便于展示和导入
 - `data/output/graph.json`
   - 网页可视化直接读取的节点边数据，节点、边、事件都尽量保留原文编号和来源信息
+- `data/output/explainability.json`
+  - 给网页“规则解释”区域使用，里面放了消歧打分案例和事件生成关系案例
 - `data/output/traceability.json`
   - 每个 raw 文本对应的来源、抽取统计、示例关系和示例事件，便于答辩时回溯
 - `data/output/report.json`

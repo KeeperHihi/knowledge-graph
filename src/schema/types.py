@@ -75,6 +75,7 @@ class LinkedMention:
     context_keyword_score: float = 0.0
     type_prior_score: float = 0.0
     candidate_ids: List[str] = field(default_factory=list) # 可能是这个 Memtion 对应的实体构成的列表
+    candidate_details: List[Dict[str, str | float]] = field(default_factory=list) # 保存每个候选实体的打分明细
 
     def to_dict(self) -> dict:
         return asdict(self)

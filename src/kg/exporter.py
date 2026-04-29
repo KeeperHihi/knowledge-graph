@@ -41,6 +41,13 @@ def export_outputs(
         source_map=source_map,
     )
     write_json(output_dir / "traceability.json", traceability)
+    explainability = build_explainability_payload(
+        linked_mentions=linked_mentions,
+        events=events,
+        relations=relations,
+        source_map=source_map,
+    )
+    write_json(output_dir / "explainability.json", explainability)
 
     relation_rows = [
         [
@@ -88,6 +95,7 @@ def export_outputs(
         "triples_path": str(output_dir / "triples.csv"),
         "graph_path": str(output_dir / "graph.json"),
         "traceability_path": str(output_dir / "traceability.json"),
+        "explainability_path": str(output_dir / "explainability.json"),
         "report_path": str(output_dir / "report.json"),
         "unique_entity_count": len(unique_entities),
         "relation_count": len(relations),
@@ -155,4 +163,179 @@ def build_event_payloads(events: List[EventRecord], source_map: Dict[str, dict])
         item["collected_on"] = source_info.get("collected_on", "")
         item["source_note"] = source_info.get("note", "")
         payload.append(item)
+    return payload
+
+
+def build_explainability_payload(
+    linked_mentions: List[LinkedMention],
+    events: List[EventRecord],
+    relations: List[RelationRecord],
+    source_map: Dict[str, dict],
+) -> dict:
+    disambiguation_cases = build_disambiguation_cases(linked_mentions, source_map)
+    event_relation_cases = build_event_relation_cases(events, relations, source_map)
+    return {
+        "scoring_formula": {
+            "alias_weight": 0.5,
+            "context_keyword_weight": 0.3,
+            "type_prior_weight": 0.2,
+        },
+        "disambiguation_cases": disambiguation_cases,
+        "event_relation_cases": event_relation_cases,
+    }
+
+
+def build_disambiguation_cases(
+    linked_mentions: List[LinkedMention], source_map: Dict[str, dict]
+) -> List[dict]:
+    preferred_rules = [
+        ("text_03_cambridge_manchester", "Cambridge"),
+        ("text_01_biography", "剑桥大学"),
+        ("text_05_places", "Cambridge"),
+        ("text_05_places", "Princeton"),
+    ]
+    picked_cases = []
+    seen = set()
+
+    for text_id, mention_text in preferred_rules:
+        case = next(
+            (
+                linked
+                for linked in linked_mentions
+                if linked.text_id == text_id
+                and linked.mention == mention_text
+                and len(linked.candidate_details) > 1
+            ),
+            None,
+        )
+        if case is None:
+            continue
+        case_key = (case.text_id, case.sentence_id, case.start, case.end)
+        if case_key in seen:
+            continue
+        seen.add(case_key)
+        picked_cases.append(case)
+
+    if len(picked_cases) < 2:
+        fallback_cases = sorted(
+            (
+                linked
+                for linked in linked_mentions
+                if len(linked.candidate_details) > 1 and linked.status == "linked"
+            ),
+            key=lambda item: (-len(item.candidate_details), item.text_id, item.sentence_id, item.start),
+        )
+        for case in fallback_cases:
+            case_key = (case.text_id, case.sentence_id, case.start, case.end)
+            if case_key in seen:
+                continue
+            seen.add(case_key)
+            picked_cases.append(case)
+            if len(picked_cases) >= 3:
+                break
+
+    payload = []
+    for index, linked in enumerate(picked_cases[:3], start=1):
+        source_info = source_map.get(linked.text_id, {})
+        ranked_candidates = sorted(
+            linked.candidate_details,
+            key=lambda item: item["final_score"],
+            reverse=True,
+        )
+        payload.append(
+            {
+                "case_id": f"DISAMBIG{index:02d}",
+                "title": f"{linked.mention} 的消歧过程",
+                "mention": linked.mention,
+                "text_id": linked.text_id,
+                "sentence_id": linked.sentence_id,
+                "context": linked.context,
+                "status": linked.status,
+                "selected_entity_id": linked.entity_id,
+                "selected_name": linked.canonical_name,
+                "selected_type": linked.resolved_entity_type,
+                "selected_score": linked.score,
+                "selected_reason": "综合别名匹配、上下文关键词和类型一致性后，最终分数最高。",
+                "candidates": ranked_candidates,
+                "source_title": source_info.get("source_title", ""),
+                "source_url": source_info.get("source_url", ""),
+            }
+        )
+    return payload
+
+
+def build_event_relation_cases(
+    events: List[EventRecord],
+    relations: List[RelationRecord],
+    source_map: Dict[str, dict],
+) -> List[dict]:
+    relations_by_event = {}
+    for relation in relations:
+        if not relation.source_event_id:
+            continue
+        relations_by_event.setdefault(relation.source_event_id, []).append(relation)
+
+    preferred_rules = [
+        ("text_01_biography", "PublicationEvent"),
+        ("text_03_cambridge_manchester", "EducationEvent"),
+        ("text_08_bletchley_team", "EmploymentEvent"),
+        ("text_11_late_life", "EmploymentEvent"),
+    ]
+    picked_events = []
+    seen = set()
+
+    for text_id, event_type in preferred_rules:
+        event = next(
+            (
+                item
+                for item in events
+                if item.text_id == text_id
+                and item.event_type == event_type
+                and relations_by_event.get(item.event_id)
+            ),
+            None,
+        )
+        if event is None or event.event_id in seen:
+            continue
+        seen.add(event.event_id)
+        picked_events.append(event)
+
+    if len(picked_events) < 2:
+        fallback_events = [
+            item for item in events if item.event_id in relations_by_event and item.event_id not in seen
+        ]
+        for event in fallback_events:
+            seen.add(event.event_id)
+            picked_events.append(event)
+            if len(picked_events) >= 4:
+                break
+
+    payload = []
+    for index, event in enumerate(picked_events[:4], start=1):
+        source_info = source_map.get(event.text_id, {})
+        event_relations = relations_by_event.get(event.event_id, [])
+        payload.append(
+            {
+                "case_id": f"EVENTCHAIN{index:02d}",
+                "title": f"{event.event_type} 如何生成关系",
+                "text_id": event.text_id,
+                "sentence_id": event.sentence_id,
+                "evidence": event.evidence,
+                "event_id": event.event_id,
+                "event_type": event.event_type,
+                "trigger": event.trigger,
+                "participants": event.participants,
+                "relations": [
+                    {
+                        "relation_id": relation.relation_id,
+                        "triple": f"{relation.head_name} - {relation.relation} - {relation.tail_name}",
+                        "method": relation.method,
+                        "trigger": relation.trigger,
+                    }
+                    for relation in event_relations
+                ],
+                "source_title": source_info.get("source_title", ""),
+                "source_url": source_info.get("source_url", ""),
+            }
+        )
     return payload

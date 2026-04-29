@@ -10,6 +10,8 @@ const sourceCount = document.getElementById("source-count");
 const processSteps = document.getElementById("process-steps");
 const personFocusButtons = document.getElementById("person-focus-buttons");
 const personFocusSummary = document.getElementById("person-focus-summary");
+const disambiguationCasesBox = document.getElementById("disambiguation-cases");
+const eventChainCasesBox = document.getElementById("event-chain-cases");
 
 const PERSON_FOCUS_ORDER = [
   "Alan Turing",
@@ -39,6 +41,7 @@ const graphState = {
   animating: false,
   report: null,
   traceability: null,
+  explainability: null,
   focusNodeId: "",
   focusNeighborIds: [],
   activePersonLabel: "",
@@ -209,6 +212,10 @@ function buildProcessData(report, traceability, mentions, linkedMentions, events
   ];
 }
 
+function formatScore(value) {
+  return Number(value || 0).toFixed(2);
+}
+
 function renderProcessSteps(report, traceability, mentions, linkedMentions, events) {
   const steps = buildProcessData(report, traceability, mentions, linkedMentions, events);
   processSteps.innerHTML = steps
@@ -239,6 +246,114 @@ function renderProcessSteps(report, traceability, mentions, linkedMentions, even
       `
     )
     .join("");
+}
+
+function renderExplainability(explainability) {
+  graphState.explainability = explainability;
+  renderDisambiguationCases(explainability.disambiguation_cases || []);
+  renderEventChainCases(explainability.event_relation_cases || []);
+}
+
+function renderDisambiguationCases(cases) {
+  disambiguationCasesBox.innerHTML = "";
+
+  for (const item of cases) {
+    const card = document.createElement("article");
+    card.className = "case-item";
+    card.innerHTML = `
+      <h4>${item.title}</h4>
+      <p>${item.context}</p>
+      <div class="case-meta">
+        <span>${item.text_id} / 句子 ${item.sentence_id}</span>
+        <span>最终选择：${item.selected_name}</span>
+      </div>
+      <div class="score-table">
+        ${(item.candidates || [])
+          .map(
+            (candidate) => `
+              <div class="score-row${candidate.entity_id === item.selected_entity_id ? " selected" : ""}">
+                <strong>${candidate.canonical_name}</strong>
+                <div class="score-values">
+                  <span>alias ${formatScore(candidate.alias_score)}</span>
+                  <span>context ${formatScore(candidate.context_keyword_score)}</span>
+                  <span>type ${formatScore(candidate.type_prior_score)}</span>
+                  <span>final ${formatScore(candidate.final_score)}</span>
+                </div>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <p>${item.selected_reason}</p>
+      <button type="button" class="case-button">在图里看结果</button>
+    `;
+
+    const button = card.querySelector(".case-button");
+    button.addEventListener("click", () => {
+      const node = getNodeById(item.selected_entity_id);
+      if (!node) {
+        return;
+      }
+      if (node.type === "Person") {
+        focusOnPerson(node.label);
+        return;
+      }
+      graphState.selectedNodeId = node.id;
+      graphState.selectedEdgeId = "";
+      updateDetailForNode(node.id);
+      updateActiveEventCard("");
+    });
+
+    disambiguationCasesBox.appendChild(card);
+  }
+}
+
+function renderEventChainCases(cases) {
+  eventChainCasesBox.innerHTML = "";
+
+  for (const item of cases) {
+    const participantText = (item.participants || [])
+      .map((participant) => `${participant.role}: ${participant.name}`)
+      .join(" / ");
+
+    const card = document.createElement("article");
+    card.className = "case-item";
+    card.innerHTML = `
+      <h4>${item.title}</h4>
+      <p>${item.evidence}</p>
+      <div class="case-meta">
+        <span>${item.event_type}</span>
+        <span>触发词：${item.trigger || "规则匹配"}</span>
+      </div>
+      <div class="chain-list">
+        <div class="chain-row">
+          <strong>事件层</strong>
+          <span>${participantText || "无参与实体"}</span>
+        </div>
+        ${(item.relations || [])
+          .map(
+            (relation) => `
+              <div class="chain-row selected">
+                <strong>关系层</strong>
+                <span>${relation.triple}</span>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <button type="button" class="case-button">在图里看这条事件</button>
+    `;
+
+    const button = card.querySelector(".case-button");
+    button.addEventListener("click", () => {
+      graphState.selectedNodeId = item.event_id;
+      graphState.selectedEdgeId = "";
+      updateDetailForNode(item.event_id);
+      updateActiveEventCard(item.event_id);
+    });
+
+    eventChainCasesBox.appendChild(card);
+  }
 }
 
 function updatePersonFocusSummary() {
@@ -394,7 +509,7 @@ function renderSummary(report) {
       <div class="summary-item"><span>关系条数</span><strong>${report.relation_count}</strong></div>
       <div class="summary-item"><span>事件条数</span><strong>${report.event_count}</strong></div>
     </div>
-    <p>现在网页同时支持“构建过程”和“人物视角”两种讲法：既能看流程，也能切到具体主体的局部关系。</p>
+    <p>现在网页同时支持“构建过程”“人物视角”“规则解释”三种讲法：既能看流程，也能看局部主体，还能直接拆解释案例。</p>
     <div>
       <p>常见关系：</p>
       <ul class="summary-list">
@@ -741,12 +856,14 @@ async function boot() {
     graphResponse,
     reportResponse,
     traceResponse,
+    explainResponse,
     mentionsResponse,
     linkedResponse,
   ] = await Promise.all([
     fetch("/data/output/graph.json"),
     fetch("/data/output/report.json"),
     fetch("/data/output/traceability.json"),
+    fetch("/data/output/explainability.json"),
     fetch("/data/intermediate/mentions.jsonl"),
     fetch("/data/intermediate/linked_entities.jsonl"),
   ]);
@@ -754,6 +871,7 @@ async function boot() {
   const graph = await graphResponse.json();
   const report = await reportResponse.json();
   const traceability = await traceResponse.json();
+  const explainability = await explainResponse.json();
   const mentions = parseJsonl(await mentionsResponse.text());
   const linkedMentions = parseJsonl(await linkedResponse.text());
 
@@ -761,10 +879,13 @@ async function boot() {
   renderSummary(report);
   renderSourceList(traceability);
   renderProcessSteps(report, traceability, mentions, linkedMentions, graph.events || []);
+  renderExplainability(explainability);
 }
 
 boot().catch((error) => {
   detailBox.innerHTML = `<p>加载失败：${error.message}</p>`;
   processSteps.innerHTML = `<p>流程数据加载失败：${error.message}</p>`;
   personFocusSummary.innerHTML = `<p>人物视角加载失败：${error.message}</p>`;
+  disambiguationCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
+  eventChainCasesBox.innerHTML = `<p>规则解释加载失败：${error.message}</p>`;
 });

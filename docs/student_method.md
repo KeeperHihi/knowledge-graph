@@ -12,6 +12,8 @@
 
 实体消歧是我觉得这个作业里比较能体现“自己动手想过”的地方。同样是“剑桥”，它可能是城市，也可能是大学。我没有上复杂模型，而是用了一个很直观的打分办法：别名像不像、上下文关键词对不对、类型是不是一致。比如句子里如果同时出现“学习”“学院”“数学”，那就更像 `University of Cambridge`；如果出现“城市”“英格兰东部”，就更像 `Cambridge`。这一步虽然简单，但它能比较自然地解释为什么最后连到了哪个实体。
 
+为了让这一步不只是停留在 README 里的公式，我后来把真实打分案例也做进了网页。比如 `Cambridge` 这个词，我会把每个候选实体的 `alias_score`、`context_keyword_score`、`type_prior_score` 和最后总分都直接列出来。这样老师如果问“为什么这里不是另一个实体”，我不用现场口算，直接点开案例卡就能讲。
+
 后面我没有直接从句子硬抽三元组，而是先加了一层“事件”。这是我做着做着感觉比较顺的一点。因为图灵这个主题本来就很适合按事件去组织，比如“求学”“发表论文”“提出概念”“战争中的密码工作”“在某机构任职”。我把这些句子先归成 `EducationEvent`、`PublicationEvent`、`ResearchEvent`、`WarWorkEvent`、`EmploymentEvent`、`InfluenceEvent` 这几类，再从事件里生成关系。这样一来，关系就不是凭空冒出来的，而是有一个中间层。比如：
 
 - “图灵曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位”  
@@ -20,6 +22,8 @@
   我先抽出 `InfluenceEvent`，再生成 `Alan Turing influenced_by Alonzo Church`。
 
 这一层对答辩特别有用，因为老师如果问“为什么这条边存在”，我不需要只给他看最后的 CSV，我可以先给他看事件卡片，再给他看证据句。
+
+我后来又把“事件怎么变成关系”也整理成了网页里的案例卡。比如论文发表那句，我会直接展示：原句先被判成 `PublicationEvent`，触发词是“发表”，参与实体是 `Alan Turing` 和 `Computable Numbers`，然后再生成 `published` 这条关系。这样解释起来就更像一个玻璃盒系统，而不是只给老师看最后的结果。
 
 关系抽取我也尽量控制在少量、常见、好解释的范围里，没有贪多。最后保留的是 `studied_at`、`worked_at`、`published`、`proposed`、`influenced_by`、`participated_in`、`used`、`located_in` 这些。原因很简单：这些关系已经足够把图灵的学习、研究、战争工作和后期计算机研究串起来，再多就容易写出一堆很难维护的规则，反而不像本科作业。
 

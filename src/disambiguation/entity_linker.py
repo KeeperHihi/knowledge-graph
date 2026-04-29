@@ -98,6 +98,23 @@ class EntityLinker:
             "score": final_score,
         }
 
+    def build_candidate_details(self, scored_candidates: List[dict]) -> List[dict]:
+        details = []
+        for item in scored_candidates:
+            entity = item["entity"]
+            details.append(
+                {
+                    "entity_id": entity.entity_id,
+                    "canonical_name": entity.canonical_name,
+                    "entity_type": entity.entity_type,
+                    "alias_score": item["alias_score"],
+                    "context_keyword_score": item["context_keyword_score"],
+                    "type_prior_score": item["type_prior_score"],
+                    "final_score": item["score"],
+                }
+            )
+        return details
+
     def link_mention(self, mention: Mention) -> LinkedMention:
         candidates = self.generate_candidates(mention)
         if not candidates:
@@ -109,9 +126,11 @@ class EntityLinker:
                 score=0.0,
                 status="NIL",
                 candidate_ids=[],
+                candidate_details=[],
             )
 
         scored_candidates = [self.score_candidate(mention, entity) for entity in candidates]
+        candidate_details = self.build_candidate_details(scored_candidates)
         best_candidate = max(
             scored_candidates,
             key=lambda item: (
@@ -133,6 +152,7 @@ class EntityLinker:
                 context_keyword_score=best_candidate["context_keyword_score"],
                 type_prior_score=best_candidate["type_prior_score"],
                 candidate_ids=[item["entity"].entity_id for item in scored_candidates],
+                candidate_details=candidate_details,
             )
 
         chosen_entity = best_candidate["entity"]
@@ -147,6 +167,7 @@ class EntityLinker:
             context_keyword_score=best_candidate["context_keyword_score"],
             type_prior_score=best_candidate["type_prior_score"],
             candidate_ids=[item["entity"].entity_id for item in scored_candidates],
+            candidate_details=candidate_details,
         )
 
     def link_mentions(self, mentions: List[Mention]) -> List[LinkedMention]:

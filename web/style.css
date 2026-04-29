@@ -99,6 +99,7 @@ body {
 }
 
 .focus-panel,
+.explain-panel,
 .process-panel,
 .graph-panel,
 .sidebar-card {
@@ -110,12 +111,14 @@ body {
 }
 
 .focus-panel,
+.explain-panel,
 .process-panel,
 .graph-panel {
   padding: 18px;
 }
 
 .focus-panel,
+.explain-panel,
 .process-panel {
   margin-bottom: 18px;
 }
@@ -187,6 +190,115 @@ body {
   background: rgba(30, 42, 51, 0.06);
   font-size: 12px;
   color: var(--muted);
+}
+
+.explain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.explain-card {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(30, 42, 51, 0.07);
+}
+
+.case-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.case-item {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(30, 42, 51, 0.05);
+  border: 1px solid rgba(30, 42, 51, 0.06);
+}
+
+.case-item h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.case-item p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.case-meta span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.score-table,
+.chain-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.score-row,
+.chain-row {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.score-row.selected,
+.chain-row.selected {
+  border: 1px solid rgba(217, 108, 58, 0.28);
+  background: rgba(255, 248, 241, 0.92);
+}
+
+.score-row strong,
+.chain-row strong {
+  font-size: 14px;
+}
+
+.score-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.score-values span {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(30, 42, 51, 0.06);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.case-button {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(217, 108, 58, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+.case-button:hover {
+  background: rgba(255, 248, 241, 0.96);
 }
 
 .panel-head,
@@ -532,6 +644,10 @@ body {
   }
 
   .process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .explain-grid {
     grid-template-columns: 1fr;
   }
 

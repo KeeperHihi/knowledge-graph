@@ -55,14 +55,16 @@
 推荐点击顺序：
 
 1. 先看页面最上方的“构建过程”卡片
-2. 再点“人物视角”里的 `Alan Turing`
-3. 接着切到 `Joan Clarke`
-4. 再切到 `Alonzo Church` 或 `Max Newman`
-5. 然后再点左侧关系图里的 `Princeton University` 或 `Bletchley Park`
-6. 任意一条 `studied_at` 或 `worked_at` 的边
-7. 右侧任意一个事件卡片
+2. 再点“规则解释”里的 `Cambridge` 消歧案例
+3. 接着点论文发表那张事件案例卡
+4. 然后再切到“人物视角”里的 `Alan Turing`
+5. 再切到 `Joan Clarke`
+6. 再切到 `Alonzo Church` 或 `Max Newman`
+7. 最后点左侧关系图里的 `Princeton University` 或 `Bletchley Park`
+8. 任意一条 `studied_at` 或 `worked_at` 的边
+9. 右侧任意一个事件卡片
 
-我想让老师先看到的是：这不是直接画出来的图，而且它也不是只围着图灵一个人转。通过人物视角切换，我可以直接告诉老师，同一套规则怎样把不同人物放到同一张知识图里。
+我想让老师先看到的是：这不是直接画出来的图，而且它也不是黑箱。通过规则解释卡，我可以先说明“为什么这样判”，再通过人物视角切换说明“同一套规则怎样把不同人物放到同一张知识图里”。
 
 原来的图谱点击顺序也还可以保留：
 

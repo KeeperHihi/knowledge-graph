@@ -83,6 +83,10 @@ class BasicPipelineTestCase(unittest.TestCase):
 
         self.assertEqual(university_link.entity_id, "E008")
         self.assertEqual(city_link.entity_id, "E011")
+        self.assertGreaterEqual(len(university_link.candidate_details), 2)
+        self.assertTrue(
+            any(item["canonical_name"] == "University of Cambridge" for item in university_link.candidate_details)
+        )
 
 
 if __name__ == "__main__":

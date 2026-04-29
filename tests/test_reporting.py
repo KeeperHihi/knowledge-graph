@@ -1,7 +1,11 @@
 import unittest
 
 from src.evaluation.report import build_report
-from src.kg.exporter import build_event_payloads, build_traceability_payload
+from src.kg.exporter import (
+    build_event_payloads,
+    build_explainability_payload,
+    build_traceability_payload,
+)
 from src.kg.graph_builder import GraphBuilder
 from src.schema.types import Entity, EventRecord, LinkedMention, Mention, RelationRecord
 
@@ -35,6 +39,57 @@ class ReportingTestCase(unittest.TestCase):
                 resolved_entity_type="Person",
                 score=1.0,
                 status="linked",
+                candidate_ids=["E001"],
+                candidate_details=[
+                    {
+                        "entity_id": "E001",
+                        "canonical_name": "Alan Turing",
+                        "entity_type": "Person",
+                        "alias_score": 1.0,
+                        "context_keyword_score": 1.0,
+                        "type_prior_score": 1.0,
+                        "final_score": 1.0,
+                    }
+                ],
+            ),
+            LinkedMention(
+                text_id="text_demo",
+                sentence_id=1,
+                mention="剑桥",
+                start=3,
+                end=5,
+                entity_type="Place",
+                context="图灵在剑桥学习数学。",
+                method="gazetteer",
+                entity_id="E008",
+                canonical_name="University of Cambridge",
+                resolved_entity_type="Organization",
+                score=0.7,
+                status="linked",
+                alias_score=0.9,
+                context_keyword_score=0.7,
+                type_prior_score=0.2,
+                candidate_ids=["E008", "E011"],
+                candidate_details=[
+                    {
+                        "entity_id": "E008",
+                        "canonical_name": "University of Cambridge",
+                        "entity_type": "Organization",
+                        "alias_score": 0.9,
+                        "context_keyword_score": 0.7,
+                        "type_prior_score": 0.2,
+                        "final_score": 0.7,
+                    },
+                    {
+                        "entity_id": "E011",
+                        "canonical_name": "Cambridge",
+                        "entity_type": "Place",
+                        "alias_score": 1.0,
+                        "context_keyword_score": 0.2,
+                        "type_prior_score": 1.0,
+                        "final_score": 0.56,
+                    },
+                ],
             )
         ]
         relations = [
@@ -52,6 +107,7 @@ class ReportingTestCase(unittest.TestCase):
                 evidence="图灵在剑桥学习数学。",
                 method="event_rule",
                 trigger="学习",
+                source_event_id="EVT001",
             )
         ]
         events = [
@@ -112,6 +168,24 @@ class ReportingTestCase(unittest.TestCase):
         self.assertEqual(event_payload[0]["source_title"], "Demo Source")
         self.assertEqual(event_payload[0]["source_url"], "https://example.com/demo")
         self.assertEqual(event_payload[0]["source_note"], "demo note")
+
+        explainability = build_explainability_payload(
+            linked_mentions=linked_mentions,
+            events=events,
+            relations=relations,
+            source_map=source_map,
+        )
+        self.assertEqual(explainability["scoring_formula"]["alias_weight"], 0.5)
+        self.assertGreaterEqual(len(explainability["disambiguation_cases"]), 1)
+        self.assertEqual(
+            explainability["disambiguation_cases"][0]["candidates"][0]["canonical_name"],
+            "University of Cambridge",
+        )
+        self.assertEqual(explainability["event_relation_cases"][0]["event_id"], "EVT001")
+        self.assertEqual(
+            explainability["event_relation_cases"][0]["relations"][0]["triple"],
+            "Alan Turing - studied_at - University of Cambridge",
+        )
 
         graph = GraphBuilder().build(
             entity_map={
