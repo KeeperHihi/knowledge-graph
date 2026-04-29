@@ -9,7 +9,7 @@ from src.kg.exporter import export_outputs
 from src.kg.graph_builder import GraphBuilder
 from src.preprocess.cleaner import preprocess_raw_texts
 from src.schema.types import Mention
-from src.utils.io import load_entities, read_jsonl, read_text_files, write_jsonl
+from src.utils.io import load_entities, read_json, read_jsonl, read_text_files, write_jsonl
 
 
 def run_extraction(
@@ -60,6 +60,9 @@ def run_full_pipeline(
 ) -> dict:
     sentences = preprocess_raw_texts(raw_dir)
     raw_text_count = len(read_text_files(raw_dir))
+    source_manifest_path = raw_dir / "source_manifest.json"
+    source_records = read_json(source_manifest_path) if source_manifest_path.exists() else []
+    source_map = {item["text_id"]: item for item in source_records}
 
     extractor = EntityExtractor.from_kb_file(kb_path)
     mentions = extractor.extract(sentences)
@@ -91,6 +94,7 @@ def run_full_pipeline(
         linked_mentions=linked_mentions,
         relations=relations,
         events=events,
+        source_map=source_map,
     )
 
     export_result = export_outputs(
@@ -102,6 +106,7 @@ def run_full_pipeline(
         events=events,
         graph=graph,
         entity_map=entity_map,
+        source_map=source_map,
         output_dir=output_dir,
     )
 

@@ -4,6 +4,9 @@ const detailBox = document.getElementById("detail-box");
 const eventList = document.getElementById("event-list");
 const statsBox = document.getElementById("stats");
 const eventCount = document.getElementById("event-count");
+const summaryBox = document.getElementById("summary-box");
+const sourceList = document.getElementById("source-list");
+const sourceCount = document.getElementById("source-count");
 
 const typeColors = {
   Person: "#d96c3a",
@@ -24,6 +27,8 @@ const graphState = {
   selectedEdgeId: "",
   hoveredNodeId: "",
   animating: false,
+  report: null,
+  traceability: null,
 };
 
 function resizeCanvas() {
@@ -84,6 +89,62 @@ function renderStats(summary) {
     const tag = document.createElement("span");
     tag.textContent = item;
     statsBox.appendChild(tag);
+  }
+}
+
+function renderSummary(report) {
+  graphState.report = report;
+  const relationItems = Object.entries(report.relation_type_counts || {})
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4);
+  const textItems = (report.text_statistics || [])
+    .slice()
+    .sort((a, b) => b.relation_count - a.relation_count || b.event_count - a.event_count)
+    .slice(0, 3);
+
+  summaryBox.innerHTML = `
+    <div class="summary-grid">
+      <div class="summary-item"><span>原始文本</span><strong>${report.raw_text_count}</strong></div>
+      <div class="summary-item"><span>抽到实体</span><strong>${report.linked_count}</strong></div>
+      <div class="summary-item"><span>关系条数</span><strong>${report.relation_count}</strong></div>
+      <div class="summary-item"><span>事件条数</span><strong>${report.event_count}</strong></div>
+    </div>
+    <p>展示链路：原始文本 -> 实体抽取 -> 实体消歧 -> 事件抽取 -> 关系抽取 -> 图谱展示。</p>
+    <div>
+      <p>出现最多的关系：</p>
+      <ul class="summary-list">
+        ${relationItems.map(([name, count]) => `<li><span>${name}</span><strong>${count}</strong></li>`).join("")}
+      </ul>
+    </div>
+    <div>
+      <p>信息量较多的原文片段：</p>
+      <ul class="summary-list">
+        ${textItems.map((item) => `<li><span>${item.text_id}</span><strong>${item.relation_count} 条关系 / ${item.event_count} 个事件</strong></li>`).join("")}
+      </ul>
+    </div>
+  `;
+}
+
+function renderSourceList(traceability) {
+  graphState.traceability = traceability;
+  const texts = traceability.texts || [];
+  sourceCount.textContent = `${texts.length} 份`;
+  sourceList.innerHTML = "";
+
+  for (const item of texts) {
+    const card = document.createElement("article");
+    card.className = "source-card";
+    card.innerHTML = `
+      <h4>${item.text_id}</h4>
+      <p>${item.source_title || "未记录来源标题"}</p>
+      <p><a href="${item.source_url}" target="_blank" rel="noreferrer">查看来源链接</a></p>
+      <div class="source-meta">
+        <span>${item.mention_count} 个 mention</span>
+        <span>${item.relation_count} 条关系</span>
+        <span>${item.event_count} 个事件</span>
+      </div>
+    `;
+    sourceList.appendChild(card);
   }
 }
 
@@ -285,12 +346,27 @@ function updateDetailForNode(nodeId) {
     (edge) => edge.source === nodeId || edge.target === nodeId || edge.event_id === nodeId
   );
 
+  const evidenceList = (node.evidence_samples || [])
+    .map(
+      (item) => `
+        <div class="detail-evidence-card">
+          <strong>${item.text_id} / 句子 ${item.sentence_id}</strong>
+          <p>${item.evidence}</p>
+          ${item.source_url ? `<a class="source-link" href="${item.source_url}" target="_blank" rel="noreferrer">${item.source_title || "查看来源"}</a>` : ""}
+        </div>
+      `
+    )
+    .join("");
+
   detailBox.innerHTML = `
     <div class="title">${node.label}</div>
     <span class="meta">${node.type}</span>
     <p>${node.description || "暂无额外描述。"}</p>
     ${node.evidence ? `<div class="evidence">${node.evidence}</div>` : ""}
+    ${node.source_url ? `<a class="source-link" href="${node.source_url}" target="_blank" rel="noreferrer">${node.source_title || "查看来源"}</a>` : ""}
     <p>相关边数：${relatedEdges.length}</p>
+    ${node.text_ids ? `<p>出现原文：${node.text_ids.join("、")}</p>` : ""}
+    ${evidenceList ? `<div class="detail-evidence-list">${evidenceList}</div>` : ""}
   `;
 }
 
@@ -304,7 +380,9 @@ function updateDetailForEdge(edgeId) {
     <div class="title">${edge.sourceNode.label} → ${edge.targetNode.label}</div>
     <span class="meta">${edge.label}</span>
     <p>边类型：${edge.kind}</p>
+    <p>原文位置：${edge.text_id || "未记录"} / 句子 ${edge.sentence_id || "-"}</p>
     <div class="evidence">${edge.evidence || "暂无证据句。"}</div>
+    ${edge.source_url ? `<a class="source-link" href="${edge.source_url}" target="_blank" rel="noreferrer">${edge.source_title || "查看来源"}</a>` : ""}
   `;
 }
 
@@ -337,9 +415,17 @@ window.addEventListener("resize", () => {
 
 async function boot() {
   resizeCanvas();
-  const response = await fetch("/data/output/graph.json");
-  const graph = await response.json();
+  const [graphResponse, reportResponse, traceResponse] = await Promise.all([
+    fetch("/data/output/graph.json"),
+    fetch("/data/output/report.json"),
+    fetch("/data/output/traceability.json"),
+  ]);
+  const graph = await graphResponse.json();
+  const report = await reportResponse.json();
+  const traceability = await traceResponse.json();
   prepareGraph(graph);
+  renderSummary(report);
+  renderSourceList(traceability);
 }
 
 boot().catch((error) => {

@@ -173,6 +173,13 @@ body {
   margin-top: 12px;
 }
 
+.summary-box,
+.source-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
 .detail-box .title {
   font-size: 18px;
   font-weight: 700;
@@ -188,12 +195,111 @@ body {
   font-size: 12px;
 }
 
+.detail-box .source-link,
+.source-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.detail-box .source-link:hover,
+.source-card a:hover {
+  text-decoration: underline;
+}
+
 .detail-box .evidence,
 .event-card .evidence {
   padding: 12px 14px;
   border-radius: 16px;
   background: rgba(30, 42, 51, 0.05);
   color: var(--text);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.summary-item {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid rgba(30, 42, 51, 0.06);
+}
+
+.summary-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.summary-item strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 20px;
+}
+
+.summary-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(30, 42, 51, 0.05);
+}
+
+.source-card {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 42, 51, 0.08);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.source-card h4 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.source-card p {
+  margin: 8px 0 0;
+}
+
+.source-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.source-meta span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(30, 42, 51, 0.07);
+  font-size: 12px;
+}
+
+.detail-evidence-list {
+  display: grid;
+  gap: 10px;
+}
+
+.detail-evidence-card {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(30, 42, 51, 0.05);
+}
+
+.detail-evidence-card p {
+  margin: 8px 0 0;
 }
 
 .event-list {
@@ -260,5 +366,9 @@ body {
   #graph-canvas {
     height: 56vh;
     min-height: 420px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

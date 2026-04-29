@@ -5,6 +5,9 @@
   "linked_count": 67,
   "nil_count": 8,
   "unique_linked_entity_count": 26,
+  "relation_count": 18,
+  "event_count": 13,
+  "source_count": 12,
   "mention_type_counts": {
     "Person": 19,
     "Organization": 20,
@@ -23,5 +26,143 @@
     "Event": 1,
     "Place": 12,
     "Device": 9
-  }
+  },
+  "relation_type_counts": {
+    "studied_at": 4,
+    "worked_at": 5,
+    "used": 2,
+    "participated_in": 1,
+    "influenced_by": 2,
+    "proposed": 2,
+    "located_in": 2
+  },
+  "event_type_counts": {
+    "EducationEvent": 3,
+    "WarWorkEvent": 3,
+    "InfluenceEvent": 2,
+    "EmploymentEvent": 3,
+    "ResearchEvent": 2
+  },
+  "text_statistics": [
+    {
+      "text_id": "text_01_biography",
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+      "sentence_count": 2,
+      "mention_count": 7,
+      "linked_count": 6,
+      "relation_count": 2,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_02_war",
+      "source_title": "Alan Turing | Bletchley Park",
+      "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+      "sentence_count": 3,
+      "mention_count": 9,
+      "linked_count": 8,
+      "relation_count": 3,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_03_cambridge_manchester",
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+      "sentence_count": 3,
+      "mention_count": 7,
+      "linked_count": 7,
+      "relation_count": 1,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_04_test_and_machine",
+      "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+      "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+      "sentence_count": 3,
+      "mention_count": 7,
+      "linked_count": 6,
+      "relation_count": 1,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_05_places",
+      "source_title": "Princeton University Official Site / King's College Cambridge Official Site",
+      "source_url": "https://www.princeton.edu/",
+      "sentence_count": 3,
+      "mention_count": 6,
+      "linked_count": 6,
+      "relation_count": 0,
+      "event_count": 0
+    },
+    {
+      "text_id": "text_06_early_education",
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+      "sentence_count": 2,
+      "mention_count": 5,
+      "linked_count": 4,
+      "relation_count": 1,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_07_princeton_research",
+      "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
+      "source_url": "https://cst.princeton.edu/people/alan-turing",
+      "sentence_count": 2,
+      "mention_count": 6,
+      "linked_count": 5,
+      "relation_count": 1,
+      "event_count": 1
+    },
+    {
+      "text_id": "text_08_bletchley_team",
+      "source_title": "Alan Turing | Bletchley Park",
+      "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+      "sentence_count": 2,
+      "mention_count": 6,
+      "linked_count": 6,
+      "relation_count": 3,
+      "event_count": 3
+    },
+    {
+      "text_id": "text_09_npl_ace",
+      "source_title": "History - timeline - NPL",
+      "source_url": "https://www.npl.co.uk/about-us/History/timeline",
+      "sentence_count": 2,
+      "mention_count": 4,
+      "linked_count": 4,
+      "relation_count": 2,
+      "event_count": 2
+    },
+    {
+      "text_id": "text_10_manchester_test",
+      "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+      "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+      "sentence_count": 2,
+      "mention_count": 8,
+      "linked_count": 6,
+      "relation_count": 2,
+      "event_count": 2
+    },
+    {
+      "text_id": "text_11_late_life",
+      "source_title": "About Alan Turing | The Turing Digital Archive",
+      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+      "sentence_count": 2,
+      "mention_count": 4,
+      "linked_count": 3,
+      "relation_count": 0,
+      "event_count": 0
+    },
+    {
+      "text_id": "text_12_locations",
+      "source_title": "The University of Manchester / King's College Cambridge / NPL",
+      "source_url": "https://www.manchester.ac.uk/",
+      "sentence_count": 3,
+      "mention_count": 6,
+      "linked_count": 6,
+      "relation_count": 2,
+      "event_count": 0
+    }
+  ]
 }

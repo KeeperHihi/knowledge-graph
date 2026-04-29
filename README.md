@@ -92,7 +92,7 @@ python3 scripts/run_visualization.py --port 8000
 - `data/intermediate/linked_entities.jsonl`
   - 每行一个消歧结果，包含候选得分和最终链接结果
 - `data/output/events.json`
-  - 事件抽取结果，保留 `event_type`、`participants`、`trigger`、`evidence`
+  - 事件抽取结果，保留 `event_type`、`participants`、`trigger`、`evidence`，同时附带 `source_title/source_url`
 - `data/output/relations.csv`
   - 关系抽取结果，包含 `head / relation / tail / evidence`
 - `data/output/entities.json`
@@ -100,9 +100,11 @@ python3 scripts/run_visualization.py --port 8000
 - `data/output/triples.csv`
   - 简化版三元组结果，便于展示和导入
 - `data/output/graph.json`
-  - 网页可视化直接读取的节点边数据
+  - 网页可视化直接读取的节点边数据，节点、边、事件都尽量保留原文编号和来源信息
+- `data/output/traceability.json`
+  - 每个 raw 文本对应的来源、抽取统计、示例关系和示例事件，便于答辩时回溯
 - `data/output/report.json`
-  - 包括文本数、句子数、mention 数、消歧成功数、NIL 数、类型统计等
+  - 包括文本数、句子数、mention 数、消歧成功数、NIL 数、关系数、事件数、类型统计和分文本统计
 - `docs/student_method.md`
   - 用学生口吻说明为什么选择规则法、事件层、可视化展示，便于答辩讲解
 

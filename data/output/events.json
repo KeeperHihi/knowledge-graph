@@ -33,7 +33,11 @@
       "REL001",
       "REL002"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录。"
   },
   {
     "event_id": "EVT002",
@@ -76,7 +80,11 @@
       "REL004",
       "REL005"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "source_note": "整理了图灵在 Bletchley Park、Enigma 和 Bombe 相关的信息，用来构造战争场景。"
   },
   {
     "event_id": "EVT003",
@@ -105,7 +113,11 @@
     "source_relation_ids": [
       "REL006"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本。"
   },
   {
     "event_id": "EVT004",
@@ -134,7 +146,11 @@
     "source_relation_ids": [
       "REL007"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "source_note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展。"
   },
   {
     "event_id": "EVT005",
@@ -163,7 +179,11 @@
     "source_relation_ids": [
       "REL008"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom。"
   },
   {
     "event_id": "EVT006",
@@ -192,7 +212,11 @@
     "source_relation_ids": [
       "REL009"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
+    "source_url": "https://cst.princeton.edu/people/alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系。"
   },
   {
     "event_id": "EVT007",
@@ -228,7 +252,11 @@
       "REL010",
       "REL011"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
   },
   {
     "event_id": "EVT008",
@@ -261,7 +289,11 @@
     "place": "Bletchley Park",
     "description": "记录图灵在机构或地点工作的经历。",
     "source_relation_ids": [],
-    "metadata": null
+    "metadata": null,
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
   },
   {
     "event_id": "EVT009",
@@ -290,7 +322,11 @@
     "source_relation_ids": [
       "REL012"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "Alan Turing | Bletchley Park",
+    "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
   },
   {
     "event_id": "EVT010",
@@ -319,7 +355,11 @@
     "source_relation_ids": [
       "REL013"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "History - timeline - NPL",
+    "source_url": "https://www.npl.co.uk/about-us/History/timeline",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
     "event_id": "EVT011",
@@ -348,7 +388,11 @@
     "source_relation_ids": [
       "REL014"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "History - timeline - NPL",
+    "source_url": "https://www.npl.co.uk/about-us/History/timeline",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
     "event_id": "EVT012",
@@ -377,7 +421,11 @@
     "source_relation_ids": [
       "REL015"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
   },
   {
     "event_id": "EVT013",
@@ -406,6 +454,10 @@
     "source_relation_ids": [
       "REL016"
     ],
-    "metadata": null
+    "metadata": null,
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
   }
 ]
