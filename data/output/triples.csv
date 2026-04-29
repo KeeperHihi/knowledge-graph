@@ -1,16 +1,23 @@
 head,relation,tail,evidence
 Alan Turing,studied_at,University of Cambridge,Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。
 Alan Turing,studied_at,Princeton University,Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。
+Alan Turing,published,Computable Numbers,Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。
+Alan Turing,proposed,Turing Machine,Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。
 Alan Turing,worked_at,Bletchley Park,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
 Alan Turing,used,Enigma,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
 Alan Turing,participated_in,Second World War,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
-Alan Turing,studied_at,Cambridge,图灵早年在剑桥学习数学。
-Alan Turing,influenced_by,Alonzo Church,Alonzo Church 对图灵的研究有重要影响。
+Alan Turing,studied_at,University of Cambridge,图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。
+Alan Turing,influenced_by,Alonzo Church,Alonzo Church 对 Alan Turing 的研究有重要影响。
+Alan Turing,proposed,Turing Test,1950 年，Alan Turing 提出图灵测试（Turing Test），用来讨论机器是否能够表现出智能。
 Alan Turing,influenced_by,Christopher Morcom,图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。
+Alan Turing,studied_at,"King's College, Cambridge","1931 年，Alan Turing 进入 King's College, Cambridge 学习数学，并逐渐把兴趣转向逻辑与计算问题。"
 Alan Turing,studied_at,Princeton University,1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。
-Alan Turing,worked_at,Government Code and Cypher School,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。
-Alan Turing,worked_at,Bletchley Park,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。
-Joan Clarke,used,Bombe,Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。
+Alan Turing,influenced_by,John von Neumann,在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。
+Alan Turing,worked_at,Government Code and Cypher School,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+Alan Turing,worked_at,Bletchley Park,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+Alan Turing,used,Enigma,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+Joan Clarke,worked_at,Bletchley Park,Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。
+Joan Clarke,used,Bombe,Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。
 Alan Turing,proposed,Automatic Computing Engine,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
 Alan Turing,worked_at,National Physical Laboratory,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
 Alan Turing,worked_at,University of Manchester,1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。

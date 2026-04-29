@@ -7,6 +7,15 @@
 - [x] 关系抽取
 - [x] 图谱可视化
 
+这个项目只用了词典匹配、正则规则、简单打分和静态网页展示，没有调用大模型，也没有使用预训练模型。
+
+## 0. 先说清楚这份作业是怎么做的
+
+- 原始数据放在 `data/raw/`，每条文本都在 `source_manifest.json` 里记录了来源
+- 中间过程会输出到 `data/intermediate/`，可以直接看到 mention 和消歧结果
+- 最终图谱和统计结果放在 `data/output/`
+- 本项目重点是“过程清楚、可以解释”，不是追求复杂模型
+
 ## 1. 项目结构
 
 ```text
@@ -98,7 +107,20 @@ python3 scripts/run_demo.py --prepare-only
 python3 scripts/run_demo.py --port 8000
 ```
 
-## 3. 答辩推荐顺序
+## 3. 当前已经验证通过的结果
+
+我在本地重新跑过一次，当前这份仓库可以直接得到下面这些结果：
+
+- 单元测试：`python3 -m unittest discover -s tests -v`，`9` 个测试全部通过
+- 完整流程：`python3 main.py --mode pipeline`
+- 当前统计结果：`12` 份原始文本、`29` 个句子、`83` 个 mention、`75` 个成功链接、`25` 条关系、`18` 个事件
+- 关键检查已经通过：
+  - `PublicationEvent` 已经能抽到
+  - `published` 关系已经能生成
+  - 不再出现 `Alan Turing studied_at Cambridge` 这种把城市当学校的关系
+  - 本地网页可以通过 `python3 scripts/run_visualization.py --port 8000` 正常启动
+
+## 4. 答辩推荐顺序
 
 如果按老师现场查看项目的习惯来演示，推荐下面这个顺序：
 
@@ -123,7 +145,7 @@ python3 scripts/run_demo.py --port 8000
 - `docs/student_method.md`
 - `docs/demo_walkthrough.md`
 
-## 4. 示例输出说明
+## 5. 示例输出说明
 
 运行完整流水线后，会生成以下结果：
 
@@ -148,7 +170,7 @@ python3 scripts/run_demo.py --port 8000
 - `docs/student_method.md`
   - 用学生口吻说明为什么选择规则法、事件层、可视化展示，便于答辩讲解
 
-## 5. 当前阶段的局限性
+## 6. 当前阶段的局限性
 
 - 实体抽取主要依赖种子词典与少量正则，覆盖面有限
 - 未使用统计学习或深度学习模型，泛化能力较弱
@@ -156,7 +178,7 @@ python3 scripts/run_demo.py --port 8000
 - 规则法覆盖面仍然有限，遇到代词、省略和复杂长句时容易漏抽
 - 目前更适合“图灵主题”的小规模课程作业，不追求跨领域泛化
 
-## 6. 后续可扩展方向
+## 7. 后续可扩展方向
 
 后续可以在保持结构稳定的前提下继续扩展：
 
@@ -171,7 +193,7 @@ python3 scripts/run_demo.py --port 8000
 5. 更丰富的评估
    - 增加人工标注样本，计算 precision / recall / F1
 
-## 7. 当前实现的技术路线
+## 8. 当前实现的技术路线
 
 - 预处理：清洗空白、按中英文标点分句
 - 抽取：词典匹配 + 正则规则
@@ -192,7 +214,7 @@ score = 0.5 * alias_score + 0.3 * context_keyword_score + 0.2 * type_prior_score
 - `context_keyword_score`：上下文与实体关键词的重合程度
 - `type_prior_score`：抽取类型与候选实体类型的一致程度
 
-## 8. 数据来源说明
+## 9. 数据来源说明
 
 - 原始文本都放在 `data/raw/`，不是直接写死结构化图谱
 - 每个 raw 文本的来源记录在 `data/raw/source_manifest.json`

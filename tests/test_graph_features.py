@@ -68,6 +68,64 @@ class GraphFeatureTestCase(unittest.TestCase):
             {"University of Cambridge", "Princeton University"},
         )
 
+    def test_publication_event_generates_published_relation(self) -> None:
+        sentence = "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。"
+        mentions = [
+            make_linked("Alan Turing", "E001", "Alan Turing", "Person", sentence, 0, 12),
+            make_linked("《Computable Numbers》", "E019", "Computable Numbers", "Work", sentence, 19, 39),
+            make_linked("Turing Machine", "E017", "Turing Machine", "Concept", sentence, 45, 59),
+        ]
+
+        events = self.event_extractor.extract(mentions)
+        relations = self.relation_extractor.extract(mentions, events)
+
+        self.assertTrue(any(event.event_type == "PublicationEvent" for event in events))
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "published"
+                and relation.tail_name == "Computable Numbers"
+                for relation in relations
+            )
+        )
+
+    def test_education_relation_does_not_point_to_city(self) -> None:
+        sentence = "Alan Turing 在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。"
+        mentions = [
+            make_linked("Alan Turing", "E001", "Alan Turing", "Person", sentence, 0, 12),
+            make_linked(
+                "University of Cambridge",
+                "E008",
+                "University of Cambridge",
+                "Organization",
+                sentence,
+                15,
+                39,
+            ),
+            make_linked("Cambridge", "E011", "Cambridge", "Place", sentence, 44, 53),
+        ]
+
+        events = self.event_extractor.extract(mentions)
+        relations = self.relation_extractor.extract(mentions, events)
+
+        self.assertTrue(any(event.event_type == "EducationEvent" for event in events))
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "studied_at"
+                and relation.tail_name == "University of Cambridge"
+                for relation in relations
+            )
+        )
+        self.assertFalse(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "studied_at"
+                and relation.tail_name == "Cambridge"
+                for relation in relations
+            )
+        )
+
     def test_influence_direction_prefers_the_person_before_dui(self) -> None:
         sentence = "图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。"
         mentions = [

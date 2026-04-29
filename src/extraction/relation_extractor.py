@@ -58,9 +58,7 @@ class RelationExtractor:
 
         if event.event_type == "EducationEvent":
             relation_specs.extend(
-                self._build_role_relations(
-                    event, participants, "student", "studied_at", ["institution", "city"]
-                )
+                self._build_role_relations(event, participants, "student", "studied_at", ["institution"])
             )
         elif event.event_type == "PublicationEvent":
             relation_specs.extend(

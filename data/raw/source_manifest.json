@@ -4,7 +4,7 @@
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录。"
+    "note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录，并把发表论文句改成了显式主语，方便规则展示。"
   },
   {
     "text_id": "text_02_war",
@@ -18,14 +18,14 @@
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本。"
+    "note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本，并把求学句改成学校和城市同时出现。"
   },
   {
     "text_id": "text_04_test_and_machine",
     "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
     "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
     "collected_on": "2026-04-29",
-    "note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展。"
+    "note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展，并保留显式主语句子来展示研究事件抽取。"
   },
   {
     "text_id": "text_05_places",
@@ -39,21 +39,21 @@
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom。"
+    "note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom，并减少代词句，方便课堂展示规则抽取。"
   },
   {
     "text_id": "text_07_princeton_research",
     "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
     "source_url": "https://cst.princeton.edu/people/alan-turing",
     "collected_on": "2026-04-29",
-    "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系。"
+    "note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
   },
   {
     "text_id": "text_08_bletchley_team",
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
+    "note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
   },
   {
     "text_id": "text_09_npl_ace",

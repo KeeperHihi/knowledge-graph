@@ -1,19 +1,26 @@
 relation_id,text_id,sentence_id,head_id,head_name,head_type,relation,tail_id,tail_name,tail_type,trigger,method,source_event_id,evidence
 REL001,text_01_biography,1,E001,Alan Turing,Person,studied_at,E008,University of Cambridge,Organization,就读,event_rule,EVT001,Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。
 REL002,text_01_biography,1,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,就读,event_rule,EVT001,Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。
-REL003,text_02_war,1,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,破译,event_rule,EVT002,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
-REL004,text_02_war,1,E001,Alan Turing,Person,used,E015,Enigma,Device,破译,event_rule,EVT002,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
-REL005,text_02_war,1,E001,Alan Turing,Person,participated_in,E021,Second World War,Event,破译,event_rule,EVT002,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
-REL006,text_03_cambridge_manchester,1,E001,Alan Turing,Person,studied_at,E011,Cambridge,Place,学习,event_rule,EVT003,图灵早年在剑桥学习数学。
-REL007,text_04_test_and_machine,1,E001,Alan Turing,Person,influenced_by,E002,Alonzo Church,Person,影响,event_rule,EVT004,Alonzo Church 对图灵的研究有重要影响。
-REL008,text_06_early_education,1,E001,Alan Turing,Person,influenced_by,E006,Christopher Morcom,Person,影响,event_rule,EVT005,图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。
-REL009,text_07_princeton_research,1,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,深造,event_rule,EVT006,1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。
-REL010,text_08_bletchley_team,1,E001,Alan Turing,Person,worked_at,E023,Government Code and Cypher School,Organization,战争,event_rule,EVT007,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。
-REL011,text_08_bletchley_team,1,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,战争,event_rule,EVT007,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。
-REL012,text_08_bletchley_team,2,E005,Joan Clarke,Person,used,E016,Bombe,Device,密码,event_rule,EVT009,Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。
-REL013,text_09_npl_ace,1,E001,Alan Turing,Person,proposed,E024,Automatic Computing Engine,Device,提出,event_rule,EVT010,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
-REL014,text_09_npl_ace,1,E001,Alan Turing,Person,worked_at,E027,National Physical Laboratory,Organization,加入,event_rule,EVT011,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
-REL015,text_10_manchester_test,1,E001,Alan Turing,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT012,1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。
-REL016,text_10_manchester_test,2,E001,Alan Turing,Person,proposed,E018,Turing Test,Concept,提出,event_rule,EVT013,1950 年，图灵提出图灵测试，继续讨论机器智能问题。
-REL017,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
-REL018,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。
+REL003,text_01_biography,2,E001,Alan Turing,Person,published,E019,Computable Numbers,Work,发表,event_rule,EVT002,Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。
+REL004,text_01_biography,2,E001,Alan Turing,Person,proposed,E017,Turing Machine,Concept,提出,event_rule,EVT003,Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。
+REL005,text_02_war,1,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,破译,event_rule,EVT004,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
+REL006,text_02_war,1,E001,Alan Turing,Person,used,E015,Enigma,Device,破译,event_rule,EVT004,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
+REL007,text_02_war,1,E001,Alan Turing,Person,participated_in,E021,Second World War,Event,破译,event_rule,EVT004,第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。
+REL008,text_03_cambridge_manchester,1,E001,Alan Turing,Person,studied_at,E008,University of Cambridge,Organization,学习,event_rule,EVT005,图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。
+REL009,text_04_test_and_machine,1,E001,Alan Turing,Person,influenced_by,E002,Alonzo Church,Person,影响,event_rule,EVT006,Alonzo Church 对 Alan Turing 的研究有重要影响。
+REL010,text_04_test_and_machine,2,E001,Alan Turing,Person,proposed,E018,Turing Test,Concept,提出,event_rule,EVT007,1950 年，Alan Turing 提出图灵测试（Turing Test），用来讨论机器是否能够表现出智能。
+REL011,text_06_early_education,1,E001,Alan Turing,Person,influenced_by,E006,Christopher Morcom,Person,影响,event_rule,EVT008,图灵在 Sherborne School 接受中学教育，青年时期的朋友 Christopher Morcom 对他的科学兴趣影响很大。
+REL012,text_06_early_education,2,E001,Alan Turing,Person,studied_at,E022,"King's College, Cambridge",Organization,学习,event_rule,EVT009,"1931 年，Alan Turing 进入 King's College, Cambridge 学习数学，并逐渐把兴趣转向逻辑与计算问题。"
+REL013,text_07_princeton_research,1,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,深造,event_rule,EVT010,1936 年，Alan Turing 前往 Princeton University 深造，并在 Alonzo Church 指导下继续研究可计算性问题。
+REL014,text_07_princeton_research,2,E001,Alan Turing,Person,influenced_by,E004,John von Neumann,Person,影响,event_rule,EVT011,在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。
+REL015,text_08_bletchley_team,1,E001,Alan Turing,Person,worked_at,E023,Government Code and Cypher School,Organization,战争,event_rule,EVT012,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+REL016,text_08_bletchley_team,1,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,战争,event_rule,EVT012,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+REL017,text_08_bletchley_team,1,E001,Alan Turing,Person,used,E015,Enigma,Device,战争,event_rule,EVT012,战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。
+REL018,text_08_bletchley_team,2,E005,Joan Clarke,Person,worked_at,E010,Bletchley Park,Place,密码,event_rule,EVT014,Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。
+REL019,text_08_bletchley_team,2,E005,Joan Clarke,Person,used,E016,Bombe,Device,密码,event_rule,EVT014,Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。
+REL020,text_09_npl_ace,1,E001,Alan Turing,Person,proposed,E024,Automatic Computing Engine,Device,提出,event_rule,EVT015,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
+REL021,text_09_npl_ace,1,E001,Alan Turing,Person,worked_at,E027,National Physical Laboratory,Organization,加入,event_rule,EVT016,战后，图灵加入 National Physical Laboratory，提出了 Automatic Computing Engine 的设计方案。
+REL022,text_10_manchester_test,1,E001,Alan Turing,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT017,1948 年后，图灵受 Max Newman 邀请到 University of Manchester 工作，并参与 Manchester Mark I 相关研究。
+REL023,text_10_manchester_test,2,E001,Alan Turing,Person,proposed,E018,Turing Test,Concept,提出,event_rule,EVT018,1950 年，图灵提出图灵测试，继续讨论机器智能问题。
+REL024,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
+REL025,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。

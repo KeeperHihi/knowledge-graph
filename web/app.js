@@ -7,6 +7,7 @@ const eventCount = document.getElementById("event-count");
 const summaryBox = document.getElementById("summary-box");
 const sourceList = document.getElementById("source-list");
 const sourceCount = document.getElementById("source-count");
+const processSteps = document.getElementById("process-steps");
 
 const typeColors = {
   Person: "#d96c3a",
@@ -25,7 +26,6 @@ const graphState = {
   edges: [],
   selectedNodeId: "",
   selectedEdgeId: "",
-  hoveredNodeId: "",
   animating: false,
   report: null,
   traceability: null,
@@ -47,6 +47,152 @@ function distance(a, b) {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function parseJsonl(rawText) {
+  const trimmed = rawText.trim();
+  if (!trimmed) {
+    return [];
+  }
+  return trimmed
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => JSON.parse(line));
+}
+
+function uniqueBy(items, keyBuilder) {
+  const seen = new Set();
+  const picked = [];
+  for (const item of items) {
+    const key = keyBuilder(item);
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    picked.push(item);
+  }
+  return picked;
+}
+
+function buildProcessData(report, traceability, mentions, linkedMentions, events) {
+  const rawSamples = (traceability.texts || []).slice(0, 2).map((item) => ({
+    label: item.text_id,
+    value: item.source_title || "公开资料整理",
+  }));
+
+  const mentionSamples = uniqueBy(mentions, (item) => `${item.mention}-${item.entity_type}`)
+    .slice(0, 3)
+    .map((item) => ({
+      label: item.mention,
+      value: item.entity_type,
+    }));
+
+  const disambiguationSamples = linkedMentions
+    .filter((item) => item.status === "linked" && (item.candidate_ids || []).length > 1)
+    .sort((a, b) => (b.candidate_ids || []).length - (a.candidate_ids || []).length)
+    .slice(0, 2)
+    .map((item) => ({
+      label: `${item.mention} -> ${item.canonical_name}`,
+      value: `${item.candidate_ids.length} 个候选`,
+    }));
+
+  const eventPriority = {
+    PublicationEvent: 1,
+    EducationEvent: 2,
+    InfluenceEvent: 3,
+    WarWorkEvent: 4,
+    ResearchEvent: 5,
+    EmploymentEvent: 6,
+  };
+  const eventSamples = events
+    .slice()
+    .sort((a, b) => (eventPriority[a.event_type] || 99) - (eventPriority[b.event_type] || 99))
+    .slice(0, 3)
+    .map((item) => ({
+      label: item.event_type,
+      value: item.evidence,
+    }));
+
+  const relationSamples = [];
+  for (const text of traceability.texts || []) {
+    for (const relation of text.relations || []) {
+      relationSamples.push({
+        label: relation.triple,
+        value: text.text_id,
+      });
+    }
+  }
+
+  return [
+    {
+      index: "01",
+      title: "原始文本",
+      total: `${report.raw_text_count} 份`,
+      description: "先把公开资料整理成短文本，不直接手写结构化图谱。",
+      samples: rawSamples,
+    },
+    {
+      index: "02",
+      title: "实体抽取",
+      total: `${report.mention_count} 个 mention`,
+      description: "用词典和正则抽人物、机构、地点、作品和时间。",
+      samples: mentionSamples,
+    },
+    {
+      index: "03",
+      title: "实体消歧",
+      total: `${report.linked_count} 个成功链接`,
+      description: "对别名、上下文和类型打分，选标准实体。",
+      samples: disambiguationSamples,
+    },
+    {
+      index: "04",
+      title: "事件抽取",
+      total: `${report.event_count} 个事件`,
+      description: "先抽求学、发表、研究、战争工作这些事件。",
+      samples: eventSamples,
+    },
+    {
+      index: "05",
+      title: "关系抽取",
+      total: `${report.relation_count} 条关系`,
+      description: "再从事件和少量句式规则生成三元组。",
+      samples: relationSamples.slice(0, 3),
+    },
+  ];
+}
+
+function renderProcessSteps(report, traceability, mentions, linkedMentions, events) {
+  const steps = buildProcessData(report, traceability, mentions, linkedMentions, events);
+  processSteps.innerHTML = steps
+    .map(
+      (step) => `
+        <article class="process-step">
+          <div class="process-index">${step.index}</div>
+          <div class="process-main">
+            <div class="process-topline">
+              <span>${step.title}</span>
+              <strong>${step.total}</strong>
+            </div>
+            <p>${step.description}</p>
+            <ul class="process-list">
+              ${(step.samples || [])
+                .map(
+                  (item) => `
+                    <li>
+                      <span>${item.label}</span>
+                      <strong>${item.value}</strong>
+                    </li>
+                  `
+                )
+                .join("")}
+            </ul>
+          </div>
+        </article>
+      `
+    )
+    .join("");
 }
 
 function prepareGraph(graph) {
@@ -97,10 +243,9 @@ function renderSummary(report) {
   const relationItems = Object.entries(report.relation_type_counts || {})
     .sort((a, b) => b[1] - a[1])
     .slice(0, 4);
-  const textItems = (report.text_statistics || [])
-    .slice()
-    .sort((a, b) => b.relation_count - a.relation_count || b.event_count - a.event_count)
-    .slice(0, 3);
+  const eventItems = Object.entries(report.event_type_counts || {})
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4);
 
   summaryBox.innerHTML = `
     <div class="summary-grid">
@@ -109,17 +254,17 @@ function renderSummary(report) {
       <div class="summary-item"><span>关系条数</span><strong>${report.relation_count}</strong></div>
       <div class="summary-item"><span>事件条数</span><strong>${report.event_count}</strong></div>
     </div>
-    <p>展示链路：原始文本 -> 实体抽取 -> 实体消歧 -> 事件抽取 -> 关系抽取 -> 图谱展示。</p>
+    <p>现在网页最上方会直接展示：原始文本 -> 实体抽取 -> 实体消歧 -> 事件抽取 -> 关系抽取。</p>
     <div>
-      <p>出现最多的关系：</p>
+      <p>常见关系：</p>
       <ul class="summary-list">
         ${relationItems.map(([name, count]) => `<li><span>${name}</span><strong>${count}</strong></li>`).join("")}
       </ul>
     </div>
     <div>
-      <p>信息量较多的原文片段：</p>
+      <p>当前抽到的事件类型：</p>
       <ul class="summary-list">
-        ${textItems.map((item) => `<li><span>${item.text_id}</span><strong>${item.relation_count} 条关系 / ${item.event_count} 个事件</strong></li>`).join("")}
+        ${eventItems.map(([name, count]) => `<li><span>${name}</span><strong>${count}</strong></li>`).join("")}
       </ul>
     </div>
   `;
@@ -132,17 +277,29 @@ function renderSourceList(traceability) {
   sourceList.innerHTML = "";
 
   for (const item of texts) {
+    const relationText = (item.relations || [])
+      .slice(0, 2)
+      .map((relation) => `<li>${relation.triple}</li>`)
+      .join("");
+    const eventText = (item.events || [])
+      .slice(0, 1)
+      .map((event) => `<li>${event.event_type} · ${event.trigger}</li>`)
+      .join("");
+
     const card = document.createElement("article");
     card.className = "source-card";
     card.innerHTML = `
       <h4>${item.text_id}</h4>
       <p>${item.source_title || "未记录来源标题"}</p>
+      <p class="source-note">${item.note || "未记录说明"}</p>
       <p><a href="${item.source_url}" target="_blank" rel="noreferrer">查看来源链接</a></p>
       <div class="source-meta">
         <span>${item.mention_count} 个 mention</span>
         <span>${item.relation_count} 条关系</span>
         <span>${item.event_count} 个事件</span>
       </div>
+      ${relationText ? `<ul class="mini-list">${relationText}</ul>` : ""}
+      ${eventText ? `<ul class="mini-list">${eventText}</ul>` : ""}
     `;
     sourceList.appendChild(card);
   }
@@ -415,19 +572,33 @@ window.addEventListener("resize", () => {
 
 async function boot() {
   resizeCanvas();
-  const [graphResponse, reportResponse, traceResponse] = await Promise.all([
+  const [
+    graphResponse,
+    reportResponse,
+    traceResponse,
+    mentionsResponse,
+    linkedResponse,
+  ] = await Promise.all([
     fetch("/data/output/graph.json"),
     fetch("/data/output/report.json"),
     fetch("/data/output/traceability.json"),
+    fetch("/data/intermediate/mentions.jsonl"),
+    fetch("/data/intermediate/linked_entities.jsonl"),
   ]);
+
   const graph = await graphResponse.json();
   const report = await reportResponse.json();
   const traceability = await traceResponse.json();
+  const mentions = parseJsonl(await mentionsResponse.text());
+  const linkedMentions = parseJsonl(await linkedResponse.text());
+
   prepareGraph(graph);
   renderSummary(report);
   renderSourceList(traceability);
+  renderProcessSteps(report, traceability, mentions, linkedMentions, graph.events || []);
 }
 
 boot().catch((error) => {
   detailBox.innerHTML = `<p>加载失败：${error.message}</p>`;
+  processSteps.innerHTML = `<p>流程数据加载失败：${error.message}</p>`;
 });

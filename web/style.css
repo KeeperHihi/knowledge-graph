@@ -98,6 +98,7 @@ body {
   gap: 18px;
 }
 
+.process-panel,
 .graph-panel,
 .sidebar-card {
   background: var(--panel);
@@ -107,8 +108,13 @@ body {
   backdrop-filter: blur(14px);
 }
 
+.process-panel,
 .graph-panel {
   padding: 18px;
+}
+
+.process-panel {
+  margin-bottom: 18px;
 }
 
 .panel-head,
@@ -136,6 +142,96 @@ body {
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(30, 42, 51, 0.06);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(30, 42, 51, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(68, 49, 28, 0.08);
+}
+
+.process-index {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(217, 108, 58, 0.18), rgba(217, 108, 58, 0.06));
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.process-main {
+  min-width: 0;
+}
+
+.process-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.process-topline span {
+  font-weight: 700;
+}
+
+.process-topline strong {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.process-main p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.process-list,
+.mini-list {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.process-list li,
+.mini-list li {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(30, 42, 51, 0.05);
+}
+
+.process-list li span,
+.mini-list li {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.process-list li strong {
   color: var(--muted);
   font-size: 12px;
 }
@@ -273,6 +369,10 @@ body {
   margin: 8px 0 0;
 }
 
+.source-note {
+  color: var(--muted);
+}
+
 .source-meta {
   display: flex;
   flex-wrap: wrap;
@@ -357,6 +457,10 @@ body {
   .layout {
     grid-template-columns: 1fr;
     display: grid;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
   }
 
   .hero-note {

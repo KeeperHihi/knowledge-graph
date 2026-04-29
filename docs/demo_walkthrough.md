@@ -54,6 +54,17 @@
 
 推荐点击顺序：
 
+1. 先看页面最上方的“构建过程”卡片
+2. 再点左侧关系图里的 `Alan Turing`
+3. 再点 `Princeton University`
+4. 再点 `Bletchley Park`
+5. 任意一条 `studied_at` 或 `worked_at` 的边
+6. 右侧任意一个事件卡片
+
+我想让老师先看到的是：这不是直接画出来的图，而是能从原始文本、mention、消歧、事件、关系一步步往下追。
+
+原来的图谱点击顺序也还可以保留：
+
 1. `Alan Turing`
 2. `Princeton University`
 3. `Bletchley Park`

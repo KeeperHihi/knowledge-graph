@@ -5,7 +5,7 @@
     "type": "Person",
     "description": "英国数学家、逻辑学家和计算机科学先驱，是本项目的核心人物。",
     "source": "entity",
-    "mention_count": 13,
+    "mention_count": 18,
     "text_ids": [
       "text_01_biography",
       "text_02_war",
@@ -27,16 +27,16 @@
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
       {
-        "text_id": "text_02_war",
-        "sentence_id": 1,
-        "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
-        "source_title": "Alan Turing | Bletchley Park",
-        "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
+        "text_id": "text_01_biography",
+        "sentence_id": 2,
+        "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+        "source_title": "About Alan Turing | The Turing Digital Archive",
+        "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
       {
         "text_id": "text_02_war",
-        "sentence_id": 3,
-        "evidence": "1940 年前后，图灵的工作对盟军产生了重要影响。",
+        "sentence_id": 1,
+        "evidence": "第二次世界大战期间，图灵在 Bletchley Park 参与破译 Enigma machine。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -48,7 +48,7 @@
     "type": "Organization",
     "description": "图灵早年学习和研究的重要大学机构。",
     "source": "entity",
-    "mention_count": 3,
+    "mention_count": 4,
     "text_ids": [
       "text_01_biography",
       "text_03_cambridge_manchester",
@@ -64,17 +64,17 @@
       },
       {
         "text_id": "text_03_cambridge_manchester",
-        "sentence_id": 2,
-        "evidence": "这里的“剑桥”既可以指英国城市 Cambridge，也可能指 University of Cambridge。",
+        "sentence_id": 1,
+        "evidence": "图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
       {
-        "text_id": "text_05_places",
-        "sentence_id": 3,
-        "evidence": "University of Cambridge 作为研究机构，与 Cambridge 这座城市并不完全相同。",
-        "source_title": "Princeton University Official Site / King's College Cambridge Official Site",
-        "source_url": "https://www.princeton.edu/"
+        "text_id": "text_03_cambridge_manchester",
+        "sentence_id": 2,
+        "evidence": "这里的“Cambridge”既可以指城市，也可能出现在 University of Cambridge 这个校名里。",
+        "source_title": "About Alan Turing | The Turing Digital Archive",
+        "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       }
     ]
   },
@@ -128,7 +128,7 @@
       {
         "text_id": "text_01_biography",
         "sentence_id": 2,
-        "evidence": "他在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+        "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       }
@@ -140,17 +140,25 @@
     "type": "Concept",
     "description": "计算理论中的经典抽象模型。",
     "source": "entity",
-    "mention_count": 1,
+    "mention_count": 2,
     "text_ids": [
-      "text_01_biography"
+      "text_01_biography",
+      "text_04_test_and_machine"
     ],
     "evidence_samples": [
       {
         "text_id": "text_01_biography",
         "sentence_id": 2,
-        "evidence": "他在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+        "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+      },
+      {
+        "text_id": "text_04_test_and_machine",
+        "sentence_id": 3,
+        "evidence": "Alan Turing 也持续讨论 Turing Machine、Automatic Computing Engine 和 Manchester Mark I 代表的机器发展方向。",
+        "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+        "source_url": "https://www.cs.manchester.ac.uk/about-us/history/"
       }
     ]
   },
@@ -180,7 +188,7 @@
     "type": "Place",
     "description": "二战期间英国密码破译工作的核心地点。",
     "source": "entity",
-    "mention_count": 2,
+    "mention_count": 3,
     "text_ids": [
       "text_02_war",
       "text_08_bletchley_team"
@@ -196,7 +204,14 @@
       {
         "text_id": "text_08_bletchley_team",
         "sentence_id": 1,
-        "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+        "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。",
+        "source_title": "Alan Turing | Bletchley Park",
+        "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
+      },
+      {
+        "text_id": "text_08_bletchley_team",
+        "sentence_id": 2,
+        "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -208,7 +223,7 @@
     "type": "Device",
     "description": "二战时期著名密码机，是图灵相关文本中的高频实体。",
     "source": "entity",
-    "mention_count": 2,
+    "mention_count": 3,
     "text_ids": [
       "text_02_war",
       "text_08_bletchley_team"
@@ -223,8 +238,15 @@
       },
       {
         "text_id": "text_08_bletchley_team",
+        "sentence_id": 1,
+        "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。",
+        "source_title": "Alan Turing | Bletchley Park",
+        "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
+      },
+      {
+        "text_id": "text_08_bletchley_team",
         "sentence_id": 2,
-        "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+        "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -252,7 +274,7 @@
       {
         "text_id": "text_08_bletchley_team",
         "sentence_id": 1,
-        "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+        "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -280,7 +302,7 @@
       {
         "text_id": "text_08_bletchley_team",
         "sentence_id": 2,
-        "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+        "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -292,7 +314,7 @@
     "type": "Place",
     "description": "英国城市，与剑桥大学同名，便于构造歧义。",
     "source": "entity",
-    "mention_count": 5,
+    "mention_count": 4,
     "text_ids": [
       "text_03_cambridge_manchester",
       "text_05_places"
@@ -301,14 +323,14 @@
       {
         "text_id": "text_03_cambridge_manchester",
         "sentence_id": 1,
-        "evidence": "图灵早年在剑桥学习数学。",
+        "evidence": "图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
       {
         "text_id": "text_03_cambridge_manchester",
         "sentence_id": 2,
-        "evidence": "这里的“剑桥”既可以指英国城市 Cambridge，也可能指 University of Cambridge。",
+        "evidence": "这里的“Cambridge”既可以指城市，也可能出现在 University of Cambridge 这个校名里。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
@@ -400,7 +422,7 @@
       {
         "text_id": "text_04_test_and_machine",
         "sentence_id": 1,
-        "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+        "evidence": "Alonzo Church 对 Alan Turing 的研究有重要影响。",
         "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
         "source_url": "https://www.cs.manchester.ac.uk/about-us/history/"
       },
@@ -428,7 +450,7 @@
       {
         "text_id": "text_04_test_and_machine",
         "sentence_id": 2,
-        "evidence": "图灵测试（Turing Test）在 1950 年被提出，用来讨论机器是否能够表现出智能。",
+        "evidence": "1950 年，Alan Turing 提出图灵测试（Turing Test），用来讨论机器是否能够表现出智能。",
         "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
         "source_url": "https://www.cs.manchester.ac.uk/about-us/history/"
       },
@@ -456,7 +478,7 @@
       {
         "text_id": "text_04_test_and_machine",
         "sentence_id": 3,
-        "evidence": "Automatic Computing Engine 和 Manchester Mark I 则代表了早期计算设备的发展方向。",
+        "evidence": "Alan Turing 也持续讨论 Turing Machine、Automatic Computing Engine 和 Manchester Mark I 代表的机器发展方向。",
         "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
         "source_url": "https://www.cs.manchester.ac.uk/about-us/history/"
       },
@@ -491,7 +513,7 @@
       {
         "text_id": "text_04_test_and_machine",
         "sentence_id": 3,
-        "evidence": "Automatic Computing Engine 和 Manchester Mark I 则代表了早期计算设备的发展方向。",
+        "evidence": "Alan Turing 也持续讨论 Turing Machine、Automatic Computing Engine 和 Manchester Mark I 代表的机器发展方向。",
         "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
         "source_url": "https://www.cs.manchester.ac.uk/about-us/history/"
       },
@@ -559,7 +581,7 @@
       {
         "text_id": "text_06_early_education",
         "sentence_id": 2,
-        "evidence": "1931 年，他进入 King's College, Cambridge 学习数学，并逐渐把兴趣转向逻辑与计算问题。",
+        "evidence": "1931 年，Alan Turing 进入 King's College, Cambridge 学习数学，并逐渐把兴趣转向逻辑与计算问题。",
         "source_title": "About Alan Turing | The Turing Digital Archive",
         "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
       },
@@ -586,7 +608,7 @@
       {
         "text_id": "text_07_princeton_research",
         "sentence_id": 2,
-        "evidence": "Princeton University 的学术环境也让他接触到 John von Neumann 这样的重要学者。",
+        "evidence": "在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。",
         "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
         "source_url": "https://cst.princeton.edu/people/alan-turing"
       }
@@ -606,7 +628,7 @@
       {
         "text_id": "text_08_bletchley_team",
         "sentence_id": 2,
-        "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+        "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
         "source_title": "Alan Turing | Bletchley Park",
         "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf"
       }
@@ -721,10 +743,42 @@
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录。"
+    "source_note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录，并把发表论文句改成了显式主语，方便规则展示。"
   },
   {
     "id": "EVT002",
+    "label": "PublicationEvent",
+    "type": "EventNode",
+    "description": "记录图灵相关论文或作品的发表信息。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+    "text_id": "text_01_biography",
+    "sentence_id": 2,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录，并把发表论文句改成了显式主语，方便规则展示。"
+  },
+  {
+    "id": "EVT003",
+    "label": "ResearchEvent",
+    "type": "EventNode",
+    "description": "记录图灵提出概念、设备或研究方向的句子。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "Alan Turing 在 1936 年发表了《Computable Numbers》，并提出了 Turing Machine 的经典思想。",
+    "text_id": "text_01_biography",
+    "sentence_id": 2,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "根据公开资料整理成课程作业用的短文本，不是原文逐字摘录，并把发表论文句改成了显式主语，方便规则展示。"
+  },
+  {
+    "id": "EVT004",
     "label": "WarWorkEvent",
     "type": "EventNode",
     "description": "记录图灵在战争背景下的密码工作。",
@@ -740,39 +794,55 @@
     "source_note": "整理了图灵在 Bletchley Park、Enigma 和 Bombe 相关的信息，用来构造战争场景。"
   },
   {
-    "id": "EVT003",
+    "id": "EVT005",
     "label": "EducationEvent",
     "type": "EventNode",
     "description": "记录人物的求学经历。",
     "source": "event",
     "time": "",
     "place": "Cambridge",
-    "evidence": "图灵早年在剑桥学习数学。",
+    "evidence": "图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。",
     "text_id": "text_03_cambridge_manchester",
     "sentence_id": 1,
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本。"
+    "source_note": "结合图灵早年在剑桥、晚年在曼彻斯特的经历，专门写成带歧义的练习文本，并把求学句改成学校和城市同时出现。"
   },
   {
-    "id": "EVT004",
+    "id": "EVT006",
     "label": "InfluenceEvent",
     "type": "EventNode",
     "description": "记录人物之间的思想影响。",
     "source": "event",
     "time": "",
     "place": "",
-    "evidence": "Alonzo Church 对图灵的研究有重要影响。",
+    "evidence": "Alonzo Church 对 Alan Turing 的研究有重要影响。",
     "text_id": "text_04_test_and_machine",
     "sentence_id": 1,
     "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
     "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
     "collected_on": "2026-04-29",
-    "source_note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展。"
+    "source_note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展，并保留显式主语句子来展示研究事件抽取。"
   },
   {
-    "id": "EVT005",
+    "id": "EVT007",
+    "label": "ResearchEvent",
+    "type": "EventNode",
+    "description": "记录图灵提出概念、设备或研究方向的句子。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "1950 年，Alan Turing 提出图灵测试（Turing Test），用来讨论机器是否能够表现出智能。",
+    "text_id": "text_04_test_and_machine",
+    "sentence_id": 2,
+    "source_title": "History and heritage - Department of Computer Science - The University of Manchester",
+    "source_url": "https://www.cs.manchester.ac.uk/about-us/history/",
+    "collected_on": "2026-04-29",
+    "source_note": "主要覆盖图灵测试、Manchester Mark I 和早期机器发展，并保留显式主语句子来展示研究事件抽取。"
+  },
+  {
+    "id": "EVT008",
     "label": "InfluenceEvent",
     "type": "EventNode",
     "description": "记录人物之间的思想影响。",
@@ -785,10 +855,26 @@
     "source_title": "About Alan Turing | The Turing Digital Archive",
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom。"
+    "source_note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom，并减少代词句，方便课堂展示规则抽取。"
   },
   {
-    "id": "EVT006",
+    "id": "EVT009",
+    "label": "EducationEvent",
+    "type": "EventNode",
+    "description": "记录人物的求学经历。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "1931 年，Alan Turing 进入 King's College, Cambridge 学习数学，并逐渐把兴趣转向逻辑与计算问题。",
+    "text_id": "text_06_early_education",
+    "sentence_id": 2,
+    "source_title": "About Alan Turing | The Turing Digital Archive",
+    "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充 Sherborne School、King's College, Cambridge 和 Christopher Morcom，并减少代词句，方便课堂展示规则抽取。"
+  },
+  {
+    "id": "EVT010",
     "label": "EducationEvent",
     "type": "EventNode",
     "description": "记录人物的求学经历。",
@@ -801,58 +887,74 @@
     "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
     "source_url": "https://cst.princeton.edu/people/alan-turing",
     "collected_on": "2026-04-29",
-    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系。"
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
   },
   {
-    "id": "EVT007",
+    "id": "EVT011",
+    "label": "InfluenceEvent",
+    "type": "EventNode",
+    "description": "记录人物之间的思想影响。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "在 Princeton University 的学术环境里，John von Neumann 的研究也影响了 Alan Turing 对实际机器设计的理解。",
+    "text_id": "text_07_princeton_research",
+    "sentence_id": 2,
+    "source_title": "Alan Turing | Center on Science and Technology | Princeton University",
+    "source_url": "https://cst.princeton.edu/people/alan-turing",
+    "collected_on": "2026-04-29",
+    "source_note": "补充图灵在普林斯顿阶段与 Alonzo Church、John von Neumann 的联系，并加入明确的影响句。"
+  },
+  {
+    "id": "EVT012",
     "label": "WarWorkEvent",
     "type": "EventNode",
     "description": "记录图灵在战争背景下的密码工作。",
     "source": "event",
     "time": "",
     "place": "Bletchley Park",
-    "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+    "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 1,
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
   },
   {
-    "id": "EVT008",
+    "id": "EVT013",
     "label": "EmploymentEvent",
     "type": "EventNode",
     "description": "记录图灵在机构或地点工作的经历。",
     "source": "event",
     "time": "",
     "place": "Bletchley Park",
-    "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作。",
+    "evidence": "战争期间，Alan Turing 在 Government Code and Cypher School 的安排下到 Bletchley Park 工作，并参与分析 Enigma。",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 1,
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
   },
   {
-    "id": "EVT009",
+    "id": "EVT014",
     "label": "WarWorkEvent",
     "type": "EventNode",
     "description": "记录图灵在战争背景下的密码工作。",
     "source": "event",
     "time": "",
-    "place": "",
-    "evidence": "Joan Clarke 也在这里参与密码分析，Bombe 被用来辅助破解 Enigma。",
+    "place": "Bletchley Park",
+    "evidence": "Joan Clarke 也在 Bletchley Park 参与密码分析，Bombe 被用来辅助破解 Enigma。",
     "text_id": "text_08_bletchley_team",
     "sentence_id": 2,
     "source_title": "Alan Turing | Bletchley Park",
     "source_url": "https://bletchleypark.org.uk/wp-content/uploads/record_attachments/1800.pdf",
     "collected_on": "2026-04-29",
-    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现。"
+    "source_note": "补充 GC&CS、Joan Clarke、Bombe 和 Enigma 的同句共现，让多主体战争场景更容易展示。"
   },
   {
-    "id": "EVT010",
+    "id": "EVT015",
     "label": "ResearchEvent",
     "type": "EventNode",
     "description": "记录图灵提出概念、设备或研究方向的句子。",
@@ -868,7 +970,7 @@
     "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
-    "id": "EVT011",
+    "id": "EVT016",
     "label": "EmploymentEvent",
     "type": "EventNode",
     "description": "记录图灵在机构或地点工作的经历。",
@@ -884,7 +986,7 @@
     "source_note": "补充 National Physical Laboratory 和 Automatic Computing Engine。"
   },
   {
-    "id": "EVT012",
+    "id": "EVT017",
     "label": "EmploymentEvent",
     "type": "EventNode",
     "description": "记录图灵在机构或地点工作的经历。",
@@ -900,7 +1002,7 @@
     "source_note": "补充 Max Newman、University of Manchester、Manchester Mark I 和图灵测试。"
   },
   {
-    "id": "EVT013",
+    "id": "EVT018",
     "label": "ResearchEvent",
     "type": "EventNode",
     "description": "记录图灵提出概念、设备或研究方向的句子。",
