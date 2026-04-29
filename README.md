@@ -52,6 +52,7 @@
 │  ├─ run_demo.py
 │  ├─ run_evaluation.py
 │  ├─ run_pipeline.py
+│  ├─ check_web_demo.py
 │  └─ run_visualization.py
 └─ tests/
    ├─ test_basic.py
@@ -119,6 +120,12 @@ python3 scripts/run_demo.py --port 8000
 python3 scripts/run_evaluation.py
 ```
 
+答辩前也可以跑一次网页演示自检，确认本地网页和关键数据都能访问：
+
+```bash
+python3 scripts/check_web_demo.py --port 8765
+```
+
 ## 3. 当前已经验证通过的结果
 
 我在本地重新跑过一次，当前这份仓库可以直接得到下面这些结果：
@@ -126,6 +133,7 @@ python3 scripts/run_evaluation.py
 - 单元测试：`python3 -m unittest discover -s tests -v`，`11` 个测试全部通过
 - 完整流程：`python3 main.py --mode pipeline`
 - 人工评测：`python3 scripts/run_evaluation.py`
+- 网页演示自检：`python3 scripts/check_web_demo.py --port 8765`
 - 当前统计结果：`12` 份原始文本、`32` 个句子、`91` 个 mention、`83` 个成功链接、`29` 条关系、`23` 个事件
 - 关键检查已经通过：
   - `PublicationEvent` 已经能抽到
