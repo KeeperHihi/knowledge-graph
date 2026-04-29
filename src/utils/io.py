@@ -1,7 +1,9 @@
 import csv
+import io
 import json
 from pathlib import Path
 from typing import Iterable, List, Sequence
+from uuid import uuid4
 
 from config import DEFAULT_ENCODING
 from src.schema.types import Entity
@@ -24,10 +26,20 @@ def read_json(path: Path):
         return json.load(file)
 
 
-def write_json(path: Path, data) -> None:
+def _atomic_write_text(path: Path, content: str) -> None:
     ensure_parent(path)
-    with path.open("w", encoding=DEFAULT_ENCODING) as file:
-        json.dump(data, file, ensure_ascii=False, indent=2)
+    tmp_path = path.with_name(f".{path.name}.{uuid4().hex}.tmp")
+    try:
+        tmp_path.write_text(content, encoding=DEFAULT_ENCODING)
+        tmp_path.replace(path)
+    finally:
+        if tmp_path.exists():
+            tmp_path.unlink()
+
+
+def write_json(path: Path, data) -> None:
+    content = json.dumps(data, ensure_ascii=False, indent=2)
+    _atomic_write_text(path, content)
 
 
 def read_jsonl(path: Path) -> List[dict]:
@@ -45,19 +57,17 @@ def read_jsonl(path: Path) -> List[dict]:
 
 
 def write_jsonl(path: Path, records: Iterable[dict]) -> None:
-    ensure_parent(path)
-    with path.open("w", encoding=DEFAULT_ENCODING) as file:
-        for record in records:
-            file.write(json.dumps(record, ensure_ascii=False) + "\n")
+    content = "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in records)
+    _atomic_write_text(path, content)
 
 
 def write_csv(path: Path, header: Sequence[str], rows: Iterable[Sequence[str]]) -> None:
-    ensure_parent(path)
-    with path.open("w", encoding=DEFAULT_ENCODING, newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
-        for row in rows:
-            writer.writerow(row)
+    output = io.StringIO(newline="")
+    writer = csv.writer(output)
+    writer.writerow(header)
+    for row in rows:
+        writer.writerow(row)
+    _atomic_write_text(path, output.getvalue())
 
 
 def load_entities(path: Path) -> List[Entity]:
