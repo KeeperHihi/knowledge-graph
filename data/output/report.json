@@ -1,49 +1,49 @@
 {
-  "raw_text_count": 12,
-  "sentence_count": 32,
-  "mention_count": 91,
-  "linked_count": 83,
-  "nil_count": 8,
-  "unique_linked_entity_count": 26,
-  "relation_count": 29,
-  "event_count": 23,
-  "source_count": 12,
+  "raw_text_count": 16,
+  "sentence_count": 47,
+  "mention_count": 134,
+  "linked_count": 124,
+  "nil_count": 10,
+  "unique_linked_entity_count": 28,
+  "relation_count": 44,
+  "event_count": 33,
+  "source_count": 16,
   "mention_type_counts": {
-    "Person": 28,
-    "Organization": 24,
-    "Time": 8,
-    "Work": 1,
-    "Concept": 5,
-    "Event": 1,
-    "Place": 13,
-    "Device": 11
+    "Person": 41,
+    "Organization": 32,
+    "Time": 10,
+    "Work": 2,
+    "Concept": 8,
+    "Event": 2,
+    "Place": 20,
+    "Device": 19
   },
   "entity_type_counts": {
-    "Person": 28,
-    "Organization": 25,
-    "Work": 1,
-    "Concept": 5,
-    "Event": 1,
-    "Place": 12,
-    "Device": 11
+    "Person": 41,
+    "Organization": 33,
+    "Work": 2,
+    "Concept": 8,
+    "Event": 2,
+    "Place": 19,
+    "Device": 19
   },
   "relation_type_counts": {
-    "studied_at": 6,
+    "studied_at": 7,
     "published": 1,
-    "proposed": 4,
-    "worked_at": 9,
-    "used": 3,
-    "participated_in": 1,
-    "influenced_by": 3,
-    "located_in": 2
+    "proposed": 5,
+    "worked_at": 15,
+    "used": 6,
+    "participated_in": 2,
+    "influenced_by": 4,
+    "located_in": 4
   },
   "event_type_counts": {
-    "EducationEvent": 5,
+    "EducationEvent": 6,
     "PublicationEvent": 1,
-    "ResearchEvent": 4,
-    "WarWorkEvent": 3,
-    "InfluenceEvent": 3,
-    "EmploymentEvent": 7
+    "ResearchEvent": 5,
+    "WarWorkEvent": 6,
+    "InfluenceEvent": 4,
+    "EmploymentEvent": 11
   },
   "text_statistics": [
     {
@@ -164,6 +164,46 @@
       "mention_count": 6,
       "linked_count": 6,
       "relation_count": 2,
+      "event_count": 0
+    },
+    {
+      "text_id": "text_13_device_links",
+      "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+      "source_url": "",
+      "sentence_count": 4,
+      "mention_count": 17,
+      "linked_count": 16,
+      "relation_count": 8,
+      "event_count": 4
+    },
+    {
+      "text_id": "text_14_manchester_device_links",
+      "source_title": "课堂补充 demo：Manchester Mark I 关系",
+      "source_url": "",
+      "sentence_count": 4,
+      "mention_count": 11,
+      "linked_count": 10,
+      "relation_count": 4,
+      "event_count": 3
+    },
+    {
+      "text_id": "text_15_princeton_extra",
+      "source_title": "Princeton University Official Site / course notes",
+      "source_url": "https://www.princeton.edu/",
+      "sentence_count": 3,
+      "mention_count": 8,
+      "linked_count": 8,
+      "relation_count": 3,
+      "event_count": 3
+    },
+    {
+      "text_id": "text_16_class_demo_extra",
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "sentence_count": 3,
+      "mention_count": 7,
+      "linked_count": 7,
+      "relation_count": 0,
       "event_count": 0
     }
   ]

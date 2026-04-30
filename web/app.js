@@ -35,7 +35,6 @@ const graphState = {
   nodes: [],
   edges: [],
   selectedNodeId: "",
-  selectedEdgeId: "",
   focusNodeId: "",
   focusNeighborIds: [],
   activePersonLabel: "",
@@ -322,11 +321,11 @@ function renderRelationExtractionCase(cases) {
       <div class="flow-row"><strong>3. 尾实体</strong><p>${item.tail_name} (${item.tail_type})</p></div>
       <div class="flow-row selected"><strong>4. 三元组</strong><p>${item.triple}</p></div>
     </div>
-    <button type="button" class="case-button" id="relation-case-button">在图里看这条边</button>
+    <button type="button" class="case-button" id="relation-case-button">在图里看头实体</button>
   `;
   document.getElementById("relation-case-button").addEventListener("click", () => {
     selectView("graph");
-    selectEdge(item.relation_id);
+    selectNode(item.head_id);
   });
 }
 
@@ -518,14 +517,13 @@ function draw() {
   drawBackground(size.width, size.height);
 
   for (const edge of graphState.edges) {
-    const selected = edge.id === graphState.selectedEdgeId;
     const relatedToSelectedNode =
       selectedNode && (edge.source === selectedNode || edge.target === selectedNode || edge.event_id === selectedNode);
     const inFocus = !focusActive || (focusSet.has(edge.source) && focusSet.has(edge.target));
 
-    if (selected || relatedToSelectedNode) {
+    if (relatedToSelectedNode) {
       ctx.strokeStyle = "rgba(217, 108, 58, 0.92)";
-      ctx.lineWidth = selected ? 2.8 : 2;
+      ctx.lineWidth = 2;
     } else if (!inFocus || selectedNode) {
       ctx.strokeStyle = "rgba(34, 46, 55, 0.08)";
       ctx.lineWidth = 1;
@@ -595,57 +593,15 @@ function findNodeAt(x, y) {
   return null;
 }
 
-function pointToSegmentDistance(px, py, ax, ay, bx, by) {
-  const abx = bx - ax;
-  const aby = by - ay;
-  const apx = px - ax;
-  const apy = py - ay;
-  const ab2 = abx * abx + aby * aby;
-  const t = ab2 === 0 ? 0 : clamp((apx * abx + apy * aby) / ab2, 0, 1);
-  const cx = ax + abx * t;
-  const cy = ay + aby * t;
-  return Math.sqrt((px - cx) ** 2 + (py - cy) ** 2);
-}
-
-function findEdgeAt(x, y) {
-  for (const edge of graphState.edges) {
-    const dist = pointToSegmentDistance(
-      x,
-      y,
-      edge.sourceNode.x,
-      edge.sourceNode.y,
-      edge.targetNode.x,
-      edge.targetNode.y
-    );
-    if (dist <= 6) {
-      return edge;
-    }
-  }
-  return null;
-}
-
 function selectNode(nodeId) {
   const node = getNodeById(nodeId);
   if (!node) {
     return;
   }
   graphState.selectedNodeId = nodeId;
-  graphState.selectedEdgeId = "";
   selectionHint.textContent = "已选节点";
   updateDetailForNode(nodeId);
   updateActiveEventCard(node.type === "EventNode" ? node.id : "");
-}
-
-function selectEdge(edgeId) {
-  const edge = graphState.edges.find((item) => item.id === edgeId);
-  if (!edge) {
-    return;
-  }
-  graphState.selectedNodeId = "";
-  graphState.selectedEdgeId = edgeId;
-  selectionHint.textContent = "已选关系";
-  updateDetailForEdge(edgeId);
-  updateActiveEventCard(edge.event_id || "");
 }
 
 function updateDetailForNode(nodeId) {
@@ -680,21 +636,6 @@ function updateDetailForNode(nodeId) {
     <p>直接连边：${relatedEdges.length} 条</p>
     <div class="case-list">${neighborItems.join("") || "<p>暂无相邻节点。</p>"}</div>
     ${evidenceItems ? `<div class="case-list">${evidenceItems}</div>` : ""}
-  `;
-}
-
-function updateDetailForEdge(edgeId) {
-  const edge = graphState.edges.find((item) => item.id === edgeId);
-  if (!edge) {
-    return;
-  }
-  detailBox.innerHTML = `
-    <div class="title">${edge.sourceNode.label} -> ${edge.targetNode.label}</div>
-    <span class="meta">${edge.label}</span>
-    <p>边类型：${edge.kind}</p>
-    <p>原文位置：${edge.text_id || "未记录"} / 句子 ${edge.sentence_id || "-"}</p>
-    <div class="evidence">${edge.evidence || "暂无证据句。"}</div>
-    ${edge.source_url ? `<a class="source-link" href="${edge.source_url}" target="_blank" rel="noreferrer">来源链接</a>` : ""}
   `;
 }
 
@@ -746,6 +687,13 @@ function releaseDrag() {
   canvas.classList.remove("dragging");
 }
 
+function clearSelection() {
+  graphState.selectedNodeId = "";
+  selectionHint.textContent = "未选择";
+  detailBox.innerHTML = "<p>先点击一个节点。</p>";
+  updateActiveEventCard("");
+}
+
 canvas.addEventListener("mouseup", releaseDrag);
 canvas.addEventListener("mouseleave", releaseDrag);
 
@@ -764,10 +712,7 @@ canvas.addEventListener("click", (event) => {
     }
     return;
   }
-  const edge = findEdgeAt(point.x, point.y);
-  if (edge) {
-    selectEdge(edge.id);
-  }
+  clearSelection();
 });
 
 window.addEventListener("resize", resizeCanvas);

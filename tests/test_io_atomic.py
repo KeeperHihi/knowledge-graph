@@ -22,6 +22,7 @@ class AtomicIoTestCase(unittest.TestCase):
 
             csv_path = base_dir / "output" / "demo.csv"
             write_csv(csv_path, ["head", "relation", "tail"], [["Alan Turing", "published", "论文"]])
+            self.assertNotIn("\r\n", csv_path.read_text(encoding="utf-8"))
             with csv_path.open("r", encoding="utf-8", newline="") as file:
                 rows = list(csv.reader(file))
             self.assertEqual(

@@ -325,6 +325,22 @@
     "description": "图灵 1936 年的代表性论文，常与图灵机一起出现。"
   },
   {
+    "entity_id": "E020",
+    "canonical_name": "Entscheidungsproblem",
+    "entity_type": "Concept",
+    "aliases": [
+      "判定问题"
+    ],
+    "keywords": [
+      "logic",
+      "decision",
+      "problem",
+      "逻辑",
+      "判定"
+    ],
+    "description": "可判定性研究中的重要问题。"
+  },
+  {
     "entity_id": "E021",
     "canonical_name": "Second World War",
     "entity_type": "Event",
@@ -411,6 +427,22 @@
       "曼彻斯特"
     ],
     "description": "早期存储程序计算机之一，与图灵在曼彻斯特时期相关。"
+  },
+  {
+    "entity_id": "E026",
+    "canonical_name": "The Imitation Game",
+    "entity_type": "Work",
+    "aliases": [
+      "模仿游戏"
+    ],
+    "keywords": [
+      "film",
+      "biography",
+      "Turing",
+      "电影",
+      "图灵"
+    ],
+    "description": "与图灵相关的流行文化作品。"
   },
   {
     "entity_id": "E027",

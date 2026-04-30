@@ -1,0 +1,3 @@
+Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。
+John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。
+Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。

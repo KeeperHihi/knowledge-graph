@@ -82,5 +82,33 @@
     "source_url": "https://www.manchester.ac.uk/",
     "collected_on": "2026-04-29",
     "note": "这一段是为了让 located_in 规则更容易展示，句子是根据公开机构信息整理的。"
+  },
+  {
+    "text_id": "text_13_device_links",
+    "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
+  },
+  {
+    "text_id": "text_14_manchester_device_links",
+    "source_title": "课堂补充 demo：Manchester Mark I 关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "note": "为了让 Manchester Mark I 能通过规则抽取连到图灵和曼彻斯特大学，我编写了几句 demo 文本；这个 source_title 不是实际存在的出处。"
+  },
+  {
+    "text_id": "text_15_princeton_extra",
+    "source_title": "Princeton University Official Site / course notes",
+    "source_url": "https://www.princeton.edu/",
+    "collected_on": "2026-04-30",
+    "note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+  },
+  {
+    "text_id": "text_16_class_demo_extra",
+    "source_title": "课堂补充 demo：消歧与流行文化例句",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
   }
 ]

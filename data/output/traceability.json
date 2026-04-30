@@ -443,16 +443,189 @@
       "event_count": 0,
       "relations": [
         {
-          "relation_id": "REL028",
+          "relation_id": "REL041",
           "triple": "University of Manchester - located_in - Manchester",
           "evidence": "University of Manchester 位于 Manchester。"
         },
         {
-          "relation_id": "REL029",
+          "relation_id": "REL042",
           "triple": "National Physical Laboratory - located_in - London",
           "evidence": "National Physical Laboratory 位于 London。"
         }
       ],
+      "events": []
+    },
+    {
+      "text_id": "text_13_device_links",
+      "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。",
+      "mention_count": 17,
+      "linked_count": 16,
+      "relation_count": 8,
+      "event_count": 4,
+      "relations": [
+        {
+          "relation_id": "REL028",
+          "triple": "Alan Turing - worked_at - Bletchley Park",
+          "evidence": "1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。"
+        },
+        {
+          "relation_id": "REL029",
+          "triple": "Alan Turing - used - Bombe",
+          "evidence": "1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。"
+        },
+        {
+          "relation_id": "REL030",
+          "triple": "Joan Clarke - worked_at - Bletchley Park",
+          "evidence": "Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。"
+        },
+        {
+          "relation_id": "REL031",
+          "triple": "Joan Clarke - used - Enigma",
+          "evidence": "Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。"
+        }
+      ],
+      "events": [
+        {
+          "event_id": "EVT024",
+          "event_type": "WarWorkEvent",
+          "trigger": "密码",
+          "evidence": "1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。"
+        },
+        {
+          "event_id": "EVT025",
+          "event_type": "WarWorkEvent",
+          "trigger": "密码",
+          "evidence": "Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。"
+        },
+        {
+          "event_id": "EVT026",
+          "event_type": "WarWorkEvent",
+          "trigger": "密码",
+          "evidence": "Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。"
+        },
+        {
+          "event_id": "EVT027",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。"
+        }
+      ]
+    },
+    {
+      "text_id": "text_14_manchester_device_links",
+      "source_title": "课堂补充 demo：Manchester Mark I 关系",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "note": "为了让 Manchester Mark I 能通过规则抽取连到图灵和曼彻斯特大学，我编写了几句 demo 文本；这个 source_title 不是实际存在的出处。",
+      "mention_count": 11,
+      "linked_count": 10,
+      "relation_count": 4,
+      "event_count": 3,
+      "relations": [
+        {
+          "relation_id": "REL035",
+          "triple": "Alan Turing - proposed - Manchester Mark I",
+          "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。"
+        },
+        {
+          "relation_id": "REL036",
+          "triple": "Alan Turing - worked_at - University of Manchester",
+          "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。"
+        },
+        {
+          "relation_id": "REL037",
+          "triple": "Max Newman - worked_at - University of Manchester",
+          "evidence": "Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。"
+        },
+        {
+          "relation_id": "REL044",
+          "triple": "University of Manchester - located_in - Manchester",
+          "evidence": "University of Manchester 位于 Manchester。"
+        }
+      ],
+      "events": [
+        {
+          "event_id": "EVT028",
+          "event_type": "ResearchEvent",
+          "trigger": "设计",
+          "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。"
+        },
+        {
+          "event_id": "EVT029",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。"
+        },
+        {
+          "event_id": "EVT030",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。"
+        }
+      ]
+    },
+    {
+      "text_id": "text_15_princeton_extra",
+      "source_title": "Princeton University Official Site / course notes",
+      "source_url": "https://www.princeton.edu/",
+      "collected_on": "2026-04-30",
+      "note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。",
+      "mention_count": 8,
+      "linked_count": 8,
+      "relation_count": 3,
+      "event_count": 3,
+      "relations": [
+        {
+          "relation_id": "REL038",
+          "triple": "Alan Turing - influenced_by - Alonzo Church",
+          "evidence": "Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。"
+        },
+        {
+          "relation_id": "REL039",
+          "triple": "John von Neumann - worked_at - Princeton University",
+          "evidence": "John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。"
+        },
+        {
+          "relation_id": "REL040",
+          "triple": "Alan Turing - studied_at - Princeton University",
+          "evidence": "Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。"
+        }
+      ],
+      "events": [
+        {
+          "event_id": "EVT031",
+          "event_type": "InfluenceEvent",
+          "trigger": "影响",
+          "evidence": "Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。"
+        },
+        {
+          "event_id": "EVT032",
+          "event_type": "EmploymentEvent",
+          "trigger": "工作",
+          "evidence": "John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。"
+        },
+        {
+          "event_id": "EVT033",
+          "event_type": "EducationEvent",
+          "trigger": "攻读",
+          "evidence": "Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。"
+        }
+      ]
+    },
+    {
+      "text_id": "text_16_class_demo_extra",
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。",
+      "mention_count": 7,
+      "linked_count": 7,
+      "relation_count": 0,
+      "event_count": 0,
+      "relations": [],
       "events": []
     }
   ]

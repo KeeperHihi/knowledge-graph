@@ -26,5 +26,20 @@ REL024,text_10_manchester_test,1,E001,Alan Turing,Person,worked_at,E009,Universi
 REL025,text_10_manchester_test,2,E003,Max Newman,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT021,Max Newman 也在 University of Manchester 工作，并支持早期计算机研究。
 REL026,text_10_manchester_test,3,E001,Alan Turing,Person,proposed,E018,Turing Test,Concept,提出,event_rule,EVT022,1950 年，图灵提出图灵测试，继续讨论机器智能问题。
 REL027,text_11_late_life,1,E001,Alan Turing,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT023,图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。
-REL028,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
-REL029,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。
+REL028,text_13_device_links,1,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,密码,event_rule,EVT024,1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。
+REL029,text_13_device_links,1,E001,Alan Turing,Person,used,E016,Bombe,Device,密码,event_rule,EVT024,1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。
+REL030,text_13_device_links,2,E005,Joan Clarke,Person,worked_at,E010,Bletchley Park,Place,密码,event_rule,EVT025,Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。
+REL031,text_13_device_links,2,E005,Joan Clarke,Person,used,E015,Enigma,Device,密码,event_rule,EVT025,Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。
+REL032,text_13_device_links,4,E001,Alan Turing,Person,worked_at,E010,Bletchley Park,Place,密码,event_rule,EVT026,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+REL033,text_13_device_links,4,E001,Alan Turing,Person,used,E016,Bombe,Device,密码,event_rule,EVT026,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+REL034,text_13_device_links,4,E001,Alan Turing,Person,participated_in,E021,Second World War,Event,密码,event_rule,EVT026,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+REL035,text_14_manchester_device_links,1,E001,Alan Turing,Person,proposed,E025,Manchester Mark I,Device,设计,event_rule,EVT028,1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。
+REL036,text_14_manchester_device_links,1,E001,Alan Turing,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT029,1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。
+REL037,text_14_manchester_device_links,2,E003,Max Newman,Person,worked_at,E009,University of Manchester,Organization,工作,event_rule,EVT030,Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。
+REL038,text_15_princeton_extra,1,E001,Alan Turing,Person,influenced_by,E002,Alonzo Church,Person,影响,event_rule,EVT031,Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。
+REL039,text_15_princeton_extra,2,E004,John von Neumann,Person,worked_at,E007,Princeton University,Organization,工作,event_rule,EVT032,John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。
+REL040,text_15_princeton_extra,3,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,攻读,event_rule,EVT033,Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。
+REL041,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
+REL042,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。
+REL043,text_13_device_links,3,E023,Government Code and Cypher School,Organization,located_in,E010,Bletchley Park,Place,位于,sentence_rule,,Government Code and Cypher School 位于 Bletchley Park。
+REL044,text_14_manchester_device_links,3,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。

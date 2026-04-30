@@ -1,0 +1,4 @@
+1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。
+Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。
+University of Manchester 位于 Manchester。
+Manchester Mark I 与 Turing Test 不同，一个是早期计算机设备，一个是机器智能问题。

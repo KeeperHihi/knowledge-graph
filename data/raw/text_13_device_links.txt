@@ -1,0 +1,4 @@
+1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。
+Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。
+Government Code and Cypher School 位于 Bletchley Park。
+Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。

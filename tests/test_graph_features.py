@@ -249,6 +249,63 @@ class GraphFeatureTestCase(unittest.TestCase):
             )
         )
 
+    def test_device_sentences_can_link_bombe_and_mark_i(self) -> None:
+        bombe_sentence = "1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。"
+        bombe_mentions = [
+            make_linked("1940 年", "T1940", "1940 年", "Time", bombe_sentence, 0, 6, text_id="device_case", sentence_id=1),
+            make_linked("Alan Turing", "E001", "Alan Turing", "Person", bombe_sentence, 10, 22, text_id="device_case", sentence_id=1),
+            make_linked("Bletchley Park", "E010", "Bletchley Park", "Place", bombe_sentence, 25, 39, text_id="device_case", sentence_id=1),
+            make_linked("Bombe", "E016", "Bombe", "Device", bombe_sentence, 43, 48, text_id="device_case", sentence_id=1),
+            make_linked("Enigma", "E015", "Enigma", "Device", bombe_sentence, 54, 60, text_id="device_case", sentence_id=1),
+        ]
+        mark_i_sentence = "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。"
+        mark_i_mentions = [
+            make_linked("1948 年", "T1948", "1948 年", "Time", mark_i_sentence, 0, 6, text_id="device_case", sentence_id=2),
+            make_linked("Alan Turing", "E001", "Alan Turing", "Person", mark_i_sentence, 8, 20, text_id="device_case", sentence_id=2),
+            make_linked(
+                "University of Manchester",
+                "E009",
+                "University of Manchester",
+                "Organization",
+                mark_i_sentence,
+                23,
+                47,
+                text_id="device_case",
+                sentence_id=2,
+            ),
+            make_linked(
+                "Manchester Mark I",
+                "E025",
+                "Manchester Mark I",
+                "Device",
+                mark_i_sentence,
+                54,
+                71,
+                text_id="device_case",
+                sentence_id=2,
+            ),
+        ]
+
+        events = self.event_extractor.extract(bombe_mentions + mark_i_mentions)
+        relations = self.relation_extractor.extract(bombe_mentions + mark_i_mentions, events)
+
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "used"
+                and relation.tail_name == "Bombe"
+                for relation in relations
+            )
+        )
+        self.assertTrue(
+            any(
+                relation.head_name == "Alan Turing"
+                and relation.relation == "proposed"
+                and relation.tail_name == "Manchester Mark I"
+                for relation in relations
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

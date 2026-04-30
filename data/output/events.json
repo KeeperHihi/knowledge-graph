@@ -813,5 +813,361 @@
     "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing",
     "collected_on": "2026-04-29",
     "source_note": "补充 Wilmslow 和图灵晚年经历，并让晚年阶段至少产出可展示的机构关系。"
+  },
+  {
+    "event_id": "EVT024",
+    "text_id": "text_13_device_links",
+    "sentence_id": 1,
+    "event_type": "WarWorkEvent",
+    "trigger": "密码",
+    "evidence": "1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。",
+    "participants": [
+      {
+        "role": "researcher",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "location",
+        "entity_id": "E010",
+        "name": "Bletchley Park",
+        "entity_type": "Place"
+      },
+      {
+        "role": "device",
+        "entity_id": "E016",
+        "name": "Bombe",
+        "entity_type": "Device"
+      }
+    ],
+    "time": "",
+    "place": "Bletchley Park",
+    "description": "记录图灵在战争背景下的密码工作。",
+    "source_relation_ids": [
+      "REL028",
+      "REL029"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
+  },
+  {
+    "event_id": "EVT025",
+    "text_id": "text_13_device_links",
+    "sentence_id": 2,
+    "event_type": "WarWorkEvent",
+    "trigger": "密码",
+    "evidence": "Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。",
+    "participants": [
+      {
+        "role": "researcher",
+        "entity_id": "E005",
+        "name": "Joan Clarke",
+        "entity_type": "Person"
+      },
+      {
+        "role": "location",
+        "entity_id": "E010",
+        "name": "Bletchley Park",
+        "entity_type": "Place"
+      },
+      {
+        "role": "device",
+        "entity_id": "E015",
+        "name": "Enigma",
+        "entity_type": "Device"
+      }
+    ],
+    "time": "",
+    "place": "Bletchley Park",
+    "description": "记录图灵在战争背景下的密码工作。",
+    "source_relation_ids": [
+      "REL030",
+      "REL031"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
+  },
+  {
+    "event_id": "EVT026",
+    "text_id": "text_13_device_links",
+    "sentence_id": 4,
+    "event_type": "WarWorkEvent",
+    "trigger": "密码",
+    "evidence": "Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。",
+    "participants": [
+      {
+        "role": "researcher",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "location",
+        "entity_id": "E010",
+        "name": "Bletchley Park",
+        "entity_type": "Place"
+      },
+      {
+        "role": "device",
+        "entity_id": "E016",
+        "name": "Bombe",
+        "entity_type": "Device"
+      },
+      {
+        "role": "background_event",
+        "entity_id": "E021",
+        "name": "Second World War",
+        "entity_type": "Event"
+      }
+    ],
+    "time": "",
+    "place": "Bletchley Park",
+    "description": "记录图灵在战争背景下的密码工作。",
+    "source_relation_ids": [
+      "REL032",
+      "REL033",
+      "REL034"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
+  },
+  {
+    "event_id": "EVT027",
+    "text_id": "text_13_device_links",
+    "sentence_id": 4,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "location",
+        "entity_id": "E010",
+        "name": "Bletchley Park",
+        "entity_type": "Place"
+      }
+    ],
+    "time": "",
+    "place": "Bletchley Park",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Bletchley Park 设备关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
+  },
+  {
+    "event_id": "EVT028",
+    "text_id": "text_14_manchester_device_links",
+    "sentence_id": 1,
+    "event_type": "ResearchEvent",
+    "trigger": "设计",
+    "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。",
+    "participants": [
+      {
+        "role": "researcher",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "topic",
+        "entity_id": "E025",
+        "name": "Manchester Mark I",
+        "entity_type": "Device"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵提出概念、设备或研究方向的句子。",
+    "source_relation_ids": [
+      "REL035"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Manchester Mark I 关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了让 Manchester Mark I 能通过规则抽取连到图灵和曼彻斯特大学，我编写了几句 demo 文本；这个 source_title 不是实际存在的出处。"
+  },
+  {
+    "event_id": "EVT029",
+    "text_id": "text_14_manchester_device_links",
+    "sentence_id": 1,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E009",
+        "name": "University of Manchester",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL036"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Manchester Mark I 关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了让 Manchester Mark I 能通过规则抽取连到图灵和曼彻斯特大学，我编写了几句 demo 文本；这个 source_title 不是实际存在的出处。"
+  },
+  {
+    "event_id": "EVT030",
+    "text_id": "text_14_manchester_device_links",
+    "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E003",
+        "name": "Max Newman",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E009",
+        "name": "University of Manchester",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL037"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：Manchester Mark I 关系",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "为了让 Manchester Mark I 能通过规则抽取连到图灵和曼彻斯特大学，我编写了几句 demo 文本；这个 source_title 不是实际存在的出处。"
+  },
+  {
+    "event_id": "EVT031",
+    "text_id": "text_15_princeton_extra",
+    "sentence_id": 1,
+    "event_type": "InfluenceEvent",
+    "trigger": "影响",
+    "evidence": "Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。",
+    "participants": [
+      {
+        "role": "influencer",
+        "entity_id": "E002",
+        "name": "Alonzo Church",
+        "entity_type": "Person"
+      },
+      {
+        "role": "influenced",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录人物之间的思想影响。",
+    "source_relation_ids": [
+      "REL038"
+    ],
+    "metadata": null,
+    "source_title": "Princeton University Official Site / course notes",
+    "source_url": "https://www.princeton.edu/",
+    "collected_on": "2026-04-30",
+    "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+  },
+  {
+    "event_id": "EVT032",
+    "text_id": "text_15_princeton_extra",
+    "sentence_id": 2,
+    "event_type": "EmploymentEvent",
+    "trigger": "工作",
+    "evidence": "John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。",
+    "participants": [
+      {
+        "role": "staff",
+        "entity_id": "E004",
+        "name": "John von Neumann",
+        "entity_type": "Person"
+      },
+      {
+        "role": "organization",
+        "entity_id": "E007",
+        "name": "Princeton University",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录图灵在机构或地点工作的经历。",
+    "source_relation_ids": [
+      "REL039"
+    ],
+    "metadata": null,
+    "source_title": "Princeton University Official Site / course notes",
+    "source_url": "https://www.princeton.edu/",
+    "collected_on": "2026-04-30",
+    "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+  },
+  {
+    "event_id": "EVT033",
+    "text_id": "text_15_princeton_extra",
+    "sentence_id": 3,
+    "event_type": "EducationEvent",
+    "trigger": "攻读",
+    "evidence": "Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。",
+    "participants": [
+      {
+        "role": "student",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "institution",
+        "entity_id": "E007",
+        "name": "Princeton University",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录人物的求学经历。",
+    "source_relation_ids": [
+      "REL040"
+    ],
+    "metadata": null,
+    "source_title": "Princeton University Official Site / course notes",
+    "source_url": "https://www.princeton.edu/",
+    "collected_on": "2026-04-30",
+    "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
   }
 ]

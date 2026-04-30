@@ -26,5 +26,20 @@ Alan Turing,worked_at,University of Manchester,1948 年后，图灵受 Max Newma
 Max Newman,worked_at,University of Manchester,Max Newman 也在 University of Manchester 工作，并支持早期计算机研究。
 Alan Turing,proposed,Turing Test,1950 年，图灵提出图灵测试，继续讨论机器智能问题。
 Alan Turing,worked_at,University of Manchester,图灵晚年生活在 Wilmslow，但仍在 University of Manchester 工作，并继续研究形态发生等问题。
+Alan Turing,worked_at,Bletchley Park,1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。
+Alan Turing,used,Bombe,1940 年前后，Alan Turing 在 Bletchley Park 使用 Bombe 辅助破解 Enigma 密码。
+Joan Clarke,worked_at,Bletchley Park,Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。
+Joan Clarke,used,Enigma,Joan Clarke 在 Bletchley Park 参与 Enigma 密码分析，并和 Alan Turing 一起检查 Bombe 的结果。
+Alan Turing,worked_at,Bletchley Park,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+Alan Turing,used,Bombe,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+Alan Turing,participated_in,Second World War,Second World War 期间，Bletchley Park 的密码工作把 Alan Turing、Joan Clarke 和 Bombe 联系在一起。
+Alan Turing,proposed,Manchester Mark I,1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。
+Alan Turing,worked_at,University of Manchester,1948 年后，Alan Turing 在 University of Manchester 工作，并设计 Manchester Mark I 的程序检查方法。
+Max Newman,worked_at,University of Manchester,Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。
+Alan Turing,influenced_by,Alonzo Church,Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。
+John von Neumann,worked_at,Princeton University,John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。
+Alan Turing,studied_at,Princeton University,Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。
 University of Manchester,located_in,Manchester,University of Manchester 位于 Manchester。
 National Physical Laboratory,located_in,London,National Physical Laboratory 位于 London。
+Government Code and Cypher School,located_in,Bletchley Park,Government Code and Cypher School 位于 Bletchley Park。
+University of Manchester,located_in,Manchester,University of Manchester 位于 Manchester。

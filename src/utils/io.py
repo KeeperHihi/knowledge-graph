@@ -63,7 +63,7 @@ def write_jsonl(path: Path, records: Iterable[dict]) -> None:
 
 def write_csv(path: Path, header: Sequence[str], rows: Iterable[Sequence[str]]) -> None:
     output = io.StringIO(newline="")
-    writer = csv.writer(output)
+    writer = csv.writer(output, lineterminator="\n")
     writer.writerow(header)
     for row in rows:
         writer.writerow(row)
