@@ -22,7 +22,8 @@ def main() -> None:
 
     handler = SimpleHTTPRequestHandler
     with TCPServer(("127.0.0.1", args.port), handler) as httpd:
-        print(f"可视化页面: http://127.0.0.1:{args.port}/web/index.html")
+        print(f"流程演示页面: http://127.0.0.1:{args.port}/web/index.html")
+        print(f"图谱总图页面: http://127.0.0.1:{args.port}/web/kg-atlas.html")
         print("按 Ctrl+C 停止服务。")
         try:
             httpd.serve_forever()

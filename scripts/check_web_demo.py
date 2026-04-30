@@ -57,8 +57,15 @@ def validate_index(html: str) -> None:
     tab_names = ["实体抽取", "实体消歧", "事件抽取", "关系抽取", "知识图谱"]
     missing = [name for name in tab_names if name not in html]
     require(not missing, f"网页首页缺少页签文字: {', '.join(missing)}")
+    require("kg-atlas.html" in html, "网页首页缺少总图页面入口")
     require("节点 / 边" not in html, "网页仍保留旧的节点/边选择提示")
     require("先点击一个节点或一条关系" not in html, "网页仍提示可以点击关系")
+
+
+def validate_atlas(html: str) -> None:
+    required = ["Turing KG Atlas", "知识图谱总图", "data/output/graph.json", "typeChips", "relationChips"]
+    missing = [keyword for keyword in required if keyword not in html]
+    require(not missing, f"图谱总图页面缺少关键内容: {', '.join(missing)}")
 
 
 def validate_graph(graph: dict) -> tuple[int, int]:
@@ -160,6 +167,10 @@ def run_checks(port: int) -> None:
         html = fetch_text(base_url, "web/index.html")
         validate_index(html)
         print("[OK] 网页首页可以访问，五个页签都存在")
+
+        atlas_html = fetch_text(base_url, "web/kg-atlas.html")
+        validate_atlas(atlas_html)
+        print("[OK] 图谱总图页面可以访问")
 
         app_js = fetch_text(base_url, "web/app.js")
         validate_app_behavior(app_js)

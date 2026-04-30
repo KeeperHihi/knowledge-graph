@@ -44,14 +44,15 @@ def print_demo_notes(result: dict, evaluation: dict, port: int) -> None:
     print("1. 先展示 data/raw 和 source_manifest，说明数据不是直接手写成图谱。")
     print("2. 再展示 mentions.jsonl 和 linked_entities.jsonl，说明抽取与消歧的中间结果。")
     print("3. 再展示 report.json、traceability.json 和 evaluation_summary.json，说明统计摘要、来源回溯和人工检查结果。")
-    print(f"4. 最后打开 http://127.0.0.1:{port}/web/index.html 做网页演示。")
+    print(f"4. 最后打开 http://127.0.0.1:{port}/web/index.html 做流程演示。")
     print("5. 网页按五个页签从左到右讲：")
     print("   - 实体抽取：看 raw 句子里 mention 的高亮。")
     print("   - 实体消歧：看 Princeton/Manchester 候选实体打分。")
     print("   - 事件抽取：看触发词、参与实体和事件记录。")
     print("   - 关系抽取：看事件或规则怎样生成三元组。")
     print("   - 知识图谱：点击节点看连边，拖动节点，切人物视角。")
-    print(f"6. 答辩前可运行 python3 scripts/check_web_demo.py --port {port + 1} 做网页材料自检。")
+    print(f"6. 需要总图时打开 http://127.0.0.1:{port}/web/kg-atlas.html。")
+    print(f"7. 答辩前可运行 python3 scripts/check_web_demo.py --port {port + 1} 做网页材料自检。")
     print("\n配套文档")
     print("- docs/student_method.md")
     print("- docs/demo_walkthrough.md")
@@ -69,7 +70,8 @@ def main() -> None:
     os.chdir(PROJECT_ROOT)
     handler = SimpleHTTPRequestHandler
     with TCPServer(("127.0.0.1", args.port), handler) as httpd:
-        print(f"\n演示网页: http://127.0.0.1:{args.port}/web/index.html")
+        print(f"\n流程演示网页: http://127.0.0.1:{args.port}/web/index.html")
+        print(f"图谱总图网页: http://127.0.0.1:{args.port}/web/kg-atlas.html")
         print("按 Ctrl+C 停止服务。")
         try:
             httpd.serve_forever()

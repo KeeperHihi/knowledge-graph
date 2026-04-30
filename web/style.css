@@ -54,6 +54,34 @@ button {
   box-shadow: var(--shadow);
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.atlas-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 31px;
+  padding: 6px 10px;
+  border: 1px solid rgba(217, 108, 58, 0.26);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.atlas-link:hover {
+  border-color: rgba(217, 108, 58, 0.45);
+  background: #fff7ef;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   color: var(--muted);

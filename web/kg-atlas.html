@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>图灵知识图谱总图</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: oklch(0.2 0.03 220);
+        --muted: oklch(0.47 0.018 220);
+        --paper: oklch(0.975 0.01 88);
+        --panel: oklch(0.995 0.005 88);
+        --line: oklch(0.82 0.018 230);
+        --blue: oklch(0.5 0.14 252);
+        --cyan: oklch(0.64 0.12 205);
+        --gold: oklch(0.72 0.14 83);
+        --red: oklch(0.58 0.18 31);
+        --green: oklch(0.58 0.12 155);
+        --violet: oklch(0.54 0.13 295);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, oklch(0.99 0.006 88), oklch(0.94 0.012 230)),
+          var(--paper);
+        color: var(--ink);
+        font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      .node-title {
+        font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      }
+
+      h1 {
+        font-size: 30px;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: 292px minmax(0, 1fr) 326px;
+        gap: 12px;
+        height: 100vh;
+        padding: 14px;
+      }
+
+      .panel,
+      .map-stage {
+        min-height: 0;
+        border: 1px solid color-mix(in oklch, var(--line) 78%, white);
+        background: color-mix(in oklch, white 88%, var(--panel));
+      }
+
+      .panel {
+        display: grid;
+        align-content: start;
+        gap: 14px;
+        overflow: auto;
+        padding: 14px;
+      }
+
+      .map-stage {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand {
+        display: grid;
+        gap: 7px;
+      }
+
+      .kicker {
+        color: color-mix(in oklch, var(--blue) 68%, black);
+        font-size: 11px;
+        font-weight: 780;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .home-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        min-height: 30px;
+        border: 1px solid color-mix(in oklch, var(--line) 82%, black);
+        padding: 5px 9px;
+        background: white;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 680;
+        text-decoration: none;
+      }
+
+      .home-link:hover {
+        border-color: color-mix(in oklch, var(--blue) 56%, black);
+        color: color-mix(in oklch, var(--blue) 72%, black);
+      }
+
+      .search {
+        display: grid;
+        gap: 8px;
+      }
+
+      .search input {
+        width: 100%;
+        min-height: 42px;
+        border: 1px solid color-mix(in oklch, var(--line) 82%, black);
+        border-radius: 0;
+        padding: 0 11px;
+        background: white;
+        color: var(--ink);
+        outline: none;
+      }
+
+      .search input:focus-visible {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 2px color-mix(in oklch, var(--blue) 18%, transparent);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .stat {
+        border: 1px solid color-mix(in oklch, var(--line) 74%, white);
+        padding: 10px;
+        background: oklch(0.99 0.006 88);
+      }
+
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 5px;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 8px;
+      }
+
+      .chip,
+      .tool-button {
+        min-height: 30px;
+        border: 1px solid color-mix(in oklch, var(--line) 82%, black);
+        border-radius: 0;
+        background: white;
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .chip {
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+
+      .chip[aria-pressed="true"] {
+        border-color: color-mix(in oklch, var(--blue) 56%, black);
+        background: color-mix(in oklch, var(--blue) 10%, white);
+      }
+
+      .tools {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .tool-button {
+        padding: 7px 9px;
+        font-size: 13px;
+        font-weight: 680;
+      }
+
+      .tool-button.primary {
+        border-color: oklch(0.18 0.035 212);
+        background: oklch(0.18 0.035 212);
+        color: white;
+      }
+
+      .tool-button[aria-pressed="true"] {
+        border-color: color-mix(in oklch, var(--blue) 56%, black);
+        background: color-mix(in oklch, var(--blue) 10%, white);
+      }
+
+      .legend {
+        display: grid;
+        gap: 8px;
+      }
+
+      .legend-row {
+        display: grid;
+        grid-template-columns: 18px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .swatch {
+        width: 18px;
+        height: 3px;
+        background: var(--line);
+      }
+
+      .map-toolbar {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid color-mix(in oklch, var(--line) 78%, white);
+        padding: 8px 10px;
+        background: oklch(1 0 0 / 0.9);
+        backdrop-filter: blur(8px);
+      }
+
+      .readout {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: grab;
+      }
+
+      canvas.is-dragging {
+        cursor: grabbing;
+      }
+
+      .detail {
+        display: grid;
+        gap: 12px;
+      }
+
+      .node-title {
+        font-size: 24px;
+        line-height: 1.15;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .tag {
+        border: 1px solid color-mix(in oklch, var(--line) 70%, white);
+        padding: 5px 7px;
+        background: color-mix(in oklch, white 84%, oklch(0.9 0.026 252));
+        color: var(--ink);
+        font-size: 12px;
+      }
+
+      .kv {
+        display: grid;
+        gap: 6px;
+      }
+
+      .kv div {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, white);
+        padding: 7px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .kv strong {
+        color: var(--ink);
+        text-align: right;
+      }
+
+      .empty {
+        border: 1px dashed color-mix(in oklch, var(--line) 78%, black);
+        padding: 16px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .source-list,
+      .edge-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .source-card,
+      .edge-card {
+        border: 1px solid color-mix(in oklch, var(--line) 70%, white);
+        padding: 10px;
+        background: oklch(0.99 0.006 88);
+      }
+
+      .source-card strong,
+      .edge-card strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+
+      .source-card p,
+      .edge-card p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .source-card a {
+        color: color-mix(in oklch, var(--blue) 72%, black);
+        text-decoration: none;
+      }
+
+      .source-card a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 1180px) {
+        .shell {
+          grid-template-columns: 252px minmax(0, 1fr);
+        }
+
+        .panel.detail-panel {
+          display: none;
+        }
+      }
+
+      @media (max-width: 760px) {
+        body {
+          overflow: auto;
+        }
+
+        .shell {
+          grid-template-columns: 1fr;
+          height: auto;
+          min-height: 100vh;
+        }
+
+        .map-stage {
+          min-height: 620px;
+        }
+
+        .panel.detail-panel {
+          display: grid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="panel">
+        <div class="brand">
+          <p class="kicker">Turing KG Atlas</p>
+          <h1>知识图谱总图</h1>
+          <a class="home-link" href="./index.html">返回演示页</a>
+        </div>
+
+        <div class="stats" id="stats"></div>
+
+        <label class="search">
+          <span class="kicker">Search</span>
+          <input id="searchInput" type="search" placeholder="搜索节点 / 类型 / 证据" autocomplete="off" />
+        </label>
+
+        <section>
+          <p class="kicker">Types</p>
+          <div class="chips" id="typeChips"></div>
+        </section>
+
+        <section>
+          <p class="kicker">Relations</p>
+          <div class="chips" id="relationChips"></div>
+        </section>
+
+        <section>
+          <p class="kicker">Tools</p>
+          <div class="tools">
+            <button class="tool-button primary" id="fitButton" type="button">适配全图</button>
+            <button class="tool-button" id="clearButton" type="button">清除选择</button>
+            <button class="tool-button" id="labelsButton" type="button" aria-pressed="false">显示标签</button>
+            <button class="tool-button" id="eventButton" type="button" aria-pressed="true">显示事件</button>
+          </div>
+        </section>
+
+        <section class="legend" id="legend"></section>
+      </aside>
+
+      <section class="map-stage">
+        <div class="map-toolbar">
+          <span class="readout" id="readout">Loading graph...</span>
+        </div>
+        <canvas id="canvas" aria-label="Turing knowledge graph atlas"></canvas>
+      </section>
+
+      <aside class="panel detail-panel">
+        <div class="detail" id="detail">
+          <p class="kicker">Inspector</p>
+          <div class="empty">选择一个节点后显示一阶邻居、证据和来源。</div>
+        </div>
+      </aside>
+    </main>
+
+    <script>
+      const TYPE_ORDER = ["Person", "Organization", "Place", "Device", "Concept", "Work", "Event", "EventNode", "unknown"];
+      const TYPE_LABELS = {
+        Person: "人物",
+        Organization: "机构",
+        Place: "地点",
+        Device: "设备",
+        Concept: "概念",
+        Work: "作品",
+        Event: "历史事件",
+        EventNode: "抽取事件",
+        unknown: "未分类",
+      };
+      const TYPE_COLORS = {
+        Person: "oklch(0.78 0.08 31)",
+        Organization: "oklch(0.62 0.12 155)",
+        Place: "oklch(0.63 0.12 205)",
+        Device: "oklch(0.56 0.14 295)",
+        Concept: "oklch(0.78 0.11 84)",
+        Work: "oklch(0.62 0.12 340)",
+        Event: "oklch(0.5 0.08 35)",
+        EventNode: "oklch(0.32 0.04 220)",
+        unknown: "oklch(0.7 0.02 220)",
+      };
+      const RELATION_COLORS = {
+        event_participant: "oklch(0.5 0.14 252)",
+        relation: "oklch(0.58 0.12 155)",
+        studied_at: "oklch(0.64 0.12 205)",
+        worked_at: "oklch(0.58 0.13 205)",
+        published: "oklch(0.7 0.12 83)",
+        proposed: "oklch(0.72 0.13 84)",
+        used: "oklch(0.56 0.14 295)",
+        influenced_by: "oklch(0.58 0.18 31)",
+        participated_in: "oklch(0.55 0.13 252)",
+        located_in: "oklch(0.57 0.12 155)",
+        unknown: "oklch(0.55 0.03 220)",
+      };
+      const RELATION_LABELS = {
+        event_participant: "事件参与",
+        relation: "抽取关系",
+      };
+
+      const canvas = document.querySelector("#canvas");
+      const ctx = canvas.getContext("2d");
+      const state = {
+        graph: null,
+        hovered: null,
+        selected: null,
+        search: "",
+        showLabels: false,
+        showEvents: true,
+        activeTypes: new Set(),
+        activeRelations: new Set(),
+        transform: { x: 0, y: 0, k: 1 },
+        dragging: false,
+        lastPoint: null,
+        pointerStart: null,
+        dragMoved: false,
+      };
+
+      function valueOf(object, keys, fallback = "") {
+        for (const key of keys) {
+          const value = object?.[key];
+          if (value !== undefined && value !== null && value !== "") {
+            return value;
+          }
+        }
+        return fallback;
+      }
+
+      function endpoint(value) {
+        return typeof value === "object" && value ? value.id || value.key || value.node_id : value;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "\"": "&quot;",
+          "'": "&#039;",
+        })[char]);
+      }
+
+      function relationKey(edge) {
+        const label = String(valueOf(edge, ["label", "relation", "type", "kind"], "unknown"));
+        const kind = String(valueOf(edge, ["kind"], ""));
+        return kind === "relation" ? label : kind || label;
+      }
+
+      function relationLabel(value) {
+        return RELATION_LABELS[value] || value;
+      }
+
+      function typeRank(type) {
+        const index = TYPE_ORDER.indexOf(type);
+        return index === -1 ? TYPE_ORDER.length : index;
+      }
+
+      function centerOutSlotIndexes(count) {
+        const centerLeft = Math.floor((count - 1) / 2);
+        const slots = [centerLeft];
+        for (let offset = 1; slots.length < count; offset += 1) {
+          const right = centerLeft + offset;
+          const left = centerLeft - offset;
+          if (right < count) slots.push(right);
+          if (left >= 0) slots.push(left);
+        }
+        return slots;
+      }
+
+      function centerWeightedTypeOrder(types, nodes) {
+        const typeCounts = new Map(types.map((type) => [type, nodes.filter((node) => node.type === type).length]));
+        const rankedTypes = [...types].sort((a, b) => {
+          const countDelta = (typeCounts.get(b) || 0) - (typeCounts.get(a) || 0);
+          return countDelta || typeRank(a) - typeRank(b) || a.localeCompare(b);
+        });
+        const ordered = new Array(rankedTypes.length);
+        centerOutSlotIndexes(rankedTypes.length).forEach((slot, index) => {
+          ordered[slot] = rankedTypes[index];
+        });
+        return ordered.filter(Boolean);
+      }
+
+      function normalizeGraph(payload) {
+        const rawNodes = payload.nodes || payload.vertices || payload.graph?.nodes || [];
+        const rawEdges = payload.edges || payload.links || payload.graph?.edges || payload.graph?.links || [];
+        const nodes = rawNodes.map((node, index) => {
+          const id = String(valueOf(node, ["id", "key", "node_id"], `node_${index}`));
+          const type = String(valueOf(node, ["type", "node_type", "category", "kind"], "unknown"));
+          const evidence = Array.isArray(node.evidence_samples) ? node.evidence_samples : [];
+          return {
+            raw: node,
+            id,
+            name: String(valueOf(node, ["label", "name", "title"], id)),
+            type,
+            description: String(valueOf(node, ["description", "summary", "evidence"], "")),
+            source: String(valueOf(node, ["source"], "")),
+            mentionCount: Number(valueOf(node, ["mention_count"], 0)) || 0,
+            textIds: Array.isArray(node.text_ids) ? node.text_ids : [],
+            evidence,
+            degree: 0,
+            inDegree: 0,
+            outDegree: 0,
+            x: 0,
+            y: 0,
+            r: 4,
+          };
+        });
+        const nodeMap = new Map(nodes.map((node) => [node.id, node]));
+        const edges = rawEdges
+          .map((edge, index) => ({
+            raw: edge,
+            id: String(valueOf(edge, ["id", "key"], `edge_${index}`)),
+            source: String(endpoint(valueOf(edge, ["source", "from", "source_id"]))),
+            target: String(endpoint(valueOf(edge, ["target", "to", "target_id"]))),
+            kind: String(valueOf(edge, ["kind"], "")),
+            label: String(valueOf(edge, ["label", "relation", "type", "kind"], "unknown")),
+            relation: relationKey(edge),
+            weight: Number(valueOf(edge, ["weight", "value", "score", "strength"], 1)) || 1,
+            evidence: String(valueOf(edge, ["evidence", "note", "description", "summary"], "")),
+            textId: String(valueOf(edge, ["text_id"], "")),
+            sentenceId: valueOf(edge, ["sentence_id"], ""),
+            sourceTitle: String(valueOf(edge, ["source_title"], "")),
+            sourceUrl: String(valueOf(edge, ["source_url"], "")),
+          }))
+          .filter((edge) => nodeMap.has(edge.source) && nodeMap.has(edge.target));
+        for (const edge of edges) {
+          const source = nodeMap.get(edge.source);
+          const target = nodeMap.get(edge.target);
+          source.degree += 1;
+          source.outDegree += 1;
+          target.degree += 1;
+          target.inDegree += 1;
+        }
+        const types = centerWeightedTypeOrder([...new Set(nodes.map((node) => node.type))], nodes);
+        const relations = [...new Set(edges.map((edge) => edge.relation))].sort((a, b) => {
+          if (a === "event_participant") return -1;
+          if (b === "event_participant") return 1;
+          return relationLabel(a).localeCompare(relationLabel(b));
+        });
+        return {
+          nodes,
+          edges,
+          nodeMap,
+          types,
+          relations,
+          summary: payload.summary || {},
+          events: payload.events || [],
+        };
+      }
+
+      function layoutGraph(graph) {
+        const visibleTypes = graph.types;
+        const maxTypeCount = Math.max(...visibleTypes.map((type) => graph.nodes.filter((node) => node.type === type).length), 1);
+        graph.world = {
+          width: Math.max(1900, visibleTypes.length * 300),
+          height: Math.max(1350, maxTypeCount * 32 + 280),
+        };
+        visibleTypes.forEach((type, typeIndex) => {
+          const nodes = graph.nodes
+            .filter((node) => node.type === type)
+            .sort((a, b) => b.degree - a.degree || b.mentionCount - a.mentionCount || a.name.localeCompare(b.name, "zh-Hans-CN"));
+          const x = 170 + typeIndex * ((graph.world.width - 340) / Math.max(1, visibleTypes.length - 1));
+          const gap = (graph.world.height - 260) / Math.max(1, nodes.length);
+          nodes.forEach((node, index) => {
+            node.x = x + ((index % 2) - 0.5) * 22;
+            node.y = 150 + gap * (index + 0.5);
+            node.r = Math.max(4.2, Math.min(11, 4 + Math.sqrt(node.degree + node.mentionCount * 0.22) * 0.92));
+          });
+        });
+      }
+
+      function viewportSize() {
+        const rect = canvas.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
+      }
+
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+        canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+      }
+
+      function fitGraph() {
+        const graph = state.graph;
+        if (!graph) return;
+        const view = viewportSize();
+        const k = Math.min(view.width / graph.world.width, view.height / graph.world.height) * 0.92;
+        state.transform.k = k;
+        state.transform.x = (view.width - graph.world.width * k) / 2;
+        state.transform.y = (view.height - graph.world.height * k) / 2;
+        draw();
+      }
+
+      function toWorld(point) {
+        return {
+          x: (point.x - state.transform.x) / state.transform.k,
+          y: (point.y - state.transform.y) / state.transform.k,
+        };
+      }
+
+      function isEventNode(node) {
+        return node.type === "EventNode";
+      }
+
+      function isSearchMatch(node) {
+        if (!state.search) return true;
+        const haystack = [
+          node.id,
+          node.name,
+          node.type,
+          node.description,
+          node.source,
+          node.textIds.join(" "),
+          node.evidence.map((item) => `${item.evidence || ""} ${item.source_title || ""}`).join(" "),
+        ].join(" ").toLowerCase();
+        return haystack.includes(state.search.toLowerCase());
+      }
+
+      function visibleNode(node) {
+        return state.activeTypes.has(node.type) && (state.showEvents || !isEventNode(node));
+      }
+
+      function visibleEdge(edge) {
+        if (!state.activeRelations.has(edge.relation)) return false;
+        const source = state.graph?.nodeMap.get(edge.source);
+        const target = state.graph?.nodeMap.get(edge.target);
+        return Boolean(source && target && visibleNode(source) && visibleNode(target));
+      }
+
+      function selectedNeighborhood() {
+        const ids = new Set();
+        const edgeIds = new Set();
+        const focus = state.selected || state.hovered;
+        if (!focus || !state.graph) return { ids, edgeIds };
+        ids.add(focus.id);
+        for (const edge of state.graph.edges) {
+          if (edge.source === focus.id || edge.target === focus.id) {
+            ids.add(edge.source);
+            ids.add(edge.target);
+            edgeIds.add(edge.id);
+          }
+        }
+        return { ids, edgeIds };
+      }
+
+      function draw() {
+        const graph = state.graph;
+        const view = viewportSize();
+        ctx.save();
+        ctx.clearRect(0, 0, view.width, view.height);
+        drawBackground(view.width, view.height);
+        if (!graph) {
+          ctx.restore();
+          return;
+        }
+        const { x, y, k } = state.transform;
+        const focus = selectedNeighborhood();
+        ctx.translate(x, y);
+        ctx.scale(k, k);
+        drawTypeBands(graph);
+        drawEdges(graph, focus);
+        drawNodes(graph, focus);
+        ctx.restore();
+        updateReadout();
+      }
+
+      function drawBackground(width, height) {
+        ctx.save();
+        ctx.fillStyle = "oklch(0.985 0.006 88)";
+        ctx.fillRect(0, 0, width, height);
+        ctx.strokeStyle = "oklch(0.79 0.014 230 / 0.28)";
+        ctx.lineWidth = 1;
+        for (let x = 40; x < width; x += 40) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+        for (let y = 40; y < height; y += 40) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawTypeBands(graph) {
+        const h = graph.world.height;
+        graph.types.forEach((type) => {
+          if (!state.activeTypes.has(type) || (!state.showEvents && type === "EventNode")) return;
+          const nodes = graph.nodes.filter((node) => node.type === type);
+          if (!nodes.length) return;
+          const x = nodes.reduce((sum, node) => sum + node.x, 0) / nodes.length;
+          ctx.fillStyle = TYPE_COLORS[type] || TYPE_COLORS.unknown;
+          ctx.globalAlpha = 0.07;
+          ctx.fillRect(x - 96, 42, 192, h - 84);
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = "oklch(0.25 0.035 220)";
+          ctx.font = "700 22px Songti SC, STSong, serif";
+          ctx.textAlign = "center";
+          ctx.fillText(TYPE_LABELS[type] || type, x, 82);
+          ctx.font = "680 12px Avenir Next, PingFang SC, sans-serif";
+          ctx.fillStyle = "oklch(0.48 0.02 220)";
+          ctx.fillText(`${nodes.length} nodes`, x, 104);
+        });
+      }
+
+      function drawEdges(graph, focus) {
+        ctx.lineCap = "round";
+        for (const edge of graph.edges) {
+          if (!visibleEdge(edge)) continue;
+          const source = graph.nodeMap.get(edge.source);
+          const target = graph.nodeMap.get(edge.target);
+          const searchDim = state.search && (!isSearchMatch(source) && !isSearchMatch(target));
+          const focused = focus.edgeIds.has(edge.id);
+          ctx.globalAlpha = focused ? 0.86 : searchDim ? 0.025 : focus.ids.size ? 0.045 : 0.14;
+          ctx.strokeStyle = RELATION_COLORS[edge.relation] || RELATION_COLORS[edge.kind] || RELATION_COLORS.unknown;
+          ctx.lineWidth = focused ? 2.8 : edge.kind === "relation" ? 1.25 : 0.8;
+          drawEdgePath(source, target);
+          ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function drawEdgePath(source, target) {
+        const deltaX = target.x - source.x;
+        const deltaY = target.y - source.y;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        ctx.beginPath();
+        ctx.moveTo(source.x, source.y);
+        if (absX < 72 || absY < 34 || (absX < 260 && absY < 120)) {
+          ctx.lineTo(target.x, target.y);
+          return;
+        }
+
+        const direction = Math.sign(deltaX) || 1;
+        if (absX >= absY * 0.72) {
+          const handle = Math.min(240, Math.max(72, absX * 0.38));
+          ctx.bezierCurveTo(source.x + direction * handle, source.y, target.x - direction * handle, target.y, target.x, target.y);
+          return;
+        }
+
+        const middleX = (source.x + target.x) / 2;
+        const middleY = (source.y + target.y) / 2;
+        const bend = Math.min(120, Math.max(34, absX * 0.18 + absY * 0.06));
+        ctx.quadraticCurveTo(middleX + direction * bend, middleY, target.x, target.y);
+      }
+
+      function drawNodes(graph, focus) {
+        for (const node of graph.nodes) {
+          if (!visibleNode(node)) continue;
+          const searchMatch = isSearchMatch(node);
+          const focused = focus.ids.has(node.id);
+          const selected = state.selected?.id === node.id;
+          const hovered = state.hovered?.id === node.id;
+          ctx.globalAlpha = state.search && !searchMatch ? 0.18 : focus.ids.size && !focused ? 0.34 : 1;
+          ctx.fillStyle = TYPE_COLORS[node.type] || TYPE_COLORS.unknown;
+          ctx.strokeStyle = selected ? "oklch(0.24 0.13 252)" : hovered ? "oklch(0.45 0.14 252)" : "oklch(0.58 0.035 220)";
+          ctx.lineWidth = selected ? 2.8 : hovered || focused ? 1.8 : 0.8;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r + (selected ? 2 : 0), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          if (shouldLabel(node, focused, searchMatch)) {
+            drawNodeLabel(node, selected || hovered);
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function shouldLabel(node, focused, searchMatch) {
+        if (state.showLabels) return true;
+        if (state.selected?.id === node.id || state.hovered?.id === node.id) return true;
+        if (state.search && searchMatch) return true;
+        return focused && node.degree >= 4;
+      }
+
+      function drawNodeLabel(node, strong) {
+        ctx.font = `${strong ? 760 : 680} 12px Avenir Next, PingFang SC, sans-serif`;
+        ctx.textBaseline = "middle";
+        const text = node.name.length > 18 ? `${node.name.slice(0, 18)}...` : node.name;
+        const width = ctx.measureText(text).width + 12;
+        const typeNodes = state.graph?.nodes.filter((item) => item.type === node.type) || [];
+        const typeCenterX = typeNodes.length ? typeNodes.reduce((sum, item) => sum + item.x, 0) / typeNodes.length : node.x;
+        const labelOnLeft = node.type === state.graph?.types[0] && node.x < typeCenterX;
+        const boxX = labelOnLeft ? node.x - node.r - 5 - width : node.x + node.r + 5;
+        const textX = labelOnLeft ? boxX + 6 : node.x + node.r + 11;
+        ctx.textAlign = "left";
+        ctx.fillStyle = "oklch(1 0 0 / 0.88)";
+        ctx.fillRect(boxX, node.y - 10, width, 20);
+        ctx.strokeStyle = "oklch(0.84 0.018 220)";
+        ctx.lineWidth = 0.8;
+        ctx.strokeRect(boxX, node.y - 10, width, 20);
+        ctx.fillStyle = "oklch(0.19 0.03 220)";
+        ctx.fillText(text, textX, node.y + 1);
+      }
+
+      function hitTest(point) {
+        if (!state.graph) return null;
+        const world = toWorld(point);
+        let best = null;
+        let bestDistance = Infinity;
+        for (const node of state.graph.nodes) {
+          if (!visibleNode(node)) continue;
+          const distance = Math.hypot(node.x - world.x, node.y - world.y);
+          const threshold = Math.max(8, node.r + 5 / state.transform.k);
+          if (distance < threshold && distance < bestDistance) {
+            best = node;
+            bestDistance = distance;
+          }
+        }
+        return best;
+      }
+
+      function renderControls() {
+        const graph = state.graph;
+        if (!graph) return;
+        const summary = graph.summary || {};
+        document.querySelector("#stats").innerHTML = [
+          ["节点", summary.node_count || graph.nodes.length],
+          ["边", summary.edge_count || graph.edges.length],
+          ["事件", summary.event_count || graph.events.length],
+          ["关系", summary.relation_count || graph.edges.filter((edge) => edge.kind === "relation").length],
+        ]
+          .map(([label, value]) => `<div class="stat"><span>${label}</span><strong>${value}</strong></div>`)
+          .join("");
+        renderChipGroup("#typeChips", graph.types, state.activeTypes, (value) => TYPE_LABELS[value] || value);
+        renderChipGroup("#relationChips", graph.relations, state.activeRelations, relationLabel);
+        document.querySelector("#legend").innerHTML = `<p class="kicker">Legend</p>${graph.relations
+          .map((relation) => {
+            const count = graph.edges.filter((edge) => edge.relation === relation).length;
+            const color = RELATION_COLORS[relation] || RELATION_COLORS.unknown;
+            return `<div class="legend-row"><i class="swatch" style="background:${color}"></i><span>${escapeHtml(relationLabel(relation))}</span><strong>${count}</strong></div>`;
+          })
+          .join("")}`;
+      }
+
+      function renderChipGroup(selector, values, activeSet, labeler) {
+        const root = document.querySelector(selector);
+        root.innerHTML = values
+          .map((value) => `<button class="chip" type="button" data-value="${escapeHtml(value)}" aria-pressed="${activeSet.has(value)}">${escapeHtml(labeler(value))}</button>`)
+          .join("");
+        root.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            const value = button.dataset.value;
+            if (activeSet.has(value)) {
+              activeSet.delete(value);
+            } else {
+              activeSet.add(value);
+            }
+            renderControls();
+            draw();
+          });
+        });
+      }
+
+      function renderDetail(node) {
+        const root = document.querySelector("#detail");
+        if (!node) {
+          root.innerHTML = `<p class="kicker">Inspector</p><div class="empty">选择一个节点后显示一阶邻居、证据和来源。</div>`;
+          return;
+        }
+        const relatedEdges = state.graph.edges.filter((edge) => edge.source === node.id || edge.target === node.id);
+        const edgeCards = relatedEdges.slice(0, 8).map((edge) => {
+          const other = state.graph.nodeMap.get(edge.source === node.id ? edge.target : edge.source);
+          return `
+            <div class="edge-card">
+              <strong>${escapeHtml(edge.label)}</strong>
+              <p>${escapeHtml(other ? other.name : edge.target)} · ${escapeHtml(relationLabel(edge.relation))}</p>
+            </div>
+          `;
+        });
+        const evidenceCards = node.evidence.slice(0, 4).map((item) => `
+          <article class="source-card">
+            <strong>${escapeHtml(item.text_id || node.id)}${item.sentence_id ? ` / 句子 ${escapeHtml(item.sentence_id)}` : ""}</strong>
+            <p>${escapeHtml(item.evidence || "")}</p>
+            ${item.source_url ? `<p><a href="${escapeHtml(item.source_url)}" target="_blank" rel="noreferrer">${escapeHtml(item.source_title || "来源链接")}</a></p>` : item.source_title ? `<p>${escapeHtml(item.source_title)}</p>` : ""}
+          </article>
+        `);
+        const edgeSources = relatedEdges
+          .filter((edge) => edge.evidence)
+          .slice(0, 3)
+          .map((edge) => `
+            <article class="source-card">
+              <strong>${escapeHtml(edge.textId || edge.id)}${edge.sentenceId !== "" ? ` / 句子 ${escapeHtml(edge.sentenceId)}` : ""}</strong>
+              <p>${escapeHtml(edge.evidence)}</p>
+              ${edge.sourceUrl ? `<p><a href="${escapeHtml(edge.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(edge.sourceTitle || "来源链接")}</a></p>` : ""}
+            </article>
+          `);
+        root.innerHTML = `
+          <p class="kicker">Inspector</p>
+          <div>
+            <p class="kicker">${escapeHtml(TYPE_LABELS[node.type] || node.type)}</p>
+            <h2 class="node-title">${escapeHtml(node.name)}</h2>
+          </div>
+          <div class="tags">
+            <span class="tag">${escapeHtml(node.type)}</span>
+            ${node.source ? `<span class="tag">${escapeHtml(node.source)}</span>` : ""}
+            ${node.textIds.length ? `<span class="tag">${node.textIds.length} texts</span>` : ""}
+          </div>
+          ${node.description ? `<p class="hint">${escapeHtml(node.description)}</p>` : ""}
+          <div class="kv">
+            <div><span>ID</span><strong>${escapeHtml(node.id)}</strong></div>
+            <div><span>入边</span><strong>${node.inDegree}</strong></div>
+            <div><span>出边</span><strong>${node.outDegree}</strong></div>
+            <div><span>总度数</span><strong>${node.degree}</strong></div>
+            <div><span>mention</span><strong>${node.mentionCount}</strong></div>
+          </div>
+          <div>
+            <p class="kicker">Neighbors</p>
+            <div class="edge-list">${edgeCards.join("") || `<div class="empty">暂无相邻节点。</div>`}</div>
+          </div>
+          <div>
+            <p class="kicker">Evidence</p>
+            <div class="source-list">${evidenceCards.join("") || edgeSources.join("") || `<div class="empty">暂无证据片段。</div>`}</div>
+          </div>
+        `;
+      }
+
+      function updateReadout() {
+        const graph = state.graph;
+        if (!graph) return;
+        const visibleNodes = graph.nodes.filter(visibleNode).length;
+        const visibleEdges = graph.edges.filter(visibleEdge).length;
+        document.querySelector("#readout").textContent = `${visibleNodes} nodes · ${visibleEdges} edges · ${Math.round(state.transform.k * 100)}%`;
+      }
+
+      async function loadGraph(payload) {
+        state.graph = normalizeGraph(payload);
+        layoutGraph(state.graph);
+        state.activeTypes = new Set(state.graph.types);
+        state.activeRelations = new Set(state.graph.relations);
+        state.selected = null;
+        state.hovered = null;
+        renderControls();
+        renderDetail(null);
+        resizeCanvas();
+        fitGraph();
+      }
+
+      async function fetchGraphPayload() {
+        const candidates = ["/data/output/graph.json", "../data/output/graph.json"];
+        let lastError = null;
+        for (const url of candidates) {
+          try {
+            const response = await fetch(url, { cache: "no-store" });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.json();
+          } catch (error) {
+            lastError = error;
+          }
+        }
+        throw lastError || new Error("graph.json load failed");
+      }
+
+      async function boot() {
+        try {
+          await loadGraph(await fetchGraphPayload());
+        } catch (error) {
+          document.querySelector("#readout").textContent = "无法加载 graph.json";
+          document.querySelector("#detail").innerHTML = `<p class="kicker">Error</p><div class="empty">${escapeHtml(error.message)}</div>`;
+        }
+      }
+
+      canvas.addEventListener("pointerdown", (event) => {
+        state.dragging = true;
+        state.pointerStart = { x: event.clientX, y: event.clientY };
+        state.lastPoint = state.pointerStart;
+        state.dragMoved = false;
+        canvas.classList.add("is-dragging");
+        canvas.setPointerCapture(event.pointerId);
+      });
+
+      canvas.addEventListener("pointermove", (event) => {
+        const point = { x: event.clientX, y: event.clientY };
+        if (state.dragging && state.lastPoint) {
+          if (state.pointerStart && Math.hypot(point.x - state.pointerStart.x, point.y - state.pointerStart.y) > 4) {
+            state.dragMoved = true;
+          }
+          state.transform.x += point.x - state.lastPoint.x;
+          state.transform.y += point.y - state.lastPoint.y;
+          state.lastPoint = point;
+          draw();
+          return;
+        }
+        const rect = canvas.getBoundingClientRect();
+        const node = hitTest({ x: event.clientX - rect.left, y: event.clientY - rect.top });
+        if (node?.id !== state.hovered?.id) {
+          state.hovered = node;
+          draw();
+        }
+      });
+
+      canvas.addEventListener("pointerup", (event) => {
+        const wasDragging = state.dragMoved;
+        state.dragging = false;
+        state.lastPoint = null;
+        state.pointerStart = null;
+        state.dragMoved = false;
+        canvas.classList.remove("is-dragging");
+        if (!wasDragging) {
+          const rect = canvas.getBoundingClientRect();
+          const node = hitTest({ x: event.clientX - rect.left, y: event.clientY - rect.top });
+          if (!node) {
+            state.selected = null;
+            renderDetail(null);
+            draw();
+            return;
+          }
+          state.selected = state.selected?.id === node.id ? null : node;
+          renderDetail(state.selected);
+          draw();
+        }
+      });
+
+      canvas.addEventListener("pointerleave", () => {
+        if (!state.dragging) {
+          state.hovered = null;
+          draw();
+        }
+      });
+
+      canvas.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const point = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+        const before = toWorld(point);
+        const factor = event.deltaY < 0 ? 1.12 : 0.89;
+        state.transform.k = Math.max(0.08, Math.min(3.6, state.transform.k * factor));
+        state.transform.x = point.x - before.x * state.transform.k;
+        state.transform.y = point.y - before.y * state.transform.k;
+        draw();
+      }, { passive: false });
+
+      document.querySelector("#searchInput").addEventListener("input", (event) => {
+        state.search = event.target.value.trim();
+        draw();
+      });
+      document.querySelector("#fitButton").addEventListener("click", fitGraph);
+      document.querySelector("#clearButton").addEventListener("click", () => {
+        state.selected = null;
+        state.hovered = null;
+        state.search = "";
+        document.querySelector("#searchInput").value = "";
+        renderDetail(null);
+        draw();
+      });
+      document.querySelector("#labelsButton").addEventListener("click", (event) => {
+        state.showLabels = !state.showLabels;
+        event.currentTarget.setAttribute("aria-pressed", String(state.showLabels));
+        event.currentTarget.textContent = state.showLabels ? "隐藏标签" : "显示标签";
+        draw();
+      });
+      document.querySelector("#eventButton").addEventListener("click", (event) => {
+        state.showEvents = !state.showEvents;
+        event.currentTarget.setAttribute("aria-pressed", String(state.showEvents));
+        event.currentTarget.textContent = state.showEvents ? "隐藏事件" : "显示事件";
+        draw();
+      });
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+      boot();
+    </script>
+  </body>
+</html>
