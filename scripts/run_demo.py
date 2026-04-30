@@ -50,7 +50,7 @@ def print_demo_notes(result: dict, evaluation: dict, port: int) -> None:
     print("   - 实体消歧：看 Cambridge/剑桥候选实体打分。")
     print("   - 事件抽取：看触发词、参与实体和事件记录。")
     print("   - 关系抽取：看事件或规则怎样生成三元组。")
-    print("   - 知识图谱：点击节点/边看详情，拖动节点，切人物视角。")
+    print("   - 知识图谱：点击节点看连边，拖动节点，切人物视角。")
     print(f"6. 答辩前可运行 python3 scripts/check_web_demo.py --port {port + 1} 做网页材料自检。")
     print("\n配套文档")
     print("- docs/student_method.md")

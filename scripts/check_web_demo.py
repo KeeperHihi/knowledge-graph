@@ -57,6 +57,8 @@ def validate_index(html: str) -> None:
     tab_names = ["实体抽取", "实体消歧", "事件抽取", "关系抽取", "知识图谱"]
     missing = [name for name in tab_names if name not in html]
     require(not missing, f"网页首页缺少页签文字: {', '.join(missing)}")
+    require("节点 / 边" not in html, "网页仍保留旧的节点/边选择提示")
+    require("先点击一个节点或一条关系" not in html, "网页仍提示可以点击关系")
 
 
 def validate_graph(graph: dict) -> tuple[int, int]:
@@ -67,6 +69,12 @@ def validate_graph(graph: dict) -> tuple[int, int]:
     require(edges, "graph.json 里 edges 为空")
     require(summary.get("relation_count", 0) > 0, "graph.json 里 relation_count 不正确")
     require(summary.get("event_count", 0) > 0, "graph.json 里 event_count 不正确")
+    node_ids = {node.get("id") for node in nodes}
+    require("E016" in node_ids, "graph.json 缺少 Bombe 节点")
+    require("E025" in node_ids, "graph.json 缺少 Manchester Mark I 节点")
+    for node_id, label in [("E016", "Bombe"), ("E025", "Manchester Mark I")]:
+        linked = any(edge.get("source") == node_id or edge.get("target") == node_id for edge in edges)
+        require(linked, f"{label} 仍然是孤立节点")
     return len(nodes), len(edges)
 
 
@@ -94,7 +102,25 @@ def validate_explainability(explainability: dict) -> dict:
         cases = explainability.get(key, [])
         require(cases, f"explainability.json 缺少{label}案例: {key}")
         counts[label] = len(cases)
+    for case in explainability.get("relation_extraction_cases", []):
+        require(case.get("head_id"), "关系抽取案例缺少 head_id，前端无法跳转头实体")
+        require(case.get("tail_id"), "关系抽取案例缺少 tail_id，前端无法确认尾实体")
     return counts
+
+
+def validate_app_behavior(app_js: str) -> None:
+    old_edge_selectors = [
+        "selectedEdgeId",
+        "function selectEdge",
+        "function findEdgeAt",
+        "function updateDetailForEdge",
+        "pointToSegmentDistance",
+        "已选关系",
+    ]
+    for keyword in old_edge_selectors:
+        require(keyword not in app_js, f"app.js 仍包含边选中逻辑: {keyword}")
+    require("clearSelection()" in app_js, "app.js 缺少空白点击取消选择逻辑")
+    require("selectNode(item.head_id)" in app_js, "关系抽取案例按钮没有跳转到头实体")
 
 
 def check_app_js_syntax() -> str:
@@ -133,8 +159,10 @@ def run_checks(port: int) -> None:
         validate_index(html)
         print("[OK] 网页首页可以访问，五个页签都存在")
 
-        fetch_text(base_url, "web/app.js")
+        app_js = fetch_text(base_url, "web/app.js")
+        validate_app_behavior(app_js)
         print("[OK] app.js 可以通过网页服务访问")
+        print("[OK] 图谱页只保留节点选择，空白点击会取消选择")
         print(check_app_js_syntax())
 
         graph = fetch_json(base_url, "data/output/graph.json")

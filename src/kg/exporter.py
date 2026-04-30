@@ -442,9 +442,11 @@ def build_relation_extraction_cases(
             "relation_id": picked_relation.relation_id,
             "text_id": picked_relation.text_id,
             "sentence_id": picked_relation.sentence_id,
+            "head_id": picked_relation.head_id,
             "head_name": picked_relation.head_name,
             "head_type": picked_relation.head_type,
             "relation": picked_relation.relation,
+            "tail_id": picked_relation.tail_id,
             "tail_name": picked_relation.tail_name,
             "tail_type": picked_relation.tail_type,
             "triple": (

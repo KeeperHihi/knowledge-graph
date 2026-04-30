@@ -193,6 +193,8 @@ class ReportingTestCase(unittest.TestCase):
             explainability["relation_extraction_cases"][0]["triple"],
             "Alan Turing - studied_at - University of Cambridge",
         )
+        self.assertEqual(explainability["relation_extraction_cases"][0]["head_id"], "E001")
+        self.assertEqual(explainability["relation_extraction_cases"][0]["tail_id"], "E008")
 
         graph = GraphBuilder().build(
             entity_map={
