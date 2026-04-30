@@ -222,5 +222,13 @@
     "aliases": ["舍伯恩学校"],
     "keywords": ["school", "student", "education", "学校", "教育"],
     "description": "图灵青年时期就读的学校。"
+  },
+  {
+    "entity_id": "E029",
+    "canonical_name": "Princeton",
+    "entity_type": "Place",
+    "aliases": ["普林斯顿"],
+    "keywords": ["town", "New Jersey", "city", "新泽西", "小镇", "城市"],
+    "description": "美国新泽西州城镇，与 Princeton University 名称重叠，用于构造消歧案例。"
   }
 ]

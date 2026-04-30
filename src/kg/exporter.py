@@ -253,10 +253,10 @@ def build_disambiguation_cases(
     linked_mentions: List[LinkedMention], source_map: Dict[str, dict]
 ) -> List[dict]:
     preferred_rules = [
-        ("text_03_cambridge_manchester", "Cambridge"),
-        ("text_01_biography", "剑桥大学"),
-        ("text_05_places", "Cambridge"),
+        ("text_16_class_demo_extra", "Princeton"),
+        ("text_16_class_demo_extra", "Manchester"),
         ("text_05_places", "Princeton"),
+        ("text_03_cambridge_manchester", "Manchester"),
     ]
     picked_cases = []
     seen = set()

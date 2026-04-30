@@ -47,7 +47,7 @@ def print_demo_notes(result: dict, evaluation: dict, port: int) -> None:
     print(f"4. 最后打开 http://127.0.0.1:{port}/web/index.html 做网页演示。")
     print("5. 网页按五个页签从左到右讲：")
     print("   - 实体抽取：看 raw 句子里 mention 的高亮。")
-    print("   - 实体消歧：看 Cambridge/剑桥候选实体打分。")
+    print("   - 实体消歧：看 Princeton/Manchester 候选实体打分。")
     print("   - 事件抽取：看触发词、参与实体和事件记录。")
     print("   - 关系抽取：看事件或规则怎样生成三元组。")
     print("   - 知识图谱：点击节点看连边，拖动节点，切人物视角。")

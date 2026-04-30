@@ -1,4 +1,5 @@
 这段课堂 demo 文本专门用来说明规则法的边界，出处不存在，只服务于课程展示。
 Alan Turing 在 London 参加一次计算讨论会时，用 Turing Machine 解释可计算问题。
 The Imitation Game 让更多同学第一次听说 Alan Turing，但电影不是本项目知识抽取的主要依据。
-Cambridge 这座城市和 University of Cambridge 名字很像，所以我保留了这句作为实体消歧练习。
+Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。
+Manchester 的工业背景和早期计算机研究联系紧密。

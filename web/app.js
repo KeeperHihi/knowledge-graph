@@ -260,12 +260,7 @@ function renderDisambiguationCases(cases) {
           )
           .join("")}
       </div>
-      <button type="button" class="case-button" data-node-id="${item.selected_entity_id}">在图里看结果</button>
     `;
-    card.querySelector("button").addEventListener("click", () => {
-      selectView("graph");
-      selectNode(item.selected_entity_id);
-    });
     box.appendChild(card);
   }
 }
@@ -293,12 +288,7 @@ function renderEventExtractionCase(cases) {
       <div class="flow-row"><strong>2. 找参与实体</strong><p>${participantText || "无参与实体"}</p></div>
       <div class="flow-row selected"><strong>3. 形成事件记录</strong><p>${item.event_id} / ${item.event_type}</p></div>
     </div>
-    <button type="button" class="case-button" id="event-case-button">在图里看这条事件</button>
   `;
-  document.getElementById("event-case-button").addEventListener("click", () => {
-    selectView("graph");
-    selectNode(item.event_id);
-  });
 }
 
 function renderRelationExtractionCase(cases) {
@@ -321,12 +311,7 @@ function renderRelationExtractionCase(cases) {
       <div class="flow-row"><strong>3. 尾实体</strong><p>${item.tail_name} (${item.tail_type})</p></div>
       <div class="flow-row selected"><strong>4. 三元组</strong><p>${item.triple}</p></div>
     </div>
-    <button type="button" class="case-button" id="relation-case-button">在图里看头实体</button>
   `;
-  document.getElementById("relation-case-button").addEventListener("click", () => {
-    selectView("graph");
-    selectNode(item.head_id);
-  });
 }
 
 function prepareGraph(graph) {

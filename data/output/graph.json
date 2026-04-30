@@ -6,7 +6,7 @@
       "type": "Person",
       "description": "英国数学家、逻辑学家和计算机科学先驱，是本项目的核心人物。",
       "source": "entity",
-      "mention_count": 28,
+      "mention_count": 29,
       "text_ids": [
         "text_01_biography",
         "text_02_war",
@@ -53,12 +53,11 @@
       "type": "Organization",
       "description": "图灵早年学习和研究的重要大学机构。",
       "source": "entity",
-      "mention_count": 5,
+      "mention_count": 4,
       "text_ids": [
         "text_01_biography",
         "text_03_cambridge_manchester",
-        "text_05_places",
-        "text_16_class_demo_extra"
+        "text_05_places"
       ],
       "evidence_samples": [
         {
@@ -90,12 +89,13 @@
       "type": "Organization",
       "description": "图灵攻读博士学位的重要学术机构。",
       "source": "entity",
-      "mention_count": 10,
+      "mention_count": 11,
       "text_ids": [
         "text_01_biography",
         "text_05_places",
         "text_07_princeton_research",
-        "text_15_princeton_extra"
+        "text_15_princeton_extra",
+        "text_16_class_demo_extra"
       ],
       "evidence_samples": [
         {
@@ -355,11 +355,10 @@
       "type": "Place",
       "description": "英国城市，与剑桥大学同名，便于构造歧义。",
       "source": "entity",
-      "mention_count": 5,
+      "mention_count": 4,
       "text_ids": [
         "text_03_cambridge_manchester",
-        "text_05_places",
-        "text_16_class_demo_extra"
+        "text_05_places"
       ],
       "evidence_samples": [
         {
@@ -429,11 +428,12 @@
       "type": "Place",
       "description": "英国城市，与曼彻斯特大学同名，便于构造歧义。",
       "source": "entity",
-      "mention_count": 3,
+      "mention_count": 4,
       "text_ids": [
         "text_03_cambridge_manchester",
         "text_12_locations",
-        "text_14_manchester_device_links"
+        "text_14_manchester_device_links",
+        "text_16_class_demo_extra"
       ],
       "evidence_samples": [
         {
@@ -465,11 +465,12 @@
       "type": "Person",
       "description": "逻辑学家，图灵在普林斯顿时期的重要学术导师。",
       "source": "entity",
-      "mention_count": 4,
+      "mention_count": 5,
       "text_ids": [
         "text_04_test_and_machine",
         "text_07_princeton_research",
-        "text_15_princeton_extra"
+        "text_15_princeton_extra",
+        "text_16_class_demo_extra"
       ],
       "evidence_samples": [
         {
@@ -1418,6 +1419,22 @@
       "source_url": "https://www.princeton.edu/",
       "collected_on": "2026-04-30",
       "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+    },
+    {
+      "id": "EVT034",
+      "label": "EducationEvent",
+      "type": "EventNode",
+      "description": "记录人物的求学经历。",
+      "source": "event",
+      "time": "",
+      "place": "",
+      "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
     }
   ],
   "edges": [
@@ -2607,6 +2624,36 @@
       "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
     },
     {
+      "id": "EVT034_E001",
+      "source": "EVT034",
+      "target": "E001",
+      "label": "student",
+      "kind": "event_participant",
+      "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+      "event_id": "EVT034",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
+    },
+    {
+      "id": "EVT034_E007",
+      "source": "EVT034",
+      "target": "E007",
+      "label": "institution",
+      "kind": "event_participant",
+      "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+      "event_id": "EVT034",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
+    },
+    {
       "id": "REL001",
       "source": "E001",
       "target": "E008",
@@ -3248,6 +3295,22 @@
     },
     {
       "id": "REL041",
+      "source": "E001",
+      "target": "E007",
+      "label": "studied_at",
+      "kind": "relation",
+      "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+      "trigger": "攻读",
+      "event_id": "EVT034",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
+    },
+    {
+      "id": "REL042",
       "source": "E009",
       "target": "E012",
       "label": "located_in",
@@ -3263,7 +3326,7 @@
       "source_note": "这一段是为了让 located_in 规则更容易展示，句子是根据公开机构信息整理的。"
     },
     {
-      "id": "REL042",
+      "id": "REL043",
       "source": "E027",
       "target": "E013",
       "label": "located_in",
@@ -3279,7 +3342,7 @@
       "source_note": "这一段是为了让 located_in 规则更容易展示，句子是根据公开机构信息整理的。"
     },
     {
-      "id": "REL043",
+      "id": "REL044",
       "source": "E023",
       "target": "E010",
       "label": "located_in",
@@ -3295,7 +3358,7 @@
       "source_note": "为了避免 Bombe 在图中成为孤立节点，我根据公开历史背景编写了几句 demo 文本；这个 source_title 不是实际存在的出处，答辩时需要说明它是课程演示补充数据。"
     },
     {
-      "id": "REL044",
+      "id": "REL045",
       "source": "E009",
       "target": "E012",
       "label": "located_in",
@@ -4482,12 +4545,45 @@
       "source_url": "https://www.princeton.edu/",
       "collected_on": "2026-04-30",
       "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+    },
+    {
+      "event_id": "EVT034",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "event_type": "EducationEvent",
+      "trigger": "攻读",
+      "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+      "participants": [
+        {
+          "role": "student",
+          "entity_id": "E001",
+          "name": "Alan Turing",
+          "entity_type": "Person"
+        },
+        {
+          "role": "institution",
+          "entity_id": "E007",
+          "name": "Princeton University",
+          "entity_type": "Organization"
+        }
+      ],
+      "time": "",
+      "place": "",
+      "description": "记录人物的求学经历。",
+      "source_relation_ids": [
+        "REL041"
+      ],
+      "metadata": null,
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": "",
+      "collected_on": "2026-04-30",
+      "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
     }
   ],
   "summary": {
-    "node_count": 61,
-    "edge_count": 123,
-    "event_count": 33,
-    "relation_count": 44
+    "node_count": 62,
+    "edge_count": 126,
+    "event_count": 34,
+    "relation_count": 45
   }
 }

@@ -1169,5 +1169,38 @@
     "source_url": "https://www.princeton.edu/",
     "collected_on": "2026-04-30",
     "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+  },
+  {
+    "event_id": "EVT034",
+    "text_id": "text_16_class_demo_extra",
+    "sentence_id": 4,
+    "event_type": "EducationEvent",
+    "trigger": "攻读",
+    "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+    "participants": [
+      {
+        "role": "student",
+        "entity_id": "E001",
+        "name": "Alan Turing",
+        "entity_type": "Person"
+      },
+      {
+        "role": "institution",
+        "entity_id": "E007",
+        "name": "Princeton University",
+        "entity_type": "Organization"
+      }
+    ],
+    "time": "",
+    "place": "",
+    "description": "记录人物的求学经历。",
+    "source_relation_ids": [
+      "REL041"
+    ],
+    "metadata": null,
+    "source_title": "课堂补充 demo：消歧与流行文化例句",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
   }
 ]

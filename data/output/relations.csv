@@ -39,7 +39,8 @@ REL037,text_14_manchester_device_links,2,E003,Max Newman,Person,worked_at,E009,U
 REL038,text_15_princeton_extra,1,E001,Alan Turing,Person,influenced_by,E002,Alonzo Church,Person,影响,event_rule,EVT031,Alonzo Church 在 Princeton University 研究 lambda calculus，并影响 Alan Turing 的逻辑研究。
 REL039,text_15_princeton_extra,2,E004,John von Neumann,Person,worked_at,E007,Princeton University,Organization,工作,event_rule,EVT032,John von Neumann 也在 Princeton University 工作，他关注早期计算机体系结构问题。
 REL040,text_15_princeton_extra,3,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,攻读,event_rule,EVT033,Alan Turing 在 Princeton University 攻读博士学位时继续思考 Entscheidungsproblem。
-REL041,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
-REL042,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。
-REL043,text_13_device_links,3,E023,Government Code and Cypher School,Organization,located_in,E010,Bletchley Park,Place,位于,sentence_rule,,Government Code and Cypher School 位于 Bletchley Park。
-REL044,text_14_manchester_device_links,3,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
+REL041,text_16_class_demo_extra,4,E001,Alan Turing,Person,studied_at,E007,Princeton University,Organization,攻读,event_rule,EVT034,Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。
+REL042,text_12_locations,2,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。
+REL043,text_12_locations,3,E027,National Physical Laboratory,Organization,located_in,E013,London,Place,位于,sentence_rule,,National Physical Laboratory 位于 London。
+REL044,text_13_device_links,3,E023,Government Code and Cypher School,Organization,located_in,E010,Bletchley Park,Place,位于,sentence_rule,,Government Code and Cypher School 位于 Bletchley Park。
+REL045,text_14_manchester_device_links,3,E009,University of Manchester,Organization,located_in,E012,Manchester,Place,位于,sentence_rule,,University of Manchester 位于 Manchester。

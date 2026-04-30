@@ -52,21 +52,57 @@
   "disambiguation_cases": [
     {
       "case_id": "DISAMBIG01",
-      "title": "Cambridge 的消歧过程",
-      "mention": "Cambridge",
-      "text_id": "text_03_cambridge_manchester",
-      "sentence_id": 1,
-      "context": "图灵早年在 University of Cambridge 学习数学，Cambridge 这座城市则是他的求学背景。",
+      "title": "Princeton 的消歧过程",
+      "mention": "Princeton",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 4,
+      "context": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
       "status": "linked",
-      "selected_entity_id": "E011",
-      "selected_name": "Cambridge",
+      "selected_entity_id": "E007",
+      "selected_name": "Princeton University",
+      "selected_type": "Organization",
+      "selected_score": 0.85,
+      "selected_reason": "综合别名匹配、上下文关键词和类型一致性后，最终分数最高。",
+      "candidates": [
+        {
+          "entity_id": "E007",
+          "canonical_name": "Princeton University",
+          "entity_type": "Organization",
+          "alias_score": 1.0,
+          "context_keyword_score": 0.5,
+          "type_prior_score": 1.0,
+          "final_score": 0.85
+        },
+        {
+          "entity_id": "E029",
+          "canonical_name": "Princeton",
+          "entity_type": "Place",
+          "alias_score": 1.0,
+          "context_keyword_score": 0.0,
+          "type_prior_score": 0.2,
+          "final_score": 0.54
+        }
+      ],
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": ""
+    },
+    {
+      "case_id": "DISAMBIG02",
+      "title": "Manchester 的消歧过程",
+      "mention": "Manchester",
+      "text_id": "text_16_class_demo_extra",
+      "sentence_id": 5,
+      "context": "Manchester 的工业背景和早期计算机研究联系紧密。",
+      "status": "linked",
+      "selected_entity_id": "E012",
+      "selected_name": "Manchester",
       "selected_type": "Place",
       "selected_score": 0.85,
       "selected_reason": "综合别名匹配、上下文关键词和类型一致性后，最终分数最高。",
       "candidates": [
         {
-          "entity_id": "E011",
-          "canonical_name": "Cambridge",
+          "entity_id": "E012",
+          "canonical_name": "Manchester",
           "entity_type": "Place",
           "alias_score": 1.0,
           "context_keyword_score": 0.5,
@@ -74,17 +110,17 @@
           "final_score": 0.85
         },
         {
-          "entity_id": "E008",
-          "canonical_name": "University of Cambridge",
-          "entity_type": "Organization",
+          "entity_id": "E025",
+          "canonical_name": "Manchester Mark I",
+          "entity_type": "Device",
           "alias_score": 0.9,
           "context_keyword_score": 1.0,
-          "type_prior_score": 0.2,
-          "final_score": 0.79
+          "type_prior_score": 0.0,
+          "final_score": 0.75
         },
         {
-          "entity_id": "E022",
-          "canonical_name": "King's College, Cambridge",
+          "entity_id": "E009",
+          "canonical_name": "University of Manchester",
           "entity_type": "Organization",
           "alias_score": 0.9,
           "context_keyword_score": 0.5,
@@ -92,26 +128,26 @@
           "final_score": 0.64
         }
       ],
-      "source_title": "About Alan Turing | The Turing Digital Archive",
-      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
+      "source_title": "课堂补充 demo：消歧与流行文化例句",
+      "source_url": ""
     },
     {
-      "case_id": "DISAMBIG02",
-      "title": "剑桥大学 的消歧过程",
-      "mention": "剑桥大学",
-      "text_id": "text_01_biography",
-      "sentence_id": 1,
-      "context": "Alan Turing（阿兰·图灵）曾就读于剑桥大学，后来前往 Princeton University 攻读博士学位。",
+      "case_id": "DISAMBIG03",
+      "title": "Princeton 的消歧过程",
+      "mention": "Princeton",
+      "text_id": "text_05_places",
+      "sentence_id": 2,
+      "context": "普林斯顿大学位于美国新泽西州，而 Princeton University 常被简称为 Princeton。",
       "status": "linked",
-      "selected_entity_id": "E008",
-      "selected_name": "University of Cambridge",
+      "selected_entity_id": "E007",
+      "selected_name": "Princeton University",
       "selected_type": "Organization",
       "selected_score": 1.0,
       "selected_reason": "综合别名匹配、上下文关键词和类型一致性后，最终分数最高。",
       "candidates": [
         {
-          "entity_id": "E008",
-          "canonical_name": "University of Cambridge",
+          "entity_id": "E007",
+          "canonical_name": "Princeton University",
           "entity_type": "Organization",
           "alias_score": 1.0,
           "context_keyword_score": 1.0,
@@ -119,67 +155,13 @@
           "final_score": 1.0
         },
         {
-          "entity_id": "E022",
-          "canonical_name": "King's College, Cambridge",
-          "entity_type": "Organization",
-          "alias_score": 0.9,
-          "context_keyword_score": 0.5,
-          "type_prior_score": 1.0,
-          "final_score": 0.8
-        },
-        {
-          "entity_id": "E011",
-          "canonical_name": "Cambridge",
-          "entity_type": "Place",
-          "alias_score": 0.9,
-          "context_keyword_score": 0.0,
-          "type_prior_score": 0.2,
-          "final_score": 0.49
-        }
-      ],
-      "source_title": "About Alan Turing | The Turing Digital Archive",
-      "source_url": "https://turingarchive.kings.cam.ac.uk/about-alan-turing"
-    },
-    {
-      "case_id": "DISAMBIG03",
-      "title": "Cambridge 的消歧过程",
-      "mention": "Cambridge",
-      "text_id": "text_05_places",
-      "sentence_id": 3,
-      "context": "University of Cambridge 作为研究机构，与 Cambridge 这座城市并不完全相同。",
-      "status": "linked",
-      "selected_entity_id": "E011",
-      "selected_name": "Cambridge",
-      "selected_type": "Place",
-      "selected_score": 0.85,
-      "selected_reason": "综合别名匹配、上下文关键词和类型一致性后，最终分数最高。",
-      "candidates": [
-        {
-          "entity_id": "E011",
-          "canonical_name": "Cambridge",
+          "entity_id": "E029",
+          "canonical_name": "Princeton",
           "entity_type": "Place",
           "alias_score": 1.0,
           "context_keyword_score": 0.5,
-          "type_prior_score": 1.0,
-          "final_score": 0.85
-        },
-        {
-          "entity_id": "E008",
-          "canonical_name": "University of Cambridge",
-          "entity_type": "Organization",
-          "alias_score": 0.9,
-          "context_keyword_score": 0.5,
           "type_prior_score": 0.2,
-          "final_score": 0.64
-        },
-        {
-          "entity_id": "E022",
-          "canonical_name": "King's College, Cambridge",
-          "entity_type": "Organization",
-          "alias_score": 0.9,
-          "context_keyword_score": 0.5,
-          "type_prior_score": 0.2,
-          "final_score": 0.64
+          "final_score": 0.69
         }
       ],
       "source_title": "Princeton University Official Site / King's College Cambridge Official Site",

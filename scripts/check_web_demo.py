@@ -103,7 +103,7 @@ def validate_explainability(explainability: dict) -> dict:
         require(cases, f"explainability.json 缺少{label}案例: {key}")
         counts[label] = len(cases)
     for case in explainability.get("relation_extraction_cases", []):
-        require(case.get("head_id"), "关系抽取案例缺少 head_id，前端无法跳转头实体")
+        require(case.get("head_id"), "关系抽取案例缺少 head_id")
         require(case.get("tail_id"), "关系抽取案例缺少 tail_id，前端无法确认尾实体")
     return counts
 
@@ -120,7 +120,9 @@ def validate_app_behavior(app_js: str) -> None:
     for keyword in old_edge_selectors:
         require(keyword not in app_js, f"app.js 仍包含边选中逻辑: {keyword}")
     require("clearSelection()" in app_js, "app.js 缺少空白点击取消选择逻辑")
-    require("selectNode(item.head_id)" in app_js, "关系抽取案例按钮没有跳转到头实体")
+    removed_button_text = "在图里" + "看"
+    require(removed_button_text not in app_js, "app.js 仍包含案例跳转按钮文案")
+    require("case-button" not in app_js, "app.js 仍包含案例跳转按钮")
 
 
 def check_app_js_syntax() -> str:

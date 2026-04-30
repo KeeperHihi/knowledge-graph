@@ -443,12 +443,12 @@
       "event_count": 0,
       "relations": [
         {
-          "relation_id": "REL041",
+          "relation_id": "REL042",
           "triple": "University of Manchester - located_in - Manchester",
           "evidence": "University of Manchester 位于 Manchester。"
         },
         {
-          "relation_id": "REL042",
+          "relation_id": "REL043",
           "triple": "National Physical Laboratory - located_in - London",
           "evidence": "National Physical Laboratory 位于 London。"
         }
@@ -541,7 +541,7 @@
           "evidence": "Max Newman 在 University of Manchester 工作，并支持 Manchester Mark I 的早期计算机研究。"
         },
         {
-          "relation_id": "REL044",
+          "relation_id": "REL045",
           "triple": "University of Manchester - located_in - Manchester",
           "evidence": "University of Manchester 位于 Manchester。"
         }
@@ -621,12 +621,25 @@
       "source_url": "",
       "collected_on": "2026-04-30",
       "note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。",
-      "mention_count": 7,
-      "linked_count": 7,
-      "relation_count": 0,
-      "event_count": 0,
-      "relations": [],
-      "events": []
+      "mention_count": 9,
+      "linked_count": 9,
+      "relation_count": 1,
+      "event_count": 1,
+      "relations": [
+        {
+          "relation_id": "REL041",
+          "triple": "Alan Turing - studied_at - Princeton University",
+          "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。"
+        }
+      ],
+      "events": [
+        {
+          "event_id": "EVT034",
+          "event_type": "EducationEvent",
+          "trigger": "攻读",
+          "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。"
+        }
+      ]
     }
   ]
 }

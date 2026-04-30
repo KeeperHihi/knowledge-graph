@@ -1,15 +1,15 @@
 {
   "raw_text_count": 16,
-  "sentence_count": 47,
-  "mention_count": 134,
-  "linked_count": 124,
+  "sentence_count": 48,
+  "mention_count": 136,
+  "linked_count": 126,
   "nil_count": 10,
   "unique_linked_entity_count": 28,
-  "relation_count": 44,
-  "event_count": 33,
+  "relation_count": 45,
+  "event_count": 34,
   "source_count": 16,
   "mention_type_counts": {
-    "Person": 41,
+    "Person": 43,
     "Organization": 32,
     "Time": 10,
     "Work": 2,
@@ -19,7 +19,7 @@
     "Device": 19
   },
   "entity_type_counts": {
-    "Person": 41,
+    "Person": 43,
     "Organization": 33,
     "Work": 2,
     "Concept": 8,
@@ -28,7 +28,7 @@
     "Device": 19
   },
   "relation_type_counts": {
-    "studied_at": 7,
+    "studied_at": 8,
     "published": 1,
     "proposed": 5,
     "worked_at": 15,
@@ -38,7 +38,7 @@
     "located_in": 4
   },
   "event_type_counts": {
-    "EducationEvent": 6,
+    "EducationEvent": 7,
     "PublicationEvent": 1,
     "ResearchEvent": 5,
     "WarWorkEvent": 6,
@@ -200,11 +200,11 @@
       "text_id": "text_16_class_demo_extra",
       "source_title": "课堂补充 demo：消歧与流行文化例句",
       "source_url": "",
-      "sentence_count": 3,
-      "mention_count": 7,
-      "linked_count": 7,
-      "relation_count": 0,
-      "event_count": 0
+      "sentence_count": 4,
+      "mention_count": 9,
+      "linked_count": 9,
+      "relation_count": 1,
+      "event_count": 1
     }
   ]
 }

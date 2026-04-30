@@ -5,7 +5,7 @@
     "type": "Person",
     "description": "英国数学家、逻辑学家和计算机科学先驱，是本项目的核心人物。",
     "source": "entity",
-    "mention_count": 28,
+    "mention_count": 29,
     "text_ids": [
       "text_01_biography",
       "text_02_war",
@@ -52,12 +52,11 @@
     "type": "Organization",
     "description": "图灵早年学习和研究的重要大学机构。",
     "source": "entity",
-    "mention_count": 5,
+    "mention_count": 4,
     "text_ids": [
       "text_01_biography",
       "text_03_cambridge_manchester",
-      "text_05_places",
-      "text_16_class_demo_extra"
+      "text_05_places"
     ],
     "evidence_samples": [
       {
@@ -89,12 +88,13 @@
     "type": "Organization",
     "description": "图灵攻读博士学位的重要学术机构。",
     "source": "entity",
-    "mention_count": 10,
+    "mention_count": 11,
     "text_ids": [
       "text_01_biography",
       "text_05_places",
       "text_07_princeton_research",
-      "text_15_princeton_extra"
+      "text_15_princeton_extra",
+      "text_16_class_demo_extra"
     ],
     "evidence_samples": [
       {
@@ -354,11 +354,10 @@
     "type": "Place",
     "description": "英国城市，与剑桥大学同名，便于构造歧义。",
     "source": "entity",
-    "mention_count": 5,
+    "mention_count": 4,
     "text_ids": [
       "text_03_cambridge_manchester",
-      "text_05_places",
-      "text_16_class_demo_extra"
+      "text_05_places"
     ],
     "evidence_samples": [
       {
@@ -428,11 +427,12 @@
     "type": "Place",
     "description": "英国城市，与曼彻斯特大学同名，便于构造歧义。",
     "source": "entity",
-    "mention_count": 3,
+    "mention_count": 4,
     "text_ids": [
       "text_03_cambridge_manchester",
       "text_12_locations",
-      "text_14_manchester_device_links"
+      "text_14_manchester_device_links",
+      "text_16_class_demo_extra"
     ],
     "evidence_samples": [
       {
@@ -464,11 +464,12 @@
     "type": "Person",
     "description": "逻辑学家，图灵在普林斯顿时期的重要学术导师。",
     "source": "entity",
-    "mention_count": 4,
+    "mention_count": 5,
     "text_ids": [
       "text_04_test_and_machine",
       "text_07_princeton_research",
-      "text_15_princeton_extra"
+      "text_15_princeton_extra",
+      "text_16_class_demo_extra"
     ],
     "evidence_samples": [
       {
@@ -1417,5 +1418,21 @@
     "source_url": "https://www.princeton.edu/",
     "collected_on": "2026-04-30",
     "source_note": "补充普林斯顿阶段的多主体句子，其中人物和机构关系根据公开资料整理，句子是课程作业改写版。"
+  },
+  {
+    "id": "EVT034",
+    "label": "EducationEvent",
+    "type": "EventNode",
+    "description": "记录人物的求学经历。",
+    "source": "event",
+    "time": "",
+    "place": "",
+    "evidence": "Alan Turing 在 Princeton 攻读博士学位时，经常参加 Alonzo Church 的逻辑讨论。",
+    "text_id": "text_16_class_demo_extra",
+    "sentence_id": 4,
+    "source_title": "课堂补充 demo：消歧与流行文化例句",
+    "source_url": "",
+    "collected_on": "2026-04-30",
+    "source_note": "这组句子是我为了展示实体消歧和规则边界编写的 demo 数据；source_title 不是实际存在的出处，不能当作真实引用。"
   }
 ]
