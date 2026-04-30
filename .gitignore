@@ -1,5 +1,3 @@
-docs/*
-!docs/
-!docs/*.md
+docs/
 __pycache__
 README.md
